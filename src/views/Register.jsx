@@ -2,49 +2,190 @@ import React, { useState } from "react";
 
 export default () => {
   return (
-    <div className="log-in w-full h-screen flex items-center bg-gray-400">
-      <div className="w-full max-w-lg rounded bg-white h-auto block mx-auto my-25">
+    <div className="log-in w-full h-auto md:h-screen flex items-center bg-white md:bg-gray-400">
+      <div className="w-50 rounded p-10 bg-white md:h-auto h-100 block mx-auto my-25">
         <p className="mx-auto block tracking-tight leading-tight text-center text-teal-600 my-6">
           Welcome to HNG Board
         </p>
-        <form
-          action=""
-          className=" bg-white shadow-md rounded h-full px-8 py-8 pt-8"
-        >
-          <div className="px-4 pb-4">
-            <label htmlFor="email" className="text-sm block font-bold  pb-2">
-              EMAIL ADDRESS
-            </label>
-            <input
-              type="email"
-              name="email"
-              id=""
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300 "
-              placeholder="Johnbull@example.com"
-            />
+        <form class="w-auto h-64 md:h-auto">
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-first-name"
+              >
+                First Name
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                id="grid-first-name"
+                type="text"
+                placeholder="Jane"
+              />
+              <p class="text-red-500 text-xs italic">
+                Please fill out this field.
+              </p>
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-last-name"
+              >
+                Last Name
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-last-name"
+                type="text"
+                placeholder="Doe"
+              />
+            </div>
           </div>
-          <div className="px-4 pb-4">
-            <label htmlFor="password" className="text-sm block font-bold pb-2">
-              PASSWORD
-            </label>
-            <input
-              type="password"
-              name="email"
-              id=""
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300"
-              placeholder="Enter your password"
-            />
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-email"
+              >
+                Email Address
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-email"
+                type="email"
+                placeholder="johndoe@gmail.com"
+              />
+              <p class="text-gray-600 text-sm italic">
+                Make it as long and as crazy as you'd like
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-track"
+              >
+                Tracks
+              </label>
+              <select
+                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-state"
+              >
+                <option>Frontend</option>
+                <option>Backend</option>
+                <option>Mobile</option>
+                <option>Coding</option>
+                <option>Design</option>
+              </select>
+              <p class="text-gray-600 text-sm italic">
+                Make it as long and as crazy as you'd like
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-password"
+              >
+                Password
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-password"
+                type="password"
+                placeholder="******************"
+              />
+              <p class="text-gray-600 text-sm italic">
+                Make it as long and as crazy as you'd like
+              </p>
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-password"
+              >
+                Confirm Password
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-password"
+                type="password"
+                placeholder="******************"
+              />
+              <p class="text-gray-600 text-sm italic">
+                Make it as long and as crazy as you'd like
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-2">
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-city"
+              >
+                Slack Username
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-city"
+                type="text"
+                placeholder="Albuquerque"
+              />
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-state"
+              >
+                Gender
+              </label>
+              <div class="relative">
+                <select
+                  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-state"
+                >
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Rather Not Say</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    class="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-zip"
+              >
+                Location
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-zip"
+                type="text"
+                placeholder="Your Location"
+              />
+            </div>
           </div>
           <div className="my-3">
             <button
-              className="bg-blue-500 hover:bg-blue-700 w-40 text-white block mx-auto font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 w-40 text-white block mx-auto mt-16 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
             >
-              Sign In
+              Register
             </button>
-            <small className="flex mx-auto text-end w-auto pl-16 tracking-tight leading-tight text-md mt-10">
-              Don't have an account ?{" "}
-              <a className="ml-2 flex cursor-pointer justify-end">Sign Up</a>
+            <small className="flex mx-auto text-end w-auto pl-16 tracking-tight justify-center leading-tight text-md mt-10">
+              Already have an account ?{" "}
+              <a className="ml-2 flex cursor-pointer justify-end">Sign In</a>
             </small>
           </div>
         </form>
