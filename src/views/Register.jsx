@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { regInAction } from "reducers/actions/authActions";
+import NotificationSystem from "react-notification-system";
+import { style } from "variables/Variables.jsx";
 
-export default () => {
+const Register = () => {
   return (
     <div className="log-in w-full h-auto md:h-screen flex items-center bg-white md:bg-gray-400">
       <div className="w-50 rounded p-10 bg-white md:h-auto block mx-auto my-25">
@@ -199,3 +203,5 @@ export default () => {
     </div>
   );
 };
+
+export default connect(null, { regInAction })(Register);

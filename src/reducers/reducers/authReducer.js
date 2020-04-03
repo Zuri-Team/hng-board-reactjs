@@ -1,7 +1,6 @@
 import {
   LOG_IN_SUCCESS,
   LOG_IN_FAIL,
-  LOG_IN_ERROR,
   SET_LOGIN_LOADING,
   LOG_OUT
 } from "../types/authTypes";
@@ -23,7 +22,6 @@ export default (state = initialState, action) => {
         loading: true
       };
     case LOG_IN_FAIL:
-    case LOG_IN_ERROR:
       return {
         ...state,
         isAuth: false,
