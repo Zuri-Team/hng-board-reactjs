@@ -3,74 +3,74 @@ import React, { useState } from "react";
 export default () => {
   return (
     <div className="log-in w-full h-auto md:h-screen flex items-center bg-white md:bg-gray-400">
-      <div className="w-50 rounded p-10 bg-white md:h-auto h-100 block mx-auto my-25">
+      <div className="w-50 rounded p-10 bg-white md:h-auto block mx-auto my-25">
         <p className="mx-auto block tracking-tight leading-tight text-center text-teal-600 my-6">
           Welcome to HNG Board
         </p>
-        <form class="w-auto h-64 md:h-auto">
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <form className="w-auto h-64 md:h-auto">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                 for="grid-first-name"
               >
                 First Name
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 id="grid-first-name"
                 type="text"
                 placeholder="Jane"
               />
-              <p class="text-red-500 text-xs italic">
+              <p className="text-red-500 text-xs italic">
                 Please fill out this field.
               </p>
             </div>
-            <div class="w-full md:w-1/2 px-3">
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                 for="grid-last-name"
               >
                 Last Name
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-last-name"
                 type="text"
                 placeholder="Doe"
               />
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                 for="grid-email"
               >
                 Email Address
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-email"
                 type="email"
                 placeholder="johndoe@gmail.com"
               />
-              <p class="text-gray-600 text-sm italic">
+              <p className="text-gray-600 text-sm italic">
                 Make it as long and as crazy as you'd like
               </p>
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                 for="grid-track"
               >
                 Tracks
               </label>
               <select
-                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-track"
               >
                 <option>Frontend</option>
                 <option>Backend</option>
@@ -78,81 +78,81 @@ export default () => {
                 <option>Coding</option>
                 <option>Design</option>
               </select>
-              <p class="text-gray-600 text-sm italic">
+              <p className="text-gray-600 text-sm italic">
                 Make it as long and as crazy as you'd like
               </p>
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                 for="grid-password"
               >
                 Password
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-password"
                 type="password"
                 placeholder="******************"
               />
-              <p class="text-gray-600 text-sm italic">
+              <p className="text-gray-600 text-sm italic">
                 Make it as long and as crazy as you'd like
               </p>
             </div>
-            <div class="w-full md:w-1/2 px-3">
+            <div className="w-full md:w-1/2 px-3">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                 for="grid-password"
               >
                 Confirm Password
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-password"
                 type="password"
                 placeholder="******************"
               />
-              <p class="text-gray-600 text-sm italic">
+              <p className="text-gray-600 text-sm italic">
                 Make it as long and as crazy as you'd like
               </p>
             </div>
           </div>
-          <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+          <div className="flex flex-wrap -mx-3 mb-2">
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-                for="grid-city"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-slack"
               >
                 Slack Username
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-city"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-slack"
                 type="text"
                 placeholder="Albuquerque"
               />
             </div>
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-                for="grid-state"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                for="grid-gender"
               >
                 Gender
               </label>
-              <div class="relative">
+              <div className="relative">
                 <select
-                  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="grid-state"
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="grid-gender"
                 >
                   <option>Male</option>
                   <option>Female</option>
                   <option>Rather Not Say</option>
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
-                    class="fill-current h-4 w-4"
+                    className="fill-current h-4 w-4"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >
@@ -161,15 +161,15 @@ export default () => {
                 </div>
               </div>
             </div>
-            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label
-                class="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+                className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
                 for="grid-zip"
               >
                 Location
               </label>
               <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-zip"
                 type="text"
                 placeholder="Your Location"

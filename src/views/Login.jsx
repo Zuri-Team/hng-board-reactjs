@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 
-export default () => {
-  return (
+export default props => {
+  const Login = () => {
+    sessionStorage.setItem("admin", true);
+    sessionStorage.setItem("isUserLogged", true);
+    console.log(props);
+    props.history.push("/admin");
+  };
+  return !sessionStorage.getItem("isUserLogged") ? (
     <div className="log-in w-full h-screen flex items-center bg-gray-400">
       <div className="w-full max-w-lg rounded bg-white h-auto block mx-auto my-25">
         <p className="mx-auto block tracking-tight leading-tight text-center text-teal-600 my-6">
@@ -39,6 +45,7 @@ export default () => {
             <button
               className="bg-blue-500 hover:bg-blue-700 w-40 text-white block mx-auto font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
+              onClick={Login}
             >
               Sign In
             </button>
@@ -50,5 +57,7 @@ export default () => {
         </form>
       </div>
     </div>
+  ) : (
+    props.history.goBack()
   );
 };

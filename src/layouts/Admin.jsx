@@ -5,10 +5,11 @@ import NotificationSystem from "react-notification-system";
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
+import ProtectedAdminRoute from "components/ProtectedRoute/ProtectedAdminRoute";
 
 import { style } from "variables/Variables.jsx";
 
-import routes from "routes.js";
+import adminRoutes from "routes/adminRoutes.js";
 
 import image from "assets/img/sidebar-3.jpg";
 
@@ -59,14 +60,10 @@ class Admin extends Component {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
-          <Route
+          <ProtectedAdminRoute
             path={prop.layout + prop.path}
-            render={props => (
-              <prop.component
-                {...props}
-                handleClick={this.handleNotificationClick}
-              />
-            )}
+            component={prop.component}
+            handleClick={this.handleNotificationClick}
             key={key}
           />
         );
@@ -76,19 +73,22 @@ class Admin extends Component {
     });
   };
   getBrandText = path => {
-    for (let i = 0; i < routes.length; i++) {
+    for (let i = 0; i < adminRoutes.length; i++) {
       if (
         this.props.location.pathname.indexOf(
-          routes[i].layout + routes[i].path
+          adminRoutes[i].layout + adminRoutes[i].path
         ) !== -1
       ) {
-        return routes[i].name;
+        return adminRoutes[i].name;
       }
     }
     return "";
   };
-  
+
   componentDidMount() {
+    if (this.props.location.pathname === "/admin") {
+      this.props.history.push("/admin/dashboard");
+    }
     this.setState({ _notificationSystem: this.refs.notificationSystem });
     var _notificationSystem = this.refs.notificationSystem;
     var color = Math.floor(Math.random() * 4 + 1);
@@ -137,21 +137,27 @@ class Admin extends Component {
     }
   }
   render() {
-    return (
+    return sessionStorage.getItem("admin") ? (
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
-        <Sidebar {...this.props} routes={routes} image={this.state.image}
-        color={this.state.color}
-        hasImage={this.state.hasImage}/>
+        <Sidebar
+          {...this.props}
+          routes={adminRoutes}
+          image={this.state.image}
+          color={this.state.color}
+          hasImage={this.state.hasImage}
+        />
         <div id="main-panel" className="main-panel" ref="mainPanel">
           <AdminNavbar
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
-          <Switch>{this.getRoutes(routes)}</Switch>
+          <Switch>{this.getRoutes(adminRoutes)}</Switch>
           <Footer />
         </div>
       </div>
+    ) : (
+      this.props.history.goBack()
     );
   }
 }
