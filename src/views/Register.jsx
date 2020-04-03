@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default () => {
   return (
@@ -185,7 +186,12 @@ export default () => {
             </button>
             <small className="flex mx-auto text-end w-auto pl-16 tracking-tight justify-center leading-tight text-md mt-10">
               Already have an account ?{" "}
-              <a className="ml-2 flex cursor-pointer justify-end">Sign In</a>
+              <Link
+                to="/login"
+                className="ml-2 flex cursor-pointer justify-end"
+              >
+                Sign In
+              </Link>
             </small>
           </div>
         </form>

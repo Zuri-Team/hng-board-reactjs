@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { logInAction } from "reducers/actions/authActions";
 import NotificationSystem from "react-notification-system";
 import { style } from "variables/Variables.jsx";
@@ -165,7 +166,7 @@ const Login = props => {
               </button>
               <small className="flex mx-auto text-end w-auto pl-16 tracking-tight leading-tight text-md mt-10">
                 Don't have an account ?{" "}
-                <a className="ml-2 flex cursor-pointer justify-end">Sign Up</a>
+                <Link to="/register" className="ml-2 flex cursor-pointer justify-end">Sign Up</Link>
               </small>
             </div>
           </form>
