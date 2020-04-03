@@ -24,15 +24,6 @@ const Login = props => {
     type
   } = props;
 
-  // useEffect(() => {
-  //   if (
-  //     props.history.action == "POP" &&
-  //     sessionStorage.getItem("isUserLogged")
-  //   ) {
-  //     props.history.goBack();
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (isLoading) {
       btn.current.textContent = "Loading...";
