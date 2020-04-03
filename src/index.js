@@ -35,7 +35,7 @@ ReactDOM.render(
         <Route exact path="/register" component={Register} />
         <ProtectedAdminRoute path="/admin" component={AdminLayout} />
         <ProtectedUserRoute path="/user" component={UserLayout} />
-        <Redirect from="/" to="/login" />
+        <Redirect strict from="/" to="/admin/dashboard" />
         <Route
           render={() => (
             <h4 className="text-center my-5">

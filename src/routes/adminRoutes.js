@@ -64,7 +64,7 @@ const dashboardRoutes = [
     icon: "pe-7s-rocket",
     component: Upgrade,
     layout: "/admin"
-  }
+  },
 ];
 
 export default dashboardRoutes;

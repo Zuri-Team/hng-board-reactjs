@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import {  Switch } from "react-router-dom";
 import NotificationSystem from "react-notification-system";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
@@ -123,6 +123,9 @@ class User extends Component {
     });
   }
   componentDidUpdate(e) {
+    if (this.props.location.pathname === "/user") {
+      this.props.history.push("/user/dashboard");
+    }
     if (
       window.innerWidth < 993 &&
       e.history.location.pathname !== e.location.pathname &&
@@ -137,7 +140,7 @@ class User extends Component {
     }
   }
   render() {
-    return sessionStorage.getItem("user") ? (
+    return sessionStorage.getItem("user") == "true" ? (
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
         <Sidebar

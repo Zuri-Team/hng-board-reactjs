@@ -123,6 +123,9 @@ class Admin extends Component {
     });
   }
   componentDidUpdate(e) {
+    if (this.props.location.pathname === "/admin") {
+      this.props.history.push("/admin/dashboard");
+    }
     if (
       window.innerWidth < 993 &&
       e.history.location.pathname !== e.location.pathname &&
@@ -137,7 +140,7 @@ class Admin extends Component {
     }
   }
   render() {
-    return sessionStorage.getItem("admin") ? (
+    return sessionStorage.getItem("admin") == "true" ? (
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
         <Sidebar
@@ -152,7 +155,16 @@ class Admin extends Component {
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
-          <Switch>{this.getRoutes(adminRoutes)}</Switch>
+          <Switch>
+            {this.getRoutes(adminRoutes)}
+            <Route
+              render={() => (
+                <h4 className="text-center h-screen my-20">
+                  Oops, this page does not seem to exist
+                </h4>
+              )}
+            />
+          </Switch>
           <Footer />
         </div>
       </div>

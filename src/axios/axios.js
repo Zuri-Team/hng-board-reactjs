@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: `https://api.start.ng`
+  baseURL: `https://api.start.ng/api`
 });

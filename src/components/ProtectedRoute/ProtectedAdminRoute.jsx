@@ -7,7 +7,7 @@ export default ({ component: Component, ...rest }) => (
     render={props =>
       sessionStorage.getItem("isUserLogged") == "true" &&
       sessionStorage.getItem("admin") == "true" ? (
-        <Component {...props} />
+        <Component {...props} {...rest}/>
       ) : (
         <Redirect
           to={{
