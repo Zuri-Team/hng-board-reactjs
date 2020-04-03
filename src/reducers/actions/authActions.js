@@ -2,7 +2,8 @@ import {
   LOG_IN_SUCCESS,
   LOG_IN_FAIL,
   LOG_IN_ERROR,
-  SET_LOGIN_LOADING
+  SET_LOGIN_LOADING,
+  LOG_OUT
 } from "../types/authTypes";
 import axios from "axios/axios";
 
@@ -32,6 +33,11 @@ export const logInError = payload => {
     payload
   };
 };
+export const logOut = payload => {
+  return {
+    type: LOG_OUT,
+  };
+};
 
 export const logInAction = payload => async dispatch => {
   dispatch(logInLoading());
@@ -46,3 +52,4 @@ export const logInAction = payload => async dispatch => {
     }
   }
 };
+

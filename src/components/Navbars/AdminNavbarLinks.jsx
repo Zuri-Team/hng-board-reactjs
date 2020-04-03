@@ -1,7 +1,22 @@
 import React, { Component } from "react";
-import { NavItem, Nav, NavDropdown, MenuItem } from "react-bootstrap";
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import { logOut } from "reducers/actions/authActions";
+import {
+  Button,
+  Form,
+  NavItem,
+  Nav,
+  NavDropdown,
+  MenuItem
+} from "react-bootstrap";
 
 class AdminNavbarLinks extends Component {
+  logOut = () => {
+    this.props.logOut();
+    this.props.history.push("/login");
+  };
+
   render() {
     const notification = (
       <div>
@@ -52,13 +67,30 @@ class AdminNavbarLinks extends Component {
             <MenuItem divider />
             <MenuItem eventKey={2.5}>Separated link</MenuItem>
           </NavDropdown>
-          <NavItem eventKey={3} href="#">
-            Log out
-          </NavItem>
+          <Button
+            style={{
+              backgroundColor: "#5bc0de",
+              color: "#FFF",
+              outline: "none"
+            }}
+            onClick={this.logOut}
+            bsStyle="info"
+            type="button"
+            pullRight
+            fill
+          >
+            LOG OUT
+          </Button>
         </Nav>
       </div>
     );
   }
 }
 
-export default AdminNavbarLinks;
+const mapState = state => {
+  return {
+    isAuth: state.auth.isAuth
+  };
+};
+
+export default withRouter(connect(null, { logOut })(AdminNavbarLinks));

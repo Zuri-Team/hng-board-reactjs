@@ -113,7 +113,6 @@ const Login = props => {
   if (props.history.action == "POP" && sessionStorage.getItem("isUserLogged")) {
     props.history.goBack();
   } else {
-
     return (
       <div className="log-in w-full h-screen flex items-center bg-gray-400">
         <NotificationSystem ref={notification} style={style} />
@@ -139,7 +138,10 @@ const Login = props => {
               />
             </div>
             <div className="px-4 pb-4">
-              <label htmlFor="password" className="text-sm block font-bold pb-2">
+              <label
+                htmlFor="password"
+                className="text-sm block font-bold pb-2"
+              >
                 PASSWORD
               </label>
               <input

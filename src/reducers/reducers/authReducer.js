@@ -2,7 +2,8 @@ import {
   LOG_IN_SUCCESS,
   LOG_IN_FAIL,
   LOG_IN_ERROR,
-  SET_LOGIN_LOADING
+  SET_LOGIN_LOADING,
+  LOG_OUT
 } from "../types/authTypes";
 const initialState = {
   isAuth: false,
@@ -49,6 +50,16 @@ export default (state = initialState, action) => {
         isAdmin: payload.user.role !== "intern",
         errorMessage: null
       };
+      case LOG_OUT:
+        sessionStorage.clear();
+        return {
+          ...state,
+          isAuth: false,
+          loading: false,
+          error: false,
+          isAdmin: false,
+          errorMessage: null
+        };
     default:
       return state;
   }
