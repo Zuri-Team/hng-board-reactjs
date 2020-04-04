@@ -6,6 +6,9 @@ import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import ProtectedUserRoute from "components/ProtectedRoute/ProtectedUserRoute";
+import { connect } from "react-redux";
+import { getUserAction } from "reducers/actions/authActions";
+import { fetchPostsAction } from "reducers/actions/postsActions";
 
 import { style } from "variables/Variables.jsx";
 
@@ -44,13 +47,13 @@ class User extends Component {
 				break;
 		}
 		this.state._notificationSystem.addNotification({
-			title: <span data-notify="icon" className="pe-7s-gift" />,
+			title: <span data-notify="icon" className="pe-7s-check" />,
 			message: (
 				<div>
-					Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.
+					Always good to have you here, <b></b>
 				</div>
 			),
-			level: level,
+			level: "success",
 			position: position,
 			autoDismiss: 15,
 		});
@@ -81,6 +84,9 @@ class User extends Component {
 	};
 
 	componentDidMount() {
+		let user = JSON.parse(sessionStorage["user_payload"]);
+		this.props.getUserAction(user.id);
+		this.props.fetchPostsAction();
 		if (this.props.location.pathname === "/user") {
 			this.props.history.push("/user/dashboard");
 		}
@@ -105,10 +111,10 @@ class User extends Component {
 				break;
 		}
 		_notificationSystem.addNotification({
-			title: <span data-notify="icon" className="pe-7s-gift" />,
+			title: <span data-notify="icon" className="pe-7s-like2" />,
 			message: (
 				<div>
-					Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.
+					Always good to have you here, <b>{user.firstname}</b>
 				</div>
 			),
 			level: level,
@@ -134,6 +140,8 @@ class User extends Component {
 		}
 	}
 	render() {
+		let user = JSON.parse(sessionStorage["user_payload"]);
+		const fullname = user.firstname + " " + user.lastname;
 		return sessionStorage.getItem("user") == "true" ? (
 			<div className="wrapper">
 				<NotificationSystem ref="notificationSystem" style={style} />
@@ -141,6 +149,7 @@ class User extends Component {
 					{...this.props}
 					routes={routes}
 					image={this.state.image}
+					fullname={fullname}
 					color={this.state.color}
 					hasImage={this.state.hasImage}
 				/>
@@ -159,4 +168,4 @@ class User extends Component {
 	}
 }
 
-export default User;
+export default connect(null, { getUserAction, fetchPostsAction })(User);

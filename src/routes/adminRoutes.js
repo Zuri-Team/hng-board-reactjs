@@ -1,4 +1,4 @@
-import Dashboard from "views/Dashboard.jsx";
+import AdminDashboard from "views/AdminDashboard.jsx";
 import UserProfile from "views/UserProfile.jsx";
 import TableList from "views/TableList.jsx";
 import Typography from "views/Typography.jsx";
@@ -12,7 +12,7 @@ const dashboardRoutes = [
 		path: "/dashboard",
 		name: "Dashboard",
 		icon: "pe-7s-graph",
-		component: Dashboard,
+		component: AdminDashboard,
 		layout: "/admin",
 	},
 	{

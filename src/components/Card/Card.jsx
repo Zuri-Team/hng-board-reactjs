@@ -19,12 +19,13 @@ export class Card extends Component {
 				>
 					{this.props.content}
 
-					<div className="footer">
-						{this.props.legend}
-						{this.props.stats != null ? <hr /> : ""}
-						<div className="stats">
+					<div className="footer flex justify-between ">
+						{/* {this.props.legend}
+						{this.props.stats != null ? <hr /> : ""} */}
+						<div className="stats  flex ml-0 justify-start">
 							<i className={this.props.statsIcon} /> {this.props.stats}
 						</div>
+						<p className="flex justify-end leading-tight text-end w-40 mr-0">view more..</p>
 					</div>
 				</div>
 			</div>

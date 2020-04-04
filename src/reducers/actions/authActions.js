@@ -10,6 +10,7 @@ import {
 	REQUEST_RESET_LOADING,
 	REQUEST_RESET_SUCCESS,
 	REQUEST_RESET_FAIL,
+	GET_USER_PROFILE,
 } from "../types/authTypes";
 import axios from "axios/axios";
 
@@ -33,7 +34,7 @@ export const logInFail = (payload) => {
 	};
 };
 
-export const logOut = (payload) => {
+export const log_Out = (payload) => {
 	return {
 		type: LOG_OUT,
 	};
@@ -81,6 +82,13 @@ export const requestSuccess = (payload) => {
 export const requestFail = (payload) => {
 	return {
 		type: REQUEST_RESET_FAIL,
+		payload,
+	};
+};
+
+export const getUser = (payload) => {
+	return {
+		type: GET_USER_PROFILE,
 		payload,
 	};
 };
@@ -134,5 +142,18 @@ export const requestAction = (payload) => async (dispatch) => {
 		} else {
 			dispatch(requestFail("Something went wrong, please try again"));
 		}
+	}
+};
+
+export const logOut = () => (dispatch) => {
+	dispatch(log_Out());
+};
+
+export const getUserAction = (id) => async (dispatch) => {
+	try {
+		const response = await axios.get(`/user-profile/${id}`);
+		dispatch(getUser(response.data.data));
+	} catch (err) {
+		console.log(err);
 	}
 };

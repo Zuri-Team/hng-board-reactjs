@@ -10,11 +10,13 @@ import {
 	REQUEST_RESET_LOADING,
 	REQUEST_RESET_SUCCESS,
 	REQUEST_RESET_FAIL,
+	GET_USER_PROFILE,
 } from "../types/authTypes";
 const initialState = {
 	loading: false,
 	error: false,
 	errorMessage: null,
+	user: null,
 	message: null,
 	type: false,
 	registered: false,
@@ -42,7 +44,7 @@ export default (state = initialState, action) => {
 		case LOG_IN_SUCCESS:
 			sessionStorage["token"] = payload.token;
 			sessionStorage["isUserLogged"] = true;
-			sessionStorage["user"] = JSON.stringify(payload.user);
+			sessionStorage["user_payload"] = JSON.stringify(payload.user);
 			if (payload.user.role != "intern") {
 				sessionStorage["admin"] = true;
 			} else {
@@ -59,6 +61,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
+				user: null,
 				error: false,
 				errorMessage: null,
 			};
@@ -112,6 +115,11 @@ export default (state = initialState, action) => {
 				isRequestPage: true,
 				errorMessage: payload,
 				type: !state.type,
+			};
+		case GET_USER_PROFILE:
+			return {
+				...state,
+				user: payload,
 			};
 
 		default:

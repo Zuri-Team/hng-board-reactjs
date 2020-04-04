@@ -6,6 +6,8 @@ import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import ProtectedAdminRoute from "components/ProtectedRoute/ProtectedAdminRoute";
+import { connect } from "react-redux";
+import { getUserAction } from "reducers/actions/authActions";
 
 import { style } from "variables/Variables.jsx";
 
@@ -83,6 +85,8 @@ class Admin extends Component {
 	};
 
 	componentDidMount() {
+		let user = JSON.parse(sessionStorage["user_payload"]);
+		this.props.getUserAction(user.id);
 		if (this.props.location.pathname === "/admin") {
 			this.props.history.push("/admin/dashboard");
 		}
@@ -170,4 +174,4 @@ class Admin extends Component {
 	}
 }
 
-export default Admin;
+export default connect(null, { getUserAction })(Admin);

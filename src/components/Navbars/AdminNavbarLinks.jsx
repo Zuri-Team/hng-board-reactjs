@@ -11,6 +11,7 @@ class AdminNavbarLinks extends Component {
 	};
 
 	render() {
+		const { user } = this.props;
 		const notification = (
 			<div>
 				<i className="fa fa-globe" />
@@ -22,10 +23,17 @@ class AdminNavbarLinks extends Component {
 		return (
 			<div>
 				<Nav>
-					<NavItem eventKey={1} href="#">
-						<i className="fa fa-dashboard" />
+					<NavItem eventKey={1} href="#sidebar">
+						{/* <i className="fa fa-dashboard" /> */}
 						<p className="hidden-lg hidden-md">Dashboard</p>
 					</NavItem>
+					{/**/}
+					{/* <NavItem eventKey={3} href="#">
+						<i className="fa fa-search" />
+						<p className="hidden-lg hidden-md">Search</p>
+					</NavItem> */}
+				</Nav>
+				<Nav pullRight>
 					<NavDropdown eventKey={2} title={notification} noCaret id="basic-nav-dropdown">
 						<MenuItem eventKey={2.1}>Notification 1</MenuItem>
 						<MenuItem eventKey={2.2}>Notification 2</MenuItem>
@@ -33,23 +41,15 @@ class AdminNavbarLinks extends Component {
 						<MenuItem eventKey={2.4}>Notification 4</MenuItem>
 						<MenuItem eventKey={2.5}>Another notifications</MenuItem>
 					</NavDropdown>
-					<NavItem eventKey={3} href="#">
-						<i className="fa fa-search" />
-						<p className="hidden-lg hidden-md">Search</p>
-					</NavItem>
-				</Nav>
-				<Nav pullRight>
 					<NavItem eventKey={1} href="#">
-						Account
+						{user ? user.email : "Loading..."}
 					</NavItem>
-					<NavDropdown eventKey={2} title="Dropdown" id="basic-nav-dropdown-right">
-						<MenuItem eventKey={2.1}>Action</MenuItem>
-						<MenuItem eventKey={2.2}>Another action</MenuItem>
-						<MenuItem eventKey={2.3}>Something</MenuItem>
-						<MenuItem eventKey={2.4}>Another action</MenuItem>
-						<MenuItem eventKey={2.5}>Something</MenuItem>
+					<NavDropdown eventKey={2} title="Actions" id="basic-nav-dropdown-right">
+						<MenuItem eventKey={2.1}>Change Track</MenuItem>
+						<MenuItem eventKey={2.2}>Change Course</MenuItem>
+						<MenuItem eventKey={2.3}>Make Submission</MenuItem>
 						<MenuItem divider />
-						<MenuItem eventKey={2.5}>Separated link</MenuItem>
+						<MenuItem eventKey={2.5}>View Profile</MenuItem>
 					</NavDropdown>
 					<Button
 						style={{
@@ -74,7 +74,8 @@ class AdminNavbarLinks extends Component {
 const mapState = (state) => {
 	return {
 		isAuth: state.auth.isAuth,
+		user: state.auth.user,
 	};
 };
 
-export default withRouter(connect(null, { logOut })(AdminNavbarLinks));
+export default withRouter(connect(mapState, { logOut })(AdminNavbarLinks));

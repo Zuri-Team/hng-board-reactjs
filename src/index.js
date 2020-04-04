@@ -22,8 +22,8 @@ import RequestPasswordReset from "./views/RequestPasswordReset";
 import ProtectedUserRoute from "./components/ProtectedRoute/ProtectedUserRoute";
 import ProtectedAdminRoute from "./components/ProtectedRoute/ProtectedAdminRoute";
 
-if (sessionStorage["user_token"]) {
-	setToken(sessionStorage["user_token"]);
+if (sessionStorage["token"]) {
+	setToken(sessionStorage["token"]);
 }
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Content-Type"] = "application/json";
