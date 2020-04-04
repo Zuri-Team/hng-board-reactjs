@@ -28,9 +28,22 @@
     "@types/googlemaps": "3.30.19",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.8.13",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
     "autoprefixer": "^9.7.5",
+    "eslint": "^5.16.0",
+    "babel-eslint": "10.0.1",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^4.7.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
     "postcss-cli": "^7.1.0",
-    "typescript": "3.4.3"
+    "prettier": "^2.0.2",
+    "typescript": "^3.4.3"
   },
   "scripts": {
     "build:style": "postcss src/styles/index.css -c tailwind.js -o src/styles/tailwind.css",
@@ -41,7 +54,9 @@
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "node-sass src/assets/sass/light-bootstrap-dashboard-react.scss src/assets/css/light-bootstrap-dashboard-react.css",
     "minify-sass": "node-sass src/assets/sass/light-bootstrap-dashboard-react.scss src/assets/css/light-bootstrap-dashboard-react.min.css --output-style compressed",
-    "map-sass": "node-sass src/assets/sass/light-bootstrap-dashboard-react.scss src/assets/css/light-bootstrap-dashboard-react.css --source-map true"
+    "map-sass": "node-sass src/assets/sass/light-bootstrap-dashboard-react.scss src/assets/css/light-bootstrap-dashboard-react.css --source-map true",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js,.jsx, ."
   },
   "browserslist": {
     "production": [
