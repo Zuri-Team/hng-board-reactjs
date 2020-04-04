@@ -23,8 +23,7 @@ class Footer extends Component {
 						</ul>
 					</nav> */}
 					<p className="copyright text-center">
-						&copy; {new Date().getFullYear()}{" "}
-						<a href="http://www.creative-tim.com?ref=lbr-footer">HNG Board</a>, HNG Internship
+						&copy; {new Date().getFullYear()} <a href="#">HNG Board</a>, HNG Internship
 					</p>
 				</Grid>
 			</footer>
