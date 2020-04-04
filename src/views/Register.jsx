@@ -48,6 +48,18 @@ const Register = (props) => {
 
 	useEffect(() => {
 		if (isRegistered) {
+			setForm({
+				...form,
+				firstname: "",
+				lastname: "",
+				username: "",
+				email: "",
+				track: "",
+				password: "",
+				confirm_password: "",
+				gender: "",
+				location: "",
+			});
 			props.history.push("/login");
 		}
 	}, [isRegistered, props.history]);

@@ -1,20 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { logInAction } from "reducers/actions/authActions";
+import { requestAction } from "reducers/actions/authActions";
 import NotificationSystem from "react-notification-system";
 import { style } from "variables/Variables.jsx";
 
-const Login = (props) => {
+const RequestPasswordReset = (props) => {
 	const [user, setUser] = useState({
 		email: "",
-		password: "",
 	});
 
 	const btn = useRef();
 	const notification = useRef();
 
-	const { isLoading, logInAction, error, errorMessage, type, isRequestPage } = props;
+	const {
+		isLoading,
+		requestAction,
+		error,
+		errorMessage,
+		successMessage,
+		type,
+		isRequestPage,
+	} = props;
 
 	useEffect(() => {
 		if (isLoading) {
@@ -23,7 +30,7 @@ const Login = (props) => {
 			btn.current.style.pointerEvents = "none";
 			btn.current.style.boxShadow = "none";
 		} else {
-			btn.current.textContent = "Sign In";
+			btn.current.textContent = "Reset Password";
 			btn.current.style.opacity = "unset";
 			btn.current.style.pointerEvents = "unset";
 			btn.current.style.boxShadow = "unset";
@@ -48,29 +55,28 @@ const Login = (props) => {
 	}
 
 	useEffect(() => {
-		if (error && !isRequestPage) {
+		if (error && isRequestPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
-	}, [type]);
+	}, [type, errorMessage, error]);
+
+	useEffect(() => {
+		if (successMessage) {
+			addNotification(undefined, successMessage, undefined);
+			setUser({ ...user, email: "" });
+		}
+	}, [type, successMessage]);
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setUser({ ...user, [name]: value });
 	};
 
-	const handleLogin = (e) => {
+	const handleReset = (e) => {
 		e.preventDefault();
-		const { email, password } = user;
-		if (email == "" && password == "") {
-			addNotification("error", "You need to provide a password and email to proceed", "pe-7s-info");
-			return;
-		}
+		const { email } = user;
 		if (email == "") {
 			addNotification("error", "The email field is required", "pe-7s-info");
-			return;
-		}
-		if (password == "") {
-			addNotification("error", "The password field is required", "pe-7s-info");
 			return;
 		}
 		if (!(email.match(/([@])/) && email.match(/([.])/))) {
@@ -81,7 +87,7 @@ const Login = (props) => {
 			);
 			return;
 		}
-		logInAction(user);
+		requestAction(user);
 	};
 
 	return (
@@ -89,15 +95,9 @@ const Login = (props) => {
 			<NotificationSystem ref={notification} style={style} />
 			<div className="w-full max-w-lg rounded bg-white h-auto block mx-auto my-25">
 				<p className="mx-auto block tracking-tight leading-tight text-center text-teal-600 my-6">
-					Welcome Back
+					Reset Your Password
 				</p>
-				<small className="flex mx-auto text-end w-auto tracking-tight justify-center leading-tight text-md mt-10">
-					Don't have an account ?{" "}
-					<Link to="/register" className="ml-2 flex cursor-pointer justify-end">
-						Sign Up
-					</Link>
-				</small>
-				<form onSubmit={handleLogin} className=" bg-white shadow-md rounded h-full px-8 py-8 pt-8">
+				<form onSubmit={handleReset} className=" bg-white shadow-md rounded h-full px-8 py-8 pt-8">
 					<div className="px-4 pb-4">
 						<label htmlFor="email" className="text-sm block font-bold  pb-2">
 							EMAIL ADDRESS
@@ -111,32 +111,18 @@ const Login = (props) => {
 							onChange={onChange}
 						/>
 					</div>
-					<div className="px-4 pb-4">
-						<label htmlFor="password" className="text-sm block font-bold pb-2">
-							PASSWORD
-						</label>
-						<input
-							type="password"
-							name="password"
-							id="password"
-							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300"
-							placeholder="Enter your password"
-							onChange={onChange}
-						/>
-					</div>
 					<div className="my-3">
 						<button
-							className="bg-blue-500 hover:bg-blue-700 w-40 text-white block mx-auto font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+							className="bg-blue-500 hover:bg-blue-700 w-auto text-white block mx-auto font-bold-600 py-2 px-4 mt-10 rounded focus:outline-none focus:shadow-outline"
 							type="submit"
 							ref={btn}
 							disabled={isLoading}
 						>
-							Sign In
+							Reset Password
 						</button>
-						<small className="flex mx-auto text-end w-auto tracking-tight leading-tight justify-center text-md mt-10">
-							Forgot Password ?{" "}
-							<Link to="/request_reset" className="ml-2 flex cursor-pointer justify-end">
-								Reset Here
+						<small className="flex mx-auto text-end w-auto tracking-tight justify-center leading-tight text-md mt-5">
+							<Link to="/login" className="ml-2 flex cursor-pointer justify-end">
+								Go To Login Page
 							</Link>
 						</small>
 					</div>
@@ -151,9 +137,10 @@ const mapState = (state) => {
 		isLoading: state.auth.loading,
 		error: state.auth.error,
 		errorMessage: state.auth.errorMessage,
-		isRequestPage: state.auth.isRequestPage,
 		type: state.auth.type,
+		successMessage: state.auth.message,
+		isRequestPage: state.auth.isRequestPage,
 	};
 };
 
-export default connect(mapState, { logInAction })(Login);
+export default connect(mapState, { requestAction })(RequestPasswordReset);

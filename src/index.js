@@ -18,6 +18,7 @@ import AdminLayout from "layouts/Admin.jsx";
 import UserLayout from "layouts/User.jsx";
 import Login from "./views/Login";
 import Register from "./views/Register";
+import RequestPasswordReset from "./views/RequestPasswordReset";
 import ProtectedUserRoute from "./components/ProtectedRoute/ProtectedUserRoute";
 import ProtectedAdminRoute from "./components/ProtectedRoute/ProtectedAdminRoute";
 
@@ -32,6 +33,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<Switch>
 				<Route exact path="/login" component={Login} />
+				<Route exact path="/request_reset" component={RequestPasswordReset} />
 				<Route exact path="/register" component={Register} />
 				<ProtectedAdminRoute path="/admin" component={AdminLayout} />
 				<ProtectedUserRoute path="/user" component={UserLayout} />

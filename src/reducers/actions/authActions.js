@@ -7,6 +7,9 @@ import {
 	REG_FAIL,
 	SET_REG_LOADING,
 	GET_TRACKS,
+	REQUEST_RESET_LOADING,
+	REQUEST_RESET_SUCCESS,
+	REQUEST_RESET_FAIL,
 } from "../types/authTypes";
 import axios from "axios/axios";
 
@@ -62,6 +65,26 @@ export const regFail = (payload) => {
 	};
 };
 
+export const requestLoading = () => {
+	return {
+		type: REQUEST_RESET_LOADING,
+	};
+};
+
+export const requestSuccess = (payload) => {
+	return {
+		type: REQUEST_RESET_SUCCESS,
+		payload,
+	};
+};
+
+export const requestFail = (payload) => {
+	return {
+		type: REQUEST_RESET_FAIL,
+		payload,
+	};
+};
+
 export const logInAction = (payload) => async (dispatch) => {
 	dispatch(logInLoading());
 	try {
@@ -96,6 +119,20 @@ export const regInAction = (payload) => async (dispatch) => {
 			dispatch(regFail("This email has already been taken"));
 		} else {
 			dispatch(regFail(err.response && err.response.data && err.response.data.message));
+		}
+	}
+};
+
+export const requestAction = (payload) => async (dispatch) => {
+	dispatch(requestLoading());
+	try {
+		const response = await axios.post("/password/forgot", payload);
+		dispatch(requestSuccess(response && response.data && response.data.message));
+	} catch (e) {
+		if (e.response && e.response.status === 400) {
+			dispatch(requestFail(e.response && e.response.data && e.response.data.message));
+		} else {
+			dispatch(requestFail("Something went wrong, please try again"));
 		}
 	}
 };

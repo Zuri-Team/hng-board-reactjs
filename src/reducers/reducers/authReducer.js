@@ -7,13 +7,18 @@ import {
 	REG_SUCCESS,
 	REG_FAIL,
 	SET_REG_LOADING,
+	REQUEST_RESET_LOADING,
+	REQUEST_RESET_SUCCESS,
+	REQUEST_RESET_FAIL,
 } from "../types/authTypes";
 const initialState = {
 	loading: false,
 	error: false,
 	errorMessage: null,
+	message: null,
 	type: false,
 	registered: false,
+	isRequestPage: false,
 	tracks: [],
 };
 
@@ -29,6 +34,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
+				isRequestPage: false,
 				error: true,
 				errorMessage: payload,
 				type: !state.type, // this is a hack to have the alert show just once per action
@@ -81,6 +87,31 @@ export default (state = initialState, action) => {
 				loading: false,
 				errorMessage: payload,
 				type: !state.type, // this is a hack to have the alert show just once per action
+			};
+		case REQUEST_RESET_LOADING:
+			return {
+				...state,
+				loading: true,
+			};
+		case REQUEST_RESET_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				error: false,
+				errorMessage: null,
+				message: payload,
+				isRequestPage: true,
+				type: !state.type,
+			};
+		case REQUEST_RESET_FAIL:
+			return {
+				...state,
+				loading: false,
+				error: true,
+				message: null,
+				isRequestPage: true,
+				errorMessage: payload,
+				type: !state.type,
 			};
 
 		default:
