@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
+import { Posts } from "components/Tasks/Posts.jsx";
 
 class Dashboard extends Component {
 	createLegend(json) {
@@ -70,7 +71,7 @@ class Dashboard extends Component {
 								content={
 									<div className="table-full-width">
 										<table className="table">
-											<Tasks name="Task" />
+											<Tasks name="Task" data={this.props.latestTasks} />
 										</table>
 									</div>
 								}
@@ -85,7 +86,7 @@ class Dashboard extends Component {
 								content={
 									<div className="table-full-width">
 										<table className="table">
-											<Tasks name="Post" posts={this.props.latestPosts} />
+											<Posts name="Post" data={this.props.latestPosts} />
 										</table>
 									</div>
 								}
@@ -102,6 +103,7 @@ const mapState = (state) => {
 	return {
 		user: state.auth.user,
 		latestPosts: state.post.posts,
+		latestTasks: state.user.tasks,
 	};
 };
 export default connect(mapState)(Dashboard);

@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				posts: payload.slice(0, 5),
+				loading: false,
 			};
 		default:
 			return state;

@@ -8,6 +8,7 @@ import Sidebar from "components/Sidebar/Sidebar";
 import ProtectedUserRoute from "components/ProtectedRoute/ProtectedUserRoute";
 import { connect } from "react-redux";
 import { getUserAction } from "reducers/actions/authActions";
+import { fetchTasksAction } from "reducers/actions/userActions";
 import { fetchPostsAction } from "reducers/actions/postsActions";
 
 import { style } from "variables/Variables.jsx";
@@ -87,6 +88,7 @@ class User extends Component {
 		let user = JSON.parse(sessionStorage["user_payload"]);
 		this.props.getUserAction(user.id);
 		this.props.fetchPostsAction();
+		this.props.fetchTasksAction();
 		if (this.props.location.pathname === "/user") {
 			this.props.history.push("/user/dashboard");
 		}
@@ -168,4 +170,4 @@ class User extends Component {
 	}
 }
 
-export default connect(null, { getUserAction, fetchPostsAction })(User);
+export default connect(null, { getUserAction, fetchPostsAction, fetchTasksAction })(User);

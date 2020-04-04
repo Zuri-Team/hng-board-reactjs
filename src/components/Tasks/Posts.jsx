@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import Checkbox from "components/CustomCheckbox/CustomCheckbox.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
-export class Tasks extends Component {
+export class Posts extends Component {
 	handleCheckbox = (event) => {
 		const target = event.target;
 		console.log(event.target);
@@ -19,7 +18,7 @@ export class Tasks extends Component {
 				{data &&
 					data.map((datum) => (
 						<tr key={datum.id}>
-							<td>{datum.title}</td>
+							<td>{datum.post_title}</td>
 							<td className="td-actions text-right">
 								<OverlayTrigger placement="top" overlay={edit}>
 									<Button bsStyle="info" simple type="button" bsSize="s">
@@ -34,4 +33,4 @@ export class Tasks extends Component {
 	}
 }
 
-export default Tasks;
+export default Posts;
