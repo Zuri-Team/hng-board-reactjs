@@ -9,12 +9,12 @@ const middleware = [];
 
 middleware.push(thunk);
 const loggerMiddleware = createLogger({
-  predicate: () => process.env.NODE_ENV === "development"
+	predicate: () => process.env.NODE_ENV === "development",
 });
 middleware.push(loggerMiddleware);
 
 export default createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+	rootReducer,
+	initialState,
+	composeWithDevTools(applyMiddleware(...middleware)),
 );

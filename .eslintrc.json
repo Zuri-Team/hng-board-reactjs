@@ -1,0 +1,14 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"extends": ["react-app", "plugin:prettier/recommended"],
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"plugins": ["react", "prettier", "@typescript-eslint"],
+	"parser": "@typescript-eslint/parser",
+	"rules": {}
+}
