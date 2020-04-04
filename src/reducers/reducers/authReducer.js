@@ -5,8 +5,6 @@ import {
   LOG_OUT
 } from "../types/authTypes";
 const initialState = {
-  isAuth: false,
-  isAdmin: false,
   loading: false,
   error: false,
   errorMessage: null,
@@ -24,9 +22,7 @@ export default (state = initialState, action) => {
     case LOG_IN_FAIL:
       return {
         ...state,
-        isAuth: false,
         loading: false,
-        isAdmin: false,
         error: true,
         errorMessage: payload,
         type: !state.type // this is a hack to have the alert show just once per action
@@ -42,20 +38,16 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
-        isAuth: true,
         loading: false,
         error: false,
-        isAdmin: payload.user.role !== "intern",
         errorMessage: null
       };
       case LOG_OUT:
         sessionStorage.clear();
         return {
           ...state,
-          isAuth: false,
           loading: false,
           error: false,
-          isAdmin: false,
           errorMessage: null
         };
     default:

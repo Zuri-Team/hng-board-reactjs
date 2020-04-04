@@ -16,8 +16,6 @@ const Login = props => {
 
   const {
     isLoading,
-    isAdmin,
-    isAuthenticated,
     logInAction,
     error,
     errorMessage,
@@ -51,16 +49,6 @@ const Login = props => {
     });
   };
 
-  useEffect(() => {
-    if (sessionStorage.getItem("isUserLogged")) {
-      addNotification(undefined, "Log in successful, Redirecting", undefined);
-      if (sessionStorage.getItem("admin")) {
-        props.history.push("/admin/dashboard");
-      } else {
-        props.history.push("/user/dashboard");
-      }
-    }
-  }, [isAuthenticated, isAdmin]);
 
   if (sessionStorage.getItem("isUserLogged")) {
     if (sessionStorage.getItem("admin")) {
@@ -177,8 +165,6 @@ const Login = props => {
 const mapState = state => {
   return {
     isLoading: state.auth.loading,
-    isAdmin: state.auth.isAdmin,
-    isAuthenticated: state.auth.isAuth,
     error: state.auth.error,
     errorMessage: state.auth.errorMessage,
     type: state.auth.type
