@@ -6,6 +6,7 @@ import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
 import { Posts } from "components/Tasks/Posts.jsx";
+import { Helmet } from "react-helmet";
 
 class Dashboard extends Component {
 	createLegend(json) {
@@ -22,6 +23,9 @@ class Dashboard extends Component {
 		const { user } = this.props;
 		return (
 			<div className="content">
+				<Helmet>
+					<title>HNG Board | Dashboard</title>
+				</Helmet>
 				<Grid fluid>
 					<Row>
 						<Col lg={3} sm={6}>

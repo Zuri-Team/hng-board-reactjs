@@ -10,6 +10,10 @@ class AdminNavbarLinks extends Component {
 		this.props.history.push("/login");
 	};
 
+	viewProfile = () => {
+		this.props.history.push("/user/profile");
+	};
+
 	render() {
 		const { user } = this.props;
 		const notification = (
@@ -49,7 +53,9 @@ class AdminNavbarLinks extends Component {
 						<MenuItem eventKey={2.2}>Change Course</MenuItem>
 						<MenuItem eventKey={2.3}>Make Submission</MenuItem>
 						<MenuItem divider />
-						<MenuItem eventKey={2.5}>View Profile</MenuItem>
+						<MenuItem onClick={this.viewProfile} eventKey={2.5}>
+							View Profile
+						</MenuItem>
 					</NavDropdown>
 					<Button
 						style={{

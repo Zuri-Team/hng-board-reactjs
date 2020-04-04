@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { logInAction } from "reducers/actions/authActions";
 import NotificationSystem from "react-notification-system";
 import { style } from "variables/Variables.jsx";
+import { Helmet } from "react-helmet";
 
 const Login = (props) => {
 	const [user, setUser] = useState({
@@ -86,6 +87,9 @@ const Login = (props) => {
 
 	return (
 		<div className="log-in w-full h-screen flex items-center bg-gray-400">
+			<Helmet>
+				<title>HNG Board | Login</title>
+			</Helmet>
 			<NotificationSystem ref={notification} style={style} />
 			<div className="w-full max-w-lg rounded bg-white h-auto block mx-auto my-25">
 				<p className="mx-auto block tracking-tight leading-tight text-center text-teal-600 my-6">

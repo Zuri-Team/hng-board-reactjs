@@ -7,11 +7,15 @@ import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
 import avatar from "assets/img/faces/face-3.jpg";
+import { Helmet } from "react-helmet";
 
 class UserProfile extends Component {
 	render() {
 		return (
 			<div className="content">
+				<Helmet>
+					<title>HNG Board | Profile</title>
+				</Helmet>
 				<Grid fluid>
 					<Row>
 						<Col md={8}>

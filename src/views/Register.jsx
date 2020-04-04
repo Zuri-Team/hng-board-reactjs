@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { regInAction, getTrackAction } from "reducers/actions/authActions";
 import NotificationSystem from "react-notification-system";
 import { style } from "variables/Variables.jsx";
+import { Helmet } from "react-helmet";
 
 const Register = (props) => {
 	const [form, setForm] = useState({
@@ -142,6 +143,9 @@ const Register = (props) => {
 	}
 	return (
 		<div className="log-in w-full h-auto md:h-screen flex items-center bg-white md:bg-gray-400">
+			<Helmet>
+				<title>HNG Board | Register</title>
+			</Helmet>
 			<NotificationSystem ref={notification} style={style} />
 			<div className="w-50 rounded p-10 bg-white md:h-auto block mx-auto my-25">
 				<p className="mx-auto block tracking-tight leading-tight text-center text-teal-600 my-6">
