@@ -6,6 +6,7 @@ import {
 	REG_SUCCESS,
 	REG_FAIL,
 	SET_REG_LOADING,
+	GET_TRACKS,
 } from "../types/authTypes";
 import axios from "axios/axios";
 
@@ -41,10 +42,16 @@ export const regLoading = () => {
 	};
 };
 
-export const regSuccess = (payload) => {
+export const getTrack = (payload) => {
+	return {
+		type: GET_TRACKS,
+		payload,
+	};
+};
+
+export const regSuccess = () => {
 	return {
 		type: REG_SUCCESS,
-		payload,
 	};
 };
 
@@ -69,16 +76,26 @@ export const logInAction = (payload) => async (dispatch) => {
 	}
 };
 
+export const getTrackAction = () => async (dispatch) => {
+	try {
+		const response = await axios.get("/track/all");
+		dispatch(getTrack(response.data.data.data));
+	} catch (e) {
+		console.log(e);
+	}
+};
+
 export const regInAction = (payload) => async (dispatch) => {
 	dispatch(regLoading());
 	try {
-		const response = await axios.post("/register", payload);
-		dispatch(regSuccess(response.data));
+		await axios.post("/register", payload);
+		dispatch(regSuccess());
 	} catch (err) {
+		console.log(err.response);
 		if (err.response && err.response.status == 401) {
-			dispatch(regFail("Invalid Credentials, Please review and retry"));
+			dispatch(regFail("This email has already been taken"));
 		} else {
-			dispatch(regFail("Something went wrong, please try again"));
+			dispatch(regFail(err.response && err.response.data && err.response.data.message));
 		}
 	}
 };

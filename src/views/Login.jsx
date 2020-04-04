@@ -51,7 +51,7 @@ const Login = (props) => {
 		if (error) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
-	}, [type]);
+	}, [type, error, errorMessage]);
 
 	const onChange = (e) => {
 		const { name, value } = e.target;

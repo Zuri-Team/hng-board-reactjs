@@ -1,38 +1,162 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { regInAction } from "reducers/actions/authActions";
+import { regInAction, getTrackAction } from "reducers/actions/authActions";
 import NotificationSystem from "react-notification-system";
 import { style } from "variables/Variables.jsx";
 
-const Register = () => {
+const Register = (props) => {
+	const [form, setForm] = useState({
+		firstname: "",
+		lastname: "",
+		username: "",
+		email: "",
+		track: "",
+		password: "",
+		confirm_password: "",
+		gender: "",
+		location: "",
+	});
+
+	const {
+		getTrackAction,
+		regInAction,
+		tracks,
+		isLoading,
+		error,
+		errorMessage,
+		isRegistered,
+		type,
+	} = props;
+
+	const btn = useRef();
+	const notification = useRef();
+
+	useEffect(() => {
+		if (isLoading) {
+			btn.current.textContent = "Loading...";
+			btn.current.style.opacity = "0.5";
+			btn.current.style.pointerEvents = "none";
+			btn.current.style.boxShadow = "none";
+		} else {
+			btn.current.textContent = "Register";
+			btn.current.style.opacity = "unset";
+			btn.current.style.pointerEvents = "unset";
+			btn.current.style.boxShadow = "unset";
+		}
+	}, [isLoading]);
+
+	useEffect(() => {
+		if (isRegistered) {
+			props.history.push("/login");
+		}
+	}, [isRegistered, props.history]);
+
+	const addNotification = (level = "success", message, className = "pe-7s-check") => {
+		notification.current.addNotification({
+			title: <span data-notify="icon" className={className} />,
+			message: <div>{message}</div>,
+			level: level,
+			position: "tr",
+		});
+	};
+
+	useEffect(() => {
+		if (error) {
+			addNotification("error", errorMessage, "pe-7s-info");
+		}
+	}, [type, error, errorMessage]);
+
+	useEffect(() => {
+		if (tracks.length !== 5) {
+			getTrackAction();
+		}
+	}, []);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const {
+			firstname,
+			lastname,
+			gender,
+			email,
+			username,
+			location,
+			password,
+			track,
+			confirm_password,
+		} = form;
+		if (
+			(firstname &&
+				lastname &&
+				gender &&
+				email &&
+				username &&
+				track &&
+				location &&
+				password &&
+				confirm_password) == ""
+		) {
+			addNotification("error", "All fields are required", "pe-7s-info");
+			return;
+		}
+		if (!(email.match(/([@])/) && email.match(/([.])/))) {
+			addNotification("error", "Please enter a valid email", "pe-7s-info");
+			return;
+		}
+		if (password.length < 4 || confirm_password.length < 4) {
+			addNotification("error", "Passwords should be minimum 4 characters", "pe-7s-info");
+			return;
+		} else {
+			if (password !== confirm_password) {
+				addNotification("error", "Passwords do not match", "pe-7s-info");
+				return;
+			}
+		}
+		regInAction(form);
+	};
+
+	const onChange = (e) => {
+		const { name, value } = e.target;
+		setForm({ ...form, [name]: value });
+	};
+
+	if (sessionStorage.getItem("isUserLogged")) {
+		if (sessionStorage.getItem("admin")) {
+			props.history.push("/admin/dashboard");
+		} else {
+			props.history.push("/user/dashboard");
+		}
+	}
 	return (
 		<div className="log-in w-full h-auto md:h-screen flex items-center bg-white md:bg-gray-400">
+			<NotificationSystem ref={notification} style={style} />
 			<div className="w-50 rounded p-10 bg-white md:h-auto block mx-auto my-25">
 				<p className="mx-auto block tracking-tight leading-tight text-center text-teal-600 my-6">
-					Welcome to HNG Board
+					HNG Board
 				</p>
-				<form className="w-auto h-64 md:h-auto">
+				<form className="w-auto h-64 md:h-auto" onSubmit={handleSubmit}>
 					<div className="flex flex-wrap -mx-3 mb-6">
 						<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-first-name"
+								htmlFor="grid-first-name"
 							>
 								First Name
 							</label>
 							<input
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
 								id="grid-first-name"
 								type="text"
+								name="firstname"
 								placeholder="Jane"
+								onChange={onChange}
 							/>
-							<p className="text-red-500 text-xs italic">Please fill out this field.</p>
 						</div>
 						<div className="w-full md:w-1/2 px-3">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-last-name"
+								htmlFor="grid-last-name"
 							>
 								Last Name
 							</label>
@@ -40,7 +164,9 @@ const Register = () => {
 								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 								id="grid-last-name"
 								type="text"
+								name="lastname"
 								placeholder="Doe"
+								onChange={onChange}
 							/>
 						</div>
 					</div>
@@ -48,7 +174,7 @@ const Register = () => {
 						<div className="w-full px-3">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-email"
+								htmlFor="grid-email"
 							>
 								Email Address
 							</label>
@@ -56,41 +182,38 @@ const Register = () => {
 								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 								id="grid-email"
 								type="email"
+								name="email"
+								onChange={onChange}
 								placeholder="johndoe@gmail.com"
 							/>
-							<p className="text-gray-600 text-sm italic">
-								Make it as long and as crazy as you'd like
-							</p>
 						</div>
 					</div>
 					<div className="flex flex-wrap -mx-3 mb-6">
 						<div className="w-full px-3">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-track"
+								htmlFor="grid-track"
 							>
-								Tracks
+								Track
 							</label>
 							<select
 								className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 								id="grid-track"
+								name="track"
+								value={form.track}
+								onChange={onChange}
 							>
-								<option>Frontend</option>
-								<option>Backend</option>
-								<option>Mobile</option>
-								<option>Coding</option>
-								<option>Design</option>
+								<option value="">Please select a track...</option>
+								{tracks &&
+									tracks.map((track) => <option key={track.id}>{track.track_name}</option>)}
 							</select>
-							<p className="text-gray-600 text-sm italic">
-								Make it as long and as crazy as you'd like
-							</p>
 						</div>
 					</div>
 					<div className="flex flex-wrap -mx-3 mb-6">
 						<div className="w-full md:w-1/2 px-3">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-password"
+								htmlFor="grid-password"
 							>
 								Password
 							</label>
@@ -98,35 +221,33 @@ const Register = () => {
 								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 								id="grid-password"
 								type="password"
+								name="password"
+								onChange={onChange}
 								placeholder="******************"
 							/>
-							<p className="text-gray-600 text-sm italic">
-								Make it as long and as crazy as you'd like
-							</p>
 						</div>
 						<div className="w-full md:w-1/2 px-3">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-password"
+								htmlFor="grid-confirm-password"
 							>
 								Confirm Password
 							</label>
 							<input
 								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								id="grid-password"
+								id="grid-confirm-password"
 								type="password"
+								onChange={onChange}
+								name="confirm_password"
 								placeholder="******************"
 							/>
-							<p className="text-gray-600 text-sm italic">
-								Make it as long and as crazy as you'd like
-							</p>
 						</div>
 					</div>
 					<div className="flex flex-wrap -mx-3 mb-2">
 						<div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-slack"
+								htmlFor="grid-slack"
 							>
 								Slack Username
 							</label>
@@ -134,13 +255,15 @@ const Register = () => {
 								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 								id="grid-slack"
 								type="text"
+								onChange={onChange}
+								name="username"
 								placeholder="Albuquerque"
 							/>
 						</div>
 						<div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-gender"
+								htmlFor="grid-gender"
 							>
 								Gender
 							</label>
@@ -148,7 +271,11 @@ const Register = () => {
 								<select
 									className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 									id="grid-gender"
+									onChange={onChange}
+									value={form.gender}
+									name="gender"
 								>
+									<option value="">Please select a gender...</option>
 									<option>Male</option>
 									<option>Female</option>
 									<option>Rather Not Say</option>
@@ -167,7 +294,7 @@ const Register = () => {
 						<div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 							<label
 								className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
-								for="grid-zip"
+								htmlFor="grid-zip"
 							>
 								Location
 							</label>
@@ -175,6 +302,8 @@ const Register = () => {
 								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 								id="grid-zip"
 								type="text"
+								onChange={onChange}
+								name="location"
 								placeholder="Your Location"
 							/>
 						</div>
@@ -182,7 +311,8 @@ const Register = () => {
 					<div className="my-3">
 						<button
 							className="bg-blue-500 hover:bg-blue-700 w-40 text-white block mx-auto mt-16 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-							type="button"
+							type="submit"
+							ref={btn}
 						>
 							Register
 						</button>
@@ -199,4 +329,15 @@ const Register = () => {
 	);
 };
 
-export default connect(null, { regInAction })(Register);
+const mapState = (state) => {
+	return {
+		tracks: state.auth.tracks,
+		isLoading: state.auth.loading,
+		error: state.auth.error,
+		errorMessage: state.auth.errorMessage,
+		type: state.auth.type,
+		isRegistred: state.auth.registered,
+	};
+};
+
+export default connect(mapState, { regInAction, getTrackAction })(Register);

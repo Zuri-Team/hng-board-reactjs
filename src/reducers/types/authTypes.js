@@ -5,3 +5,4 @@ export const LOG_OUT = "LOG_OUT";
 export const REG_SUCCESS = "REG_SUCCESS";
 export const REG_FAIL = "REG_FAIL";
 export const SET_REG_LOADING = "SET_REG_LOADING";
+export const GET_TRACKS = "GET_TRACKS";

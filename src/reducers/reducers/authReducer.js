@@ -1,9 +1,20 @@
-import { LOG_IN_SUCCESS, LOG_IN_FAIL, SET_LOGIN_LOADING, LOG_OUT } from "../types/authTypes";
+import {
+	LOG_IN_SUCCESS,
+	LOG_IN_FAIL,
+	SET_LOGIN_LOADING,
+	LOG_OUT,
+	GET_TRACKS,
+	REG_SUCCESS,
+	REG_FAIL,
+	SET_REG_LOADING,
+} from "../types/authTypes";
 const initialState = {
 	loading: false,
 	error: false,
 	errorMessage: null,
 	type: false,
+	registered: false,
+	tracks: [],
 };
 
 export default (state = initialState, action) => {
@@ -45,6 +56,33 @@ export default (state = initialState, action) => {
 				error: false,
 				errorMessage: null,
 			};
+		case GET_TRACKS:
+			return {
+				...state,
+				tracks: [...state.tracks, ...payload],
+			};
+		case SET_REG_LOADING:
+			return {
+				...state,
+				loading: true,
+			};
+		case REG_SUCCESS:
+			return {
+				...state,
+				error: false,
+				loading: false,
+				registered: true,
+			};
+		case REG_FAIL:
+			return {
+				...state,
+				registered: false,
+				error: true,
+				loading: false,
+				errorMessage: payload,
+				type: !state.type, // this is a hack to have the alert show just once per action
+			};
+
 		default:
 			return state;
 	}
