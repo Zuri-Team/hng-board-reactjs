@@ -1,9 +1,4 @@
-import {
-  LOG_IN_SUCCESS,
-  LOG_IN_FAIL,
-  SET_LOGIN_LOADING,
-  LOG_OUT
-} from "../types/authTypes";
+import { LOG_IN_SUCCESS, LOG_IN_FAIL, SET_LOGIN_LOADING, LOG_OUT } from "../types/authTypes";
 const initialState = {
   loading: false,
   error: false,

@@ -22,29 +22,27 @@ import ProtectedUserRoute from "./components/ProtectedRoute/ProtectedUserRoute";
 import ProtectedAdminRoute from "./components/ProtectedRoute/ProtectedAdminRoute";
 
 if (sessionStorage["user_token"]) {
-  setToken(sessionStorage["user_token"]);
+	setToken(sessionStorage["user_token"]);
 }
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <ProtectedAdminRoute path="/admin" component={AdminLayout} />
-        <ProtectedUserRoute path="/user" component={UserLayout} />
-        <Redirect strict from="/" to="/admin/dashboard" />
-        <Route
-          render={() => (
-            <h4 className="text-center my-5">
-              Oops, this page does not seem to exist
-            </h4>
-          )}
-        />
-      </Switch>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
+	<Provider store={store}>
+		<BrowserRouter>
+			<Switch>
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/register" component={Register} />
+				<ProtectedAdminRoute path="/admin" component={AdminLayout} />
+				<ProtectedUserRoute path="/user" component={UserLayout} />
+				<Redirect strict from="/" to="/admin/dashboard" />
+				<Route
+					render={() => (
+						<h4 className="text-center my-5">Oops, this page does not seem to exist</h4>
+					)}
+				/>
+			</Switch>
+		</BrowserRouter>
+	</Provider>,
+	document.getElementById("root"),
 );
