@@ -11,7 +11,7 @@ class AdminNavbarLinks extends Component {
 	};
 
 	viewProfile = () => {
-		this.props.history.push("/user/profile");
+		this.props.history.push(`${this.props.user.role === "intern" ? "/user" : "/admin"}/profile`);
 	};
 
 	render() {
