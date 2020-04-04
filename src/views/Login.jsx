@@ -14,13 +14,7 @@ const Login = (props) => {
 	const btn = useRef();
 	const notification = useRef();
 
-  const {
-    isLoading,
-    logInAction,
-    error,
-    errorMessage,
-    type
-  } = props;
+	const { isLoading, logInAction, error, errorMessage, type } = props;
 
 	useEffect(() => {
 		if (isLoading) {
@@ -44,7 +38,6 @@ const Login = (props) => {
 			position: "tr",
 		});
 	};
-
 
 	if (sessionStorage.getItem("isUserLogged")) {
 		if (sessionStorage.getItem("admin")) {
@@ -148,13 +141,13 @@ const Login = (props) => {
 	);
 };
 
-const mapState = state => {
-  return {
-    isLoading: state.auth.loading,
-    error: state.auth.error,
-    errorMessage: state.auth.errorMessage,
-    type: state.auth.type
-  };
+const mapState = (state) => {
+	return {
+		isLoading: state.auth.loading,
+		error: state.auth.error,
+		errorMessage: state.auth.errorMessage,
+		type: state.auth.type,
+	};
 };
 
 export default connect(mapState, { logInAction })(Login);
