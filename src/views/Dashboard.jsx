@@ -21,8 +21,8 @@ class Dashboard extends Component {
 		return legend;
 	}
 	render() {
-		const { user } = this.props;
-		if (!user) {
+		const { user, latestPosts, latestTasks } = this.props;
+		if (!user && !latestTasks && !latestPosts) {
 			return (
 				<div>
 					<Helmet>
