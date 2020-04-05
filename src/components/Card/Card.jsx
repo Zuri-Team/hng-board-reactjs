@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 export class Card extends Component {
 	render() {
 		return (
@@ -18,16 +18,19 @@ export class Card extends Component {
 					}
 				>
 					{this.props.content}
-
+					<hr />
 					<div className="footer flex justify-between ">
 						{/* {this.props.legend}
 						{this.props.stats != null ? <hr /> : ""} */}
 						<div className="stats  flex ml-0 justify-start">
 							<i className={this.props.statsIcon} /> {this.props.stats}
 						</div>
-						<p className="flex justify-end leading-tight text-end w-40 mr-0">
+						<Link
+							to={this.props.route}
+							className="flex justify-end leading-tight text-end w-40 mr-0"
+						>
 							{this.props.removeViewMore ? null : "view more.."}
-						</p>
+						</Link>
 					</div>
 				</div>
 			</div>

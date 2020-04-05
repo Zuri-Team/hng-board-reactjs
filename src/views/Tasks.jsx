@@ -100,7 +100,7 @@ class Dashboard extends Component {
 					</Row>
 				</Grid>
 			</div>
-		)
+		);
 	}
 }
 

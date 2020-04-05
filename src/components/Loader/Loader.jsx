@@ -14,7 +14,7 @@ const loaderKeyframe = keyframes`
 
 const CSSLoader = styled.div`
 	font-size: 10px;
-	margin: 50px auto;
+	margin: 30vh auto;
 	text-indent: -9999em;
 	width: 11em;
 	height: 11em;

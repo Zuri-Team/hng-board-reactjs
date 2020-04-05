@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
+import moment from "moment";
 import { Grid, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Card } from "components/Card/Card.jsx";
@@ -28,7 +28,9 @@ class Dashboard extends Component {
 					<Helmet>
 						<title>HNG Board | Dashboard</title>
 					</Helmet>
-					<Loader />
+					<div className="min-h-full" style={{ minHeight: "100vh" }}>
+						<Loader />
+					</div>
 				</div>
 			);
 		} else {
@@ -81,8 +83,13 @@ class Dashboard extends Component {
 								<Card
 									title="Latest Tasks"
 									category="Here, you see the 5 latest tasks"
-									stats="Updated 3 minutes ago"
-									statsIcon="fa fa-history"
+									stats={`Your latest task expires ${
+										this.props.latestTasks[0]
+											? moment(this.props.latestTasks[0].deadline).fromNow()
+											: "..."
+									}`}
+									statsIcon="fa fa-clock-o"
+									route="/user/tasks"
 									content={
 										<div className="table-full-width">
 											<table className="table">
@@ -96,8 +103,13 @@ class Dashboard extends Component {
 								<Card
 									title="Latest Posts"
 									category="Here, you see the 5 latest posts"
-									stats="Updated 3 minutes ago"
-									statsIcon="fa fa-history"
+									stats={`Updated ${
+										this.props.latestPosts[0]
+											? moment(this.props.latestPosts[0].created_at).fromNow()
+											: ""
+									}`}
+									statsIcon="fa fa-clock-o"
+									route="/user/posts"
 									content={
 										<div className="table-full-width">
 											<table className="table">

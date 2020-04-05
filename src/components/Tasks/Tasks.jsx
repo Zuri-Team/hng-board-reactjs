@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import Checkbox from "components/CustomCheckbox/CustomCheckbox.jsx";
+import "assets/css/override.css";
+import moment from "moment";
 import Button from "components/CustomButton/CustomButton.jsx";
 
 export class Tasks extends Component {
@@ -19,7 +20,17 @@ export class Tasks extends Component {
 				{data &&
 					data.map((datum) => (
 						<tr key={datum.id}>
-							<td>{datum.title}</td>
+							<td>
+								<p className="text-bold leading-tight tracking-tight">
+									<strong>{datum.title}</strong>
+								</p>
+								<small className="text-gray-700 leading-tight">
+									Deadline: {moment(datum.deadline).format("DD/MM/YYYY hh:mm A")}
+								</small>
+								<p className="text-sm mt-5">
+									<small className="badge badge-success d-block text-sm">placeholder</small>
+								</p>
+							</td>
 							<td className="td-actions text-right">
 								<OverlayTrigger placement="top" overlay={edit}>
 									<Button bsStyle="info" simple type="button" bsSize="s">

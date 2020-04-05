@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { requestAction } from "reducers/actions/authActions";
 import NotificationSystem from "react-notification-system";
 import { style } from "variables/Variables.jsx";
-import {Helmet} from 'react-helmet'
+import { Helmet } from "react-helmet";
 
 const RequestPasswordReset = (props) => {
 	const [user, setUser] = useState({

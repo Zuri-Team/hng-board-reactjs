@@ -29,7 +29,7 @@ const UserProfile = (props) => {
 		);
 	} else {
 		if (userProfile.status && userProfile.code === 200) {
-			console.log(userProfile);
+			// console.log(userProfile);
 			const mainProfileInfo = userProfile.data[0];
 			return (
 				<div className="content">

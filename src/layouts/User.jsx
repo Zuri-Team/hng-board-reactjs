@@ -87,8 +87,8 @@ class User extends Component {
 	componentDidMount() {
 		let user = JSON.parse(sessionStorage["user_payload"]);
 		this.props.getUserAction(user.id);
-		this.props.fetchPostsAction();
 		this.props.fetchTasksAction();
+		setTimeout(() => this.props.fetchPostsAction(), 2000); // This is to ensure that tasks display before posts. A UX dilemma
 		if (this.props.location.pathname === "/user") {
 			this.props.history.push("/user/dashboard");
 		}
@@ -150,7 +150,7 @@ class User extends Component {
 				<Sidebar
 					{...this.props}
 					routes={routes}
-					image={this.state.image}
+					// image={this.state.image}
 					fullname={fullname}
 					color={this.state.color}
 					hasImage={this.state.hasImage}

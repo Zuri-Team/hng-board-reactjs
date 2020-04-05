@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import Button from "components/CustomButton/CustomButton.jsx";
+import moment from "moment";
 
 export class Posts extends Component {
 	handleCheckbox = (event) => {
@@ -18,8 +19,21 @@ export class Posts extends Component {
 				{data &&
 					data.map((datum) => (
 						<tr key={datum.id}>
-							<td>{datum.post_title}</td>
-							<td className="td-actions text-right">
+							<td>
+								<p className="text-bold leading-tight tracking-tight">
+									<strong>{datum.post_title}</strong>
+								</p>
+								<small className="text-gray-700 leading-tight">
+									Posted: {moment(datum.created_at).format("DD/MM/YYYY hh:mm A")} by{" "}
+									{datum.user.firstname} {datum.user.lastname}
+								</small>
+								<p className="text-sm mt-5">
+									<small className="badge badge-success d-block text-sm">
+										{datum.category.title}
+									</small>
+								</p>
+							</td>
+							<td className="td-actions flex">
 								<OverlayTrigger placement="top" overlay={edit}>
 									<Button bsStyle="info" simple type="button" bsSize="s">
 										<i className="fa fa-eye" />
