@@ -25,7 +25,9 @@ export class Card extends Component {
 						<div className="stats  flex ml-0 justify-start">
 							<i className={this.props.statsIcon} /> {this.props.stats}
 						</div>
-						<p className="flex justify-end leading-tight text-end w-40 mr-0">view more..</p>
+						<p className="flex justify-end leading-tight text-end w-40 mr-0">
+							{this.props.removeViewMore ? null : "view more.."}
+						</p>
 					</div>
 				</div>
 			</div>

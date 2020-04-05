@@ -7,6 +7,7 @@ import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
 import { Posts } from "components/Tasks/Posts.jsx";
 import { Helmet } from "react-helmet";
+import Loader from "../components/Loader/Loader";
 
 class Dashboard extends Component {
 	createLegend(json) {
@@ -99,7 +100,7 @@ class Dashboard extends Component {
 					</Row>
 				</Grid>
 			</div>
-		);
+		)
 	}
 }
 
