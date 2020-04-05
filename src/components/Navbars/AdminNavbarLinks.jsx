@@ -38,17 +38,17 @@ class AdminNavbarLinks extends Component {
 					</NavItem> */}
 				</Nav>
 				<Nav pullRight>
-					<NavDropdown eventKey={2} title={notification} noCaret id="basic-nav-dropdown">
+					{/* <NavDropdown eventKey={2} title={notification} noCaret id="basic-nav-dropdown">
 						<MenuItem eventKey={2.1}>Notification 1</MenuItem>
 						<MenuItem eventKey={2.2}>Notification 2</MenuItem>
 						<MenuItem eventKey={2.3}>Notification 3</MenuItem>
 						<MenuItem eventKey={2.4}>Notification 4</MenuItem>
 						<MenuItem eventKey={2.5}>Another notifications</MenuItem>
-					</NavDropdown>
+					</NavDropdown> */}
 					<NavItem eventKey={1} href="#">
 						{user ? user.email : "Loading..."}
 					</NavItem>
-					<NavDropdown eventKey={2} title="Actions" id="basic-nav-dropdown-right">
+					{/* <NavDropdown eventKey={2} title="Actions" id="basic-nav-dropdown-right">
 						<MenuItem eventKey={2.1}>Change Track</MenuItem>
 						<MenuItem eventKey={2.2}>Change Course</MenuItem>
 						<MenuItem eventKey={2.3}>Make Submission</MenuItem>
@@ -56,7 +56,7 @@ class AdminNavbarLinks extends Component {
 						<MenuItem onClick={this.viewProfile} eventKey={2.5}>
 							View Profile
 						</MenuItem>
-					</NavDropdown>
+					</NavDropdown> */}
 					<Button
 						style={{
 							backgroundColor: "#5bc0de",

@@ -5,13 +5,10 @@ import moment from "moment";
 import Button from "components/CustomButton/CustomButton.jsx";
 
 export class Tasks extends Component {
-	handleCheckbox = (event) => {
-		const target = event.target;
-		console.log(event.target);
-		this.setState({
-			[target.name]: target.checked,
-		});
+	viewTask = (id) => {
+		this.props.history.push(`/user/task/${id}`);
 	};
+
 	render() {
 		const { data } = this.props;
 		const edit = <Tooltip id="edit_tooltip">View {this.props.name}</Tooltip>;
@@ -28,12 +25,20 @@ export class Tasks extends Component {
 									Deadline: {moment(datum.deadline).format("DD/MM/YYYY hh:mm A")}
 								</small>
 								<p className="text-sm mt-5">
-									<small className="badge badge-success d-block text-sm">placeholder</small>
+									<small className="badge badge-success tasks d-block text-sm">
+										{datum.track_name}
+									</small>
 								</p>
 							</td>
 							<td className="td-actions text-right">
 								<OverlayTrigger placement="top" overlay={edit}>
-									<Button bsStyle="info" simple type="button" bsSize="s">
+									<Button
+										bsStyle="warning"
+										simple
+										type="button"
+										bsSize="s"
+										onClick={() => this.viewTask(datum.id)}
+									>
 										<i className="fa fa-eye" />
 									</Button>
 								</OverlayTrigger>

@@ -11,6 +11,7 @@ import { getUserAction } from "reducers/actions/authActions";
 import { fetchTasksAction } from "reducers/actions/userActions";
 import { fetchPostsAction } from "reducers/actions/postsActions";
 import Post from "views/userpages/ViewPost";
+import Task from "views/userpages/ViewTask";
 
 import { style } from "variables/Variables.jsx";
 
@@ -89,7 +90,7 @@ class User extends Component {
 		let user = JSON.parse(localStorage["user_payload"]);
 		this.props.getUserAction(user.id);
 		this.props.fetchTasksAction();
-		setTimeout(() => this.props.fetchPostsAction(), 1000); // This is to ensure that tasks display before posts. A UX dilemma
+		this.props.fetchPostsAction();
 		if (this.props.location.pathname === "/user") {
 			this.props.history.push("/user/dashboard");
 		}
@@ -164,6 +165,7 @@ class User extends Component {
 					<Switch>
 						{this.getRoutes(routes)}
 						<ProtectedUserRoute exact path="/user/post/:id" component={Post} />
+						<ProtectedUserRoute exact path="/user/task/:id" component={Task} />
 					</Switch>
 					<Footer />
 				</div>

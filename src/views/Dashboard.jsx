@@ -35,7 +35,7 @@ class Dashboard extends Component {
 				</div>
 			);
 		} else {
-			if (latestTasks.length > 0 || latestPosts.length > 0) {
+			if (latestTasks.length > 0 && latestPosts.length > 0) {
 				return (
 					<div className="content">
 						<Helmet>

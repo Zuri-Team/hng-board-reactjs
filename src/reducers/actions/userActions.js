@@ -16,13 +16,20 @@ export const fetchTasksSuccess = (payload) => {
 
 export const fetchTasksAction = () => async (dispatch) => {
 	dispatch(fetchTasksLoading());
+	// const axios = require('axios');
 	try {
-		const response = await axios.get("/user/task");
-		const tasks = response.data.data.flat();
-		// const tracksPromise = tasks.map(async task => await axios.get(`/track/${task.track_id}`));
-		// const tracks = await Promise.all(tracksPromise);
-		// tracks.map((track, i) => tasks[i]["track_name"] = track.data.data.track_name);
-		dispatch(fetchTasksSuccess(tasks));
+		const [tasks, tracks] = await Promise.all([axios.get("/user/task"), axios.get("track/all")]);
+
+		const taskResponse = tasks.data.data.flat();
+		const trackResponse = tracks.data.data.data;
+		for (let i = 0; i < taskResponse.length; i++) {
+			for (let j = 0; j < trackResponse.length; j++) {
+				if (taskResponse[i].track_id == trackResponse[j].id) {
+					taskResponse[i]["track_name"] = trackResponse[j].track_name;
+				}
+			}
+		}
+		dispatch(fetchTasksSuccess(taskResponse));
 	} catch (err) {
 		console.log(err);
 	}

@@ -8,17 +8,18 @@ import Loader from "components/Loader/Loader";
 import "assets/css/override.css";
 
 const Post = (props) => {
-	const [post, setPost] = useState(null);
+	const [task, setTask] = useState(null);
+
 	const { loading } = props;
 	useEffect(() => {
 		// loading from the redux cache
-		if (props.posts.length > 0) {
-			const cachedPost = props.posts.filter((post) => post.id == props.match.params.id)[0];
-			setPost({ ...post, ...cachedPost });
+		if (props.tasks.length > 0) {
+			const cachedTask = props.tasks.filter((task) => task.id == props.match.params.id)[0];
+			setTask({ ...task, ...cachedTask });
 		}
-	}, [props.posts]);
+	}, [props.tasks]);
 
-	if (loading || post === null) {
+	if (loading || task === null) {
 		return (
 			<div>
 				<Helmet>
@@ -34,7 +35,7 @@ const Post = (props) => {
 					<Row className="flex justify-center">
 						<Col md={10} xs={10} className="mx-auto posts">
 							<Card
-								title={post.post_title}
+								title={task.title}
 								stats={null}
 								statsIcon={null}
 								removeViewMore
@@ -42,7 +43,7 @@ const Post = (props) => {
 									<div className="table-full-width">
 										<table className="table">
 											<tbody>
-												<tr key={post.id}>
+												<tr key={task.id}>
 													<td>
 														<p className="text-bold leading-tight flex justify-end tracking-tight">
 															<Button
@@ -61,17 +62,16 @@ const Post = (props) => {
 														<p className="body text-gray-700">
 															<small
 																dangerouslySetInnerHTML={{
-																	__html: post.post_body,
+																	__html: task.body,
 																}}
 															/>
 														</p>
 														<small className="text-gray-700 leading-tight">
-															Posted: {moment(post.created_at).format("DD/MM/YYYY hh:mm A")} by{" "}
-															{post.user.firstname} {post.user.lastname}
+															Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}
 														</small>
 														<p className="text-sm mt-5">
 															<small className="badge badge-success d-block text-sm">
-																{post.category.title}
+																{task.track_name}
 															</small>
 														</p>
 													</td>
@@ -91,8 +91,8 @@ const Post = (props) => {
 
 const mapStateToProps = (state) => ({
 	post: state.post.post,
-	posts: state.post.allPosts,
-	loading: state.post.loading,
+	loading: state.user.isLoading,
+	tasks: state.user.allTasks,
 });
 
 export default connect(mapStateToProps)(Post);

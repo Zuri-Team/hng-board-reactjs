@@ -10,4 +10,6 @@
 .btn-info {
 	border: none;
 }
-
+.badge.tasks {
+	background-color: #FF9500;
+}
