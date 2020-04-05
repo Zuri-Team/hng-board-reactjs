@@ -26,7 +26,7 @@ const dashboardRoutes = [
 		layout: "/user",
 	},
 	{
-		path: "/user",
+		path: "/profile",
 		name: "User Profile",
 		icon: "pe-7s-user",
 		component: UserProfile,

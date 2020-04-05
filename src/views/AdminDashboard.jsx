@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -33,6 +34,9 @@ class AdminDashboard extends Component {
 		const { user } = this.props;
 		return (
 			<div className="content">
+				<Helmet>
+					<title>HNG Board | Admin</title>
+				</Helmet>
 				<Grid fluid>
 					<Row>
 						<Col lg={3} sm={6}>
