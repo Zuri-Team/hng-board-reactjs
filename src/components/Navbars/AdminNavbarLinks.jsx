@@ -62,6 +62,9 @@ class AdminNavbarLinks extends Component {
 							backgroundColor: "#5bc0de",
 							color: "#FFF",
 							outline: "none",
+							marginRight: "auto",
+							marginLeft: "auto",
+							display: "block",
 						}}
 						onClick={this.logOut}
 						bsStyle="info"
