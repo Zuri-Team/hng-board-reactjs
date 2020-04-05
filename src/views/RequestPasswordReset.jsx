@@ -47,8 +47,8 @@ const RequestPasswordReset = (props) => {
 		});
 	};
 
-	if (sessionStorage.getItem("isUserLogged")) {
-		if (sessionStorage.getItem("admin")) {
+	if (localStorage.getItem("isUserLogged")) {
+		if (localStorage.getItem("admin")) {
 			props.history.push("/admin/dashboard");
 		} else {
 			props.history.push("/user/dashboard");

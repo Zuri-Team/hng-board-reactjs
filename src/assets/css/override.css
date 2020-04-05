@@ -1,3 +1,13 @@
 .badge {
-    background-color: #1DC7EA;
+	background-color: #1dc7ea;
 }
+@media (min-width: 992x) {
+	.col-md-10.posts {
+		float: none !important;
+	}
+}
+
+.btn-info {
+	border: none;
+}
+

@@ -4,12 +4,8 @@ import Button from "components/CustomButton/CustomButton.jsx";
 import moment from "moment";
 
 export class Posts extends Component {
-	handleCheckbox = (event) => {
-		const target = event.target;
-		console.log(event.target);
-		this.setState({
-			[target.name]: target.checked,
-		});
+	viewPost = (id) => {
+		this.props.history.push(`/user/post/${id}`);
 	};
 	render() {
 		const { data } = this.props;
@@ -33,9 +29,15 @@ export class Posts extends Component {
 									</small>
 								</p>
 							</td>
-							<td className="td-actions flex">
+							<td className="td-actions text-right">
 								<OverlayTrigger placement="top" overlay={edit}>
-									<Button bsStyle="info" simple type="button" bsSize="s">
+									<Button
+										bsStyle="info"
+										simple
+										type="button"
+										bsSize="s"
+										onClick={() => this.viewPost(datum.id)}
+									>
 										<i className="fa fa-eye" />
 									</Button>
 								</OverlayTrigger>

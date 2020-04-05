@@ -16,7 +16,7 @@ export const fetchProfileSuccess = (payload) => {
 export const fetchProfileAction = () => async (dispatch) => {
 	dispatch(fetchProfileLoading());
 	try {
-		const userId = JSON.parse(sessionStorage["user_payload"]).id;
+		const userId = JSON.parse(localStorage["user_payload"]).id;
 		const response = await axios.get(`/profile/${userId}`);
 		const tasks = response.data;
 		// const tracksPromise = tasks.map(async task => await axios.get(`/track/${task.track_id}`));

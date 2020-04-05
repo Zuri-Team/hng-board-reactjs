@@ -85,7 +85,7 @@ class Admin extends Component {
 	};
 
 	componentDidMount() {
-		let user = JSON.parse(sessionStorage["user_payload"]);
+		let user = JSON.parse(localStorage["user_payload"]);
 		this.props.getUserAction(user.id);
 		if (this.props.location.pathname === "/admin") {
 			this.props.history.push("/admin/dashboard");
@@ -140,7 +140,7 @@ class Admin extends Component {
 		}
 	}
 	render() {
-		return sessionStorage.getItem("admin") == "true" ? (
+		return localStorage.getItem("admin") == "true" ? (
 			<div className="wrapper">
 				<NotificationSystem ref="notificationSystem" style={style} />
 				<Sidebar

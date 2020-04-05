@@ -33,10 +33,9 @@ const dashboardRoutes = [
 		layout: "/user",
 	},
 	// {
-	// 	path: "/table",
-	// 	name: "Table List",
-	// 	icon: "pe-7s-note2",
-	// 	component: TableList,
+	// 	path: "/post/:id",
+	// 	name: "Single Post",
+	// 	component: Post,
 	// 	layout: "/user",
 	// },
 	// {

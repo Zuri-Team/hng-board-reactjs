@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { getUserAction } from "reducers/actions/authActions";
 import { fetchTasksAction } from "reducers/actions/userActions";
 import { fetchPostsAction } from "reducers/actions/postsActions";
+import Post from "views/userpages/ViewPost";
 
 import { style } from "variables/Variables.jsx";
 
@@ -85,10 +86,10 @@ class User extends Component {
 	};
 
 	componentDidMount() {
-		let user = JSON.parse(sessionStorage["user_payload"]);
+		let user = JSON.parse(localStorage["user_payload"]);
 		this.props.getUserAction(user.id);
 		this.props.fetchTasksAction();
-		setTimeout(() => this.props.fetchPostsAction(), 2000); // This is to ensure that tasks display before posts. A UX dilemma
+		setTimeout(() => this.props.fetchPostsAction(), 1000); // This is to ensure that tasks display before posts. A UX dilemma
 		if (this.props.location.pathname === "/user") {
 			this.props.history.push("/user/dashboard");
 		}
@@ -142,9 +143,9 @@ class User extends Component {
 		}
 	}
 	render() {
-		let user = JSON.parse(sessionStorage["user_payload"]);
+		let user = JSON.parse(localStorage["user_payload"]);
 		const fullname = user.firstname + " " + user.lastname;
-		return sessionStorage.getItem("user") == "true" ? (
+		return localStorage.getItem("user") == "true" ? (
 			<div className="wrapper">
 				<NotificationSystem ref="notificationSystem" style={style} />
 				<Sidebar
@@ -160,7 +161,10 @@ class User extends Component {
 						{...this.props}
 						brandText={this.getBrandText(this.props.location.pathname)}
 					/>
-					<Switch>{this.getRoutes(routes)}</Switch>
+					<Switch>
+						{this.getRoutes(routes)}
+						<ProtectedUserRoute exact path="/user/post/:id" component={Post} />
+					</Switch>
 					<Footer />
 				</div>
 			</div>

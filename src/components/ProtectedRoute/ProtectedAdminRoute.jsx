@@ -5,8 +5,7 @@ export default ({ component: Component, ...rest }) => (
 	<Route
 		{...rest}
 		render={(props) =>
-			sessionStorage.getItem("isUserLogged") == "true" &&
-			sessionStorage.getItem("admin") == "true" ? (
+			localStorage.getItem("isUserLogged") == "true" && localStorage.getItem("admin") == "true" ? (
 				<Component {...props} {...rest} />
 			) : (
 				<Redirect

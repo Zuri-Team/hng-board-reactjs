@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Card } from "components/Card/Card.jsx";
-import { StatsCard } from "components/StatsCard/StatsCard.jsx";
-import { Tasks } from "components/Tasks/Tasks.jsx";
-import { Posts } from "components/Tasks/Posts.jsx";
+import "assets/css/override.css";
+import Loader from "../components/Loader/Loader";
+import moment from "moment";
 import { Helmet } from "react-helmet";
 
 class Dashboard extends Component {
@@ -19,95 +18,90 @@ class Dashboard extends Component {
 		}
 		return legend;
 	}
+
+	viewPost = (id) => {
+		this.props.history.push(`/user/post/${id}`);
+	};
+
 	render() {
-		const { user } = this.props;
-		return (
-			<div className="content">
-				<Helmet>
-					<title>HNG Board | Posts</title>
-				</Helmet>
-				<Grid fluid>
-					<Row>
-						<Col lg={3} sm={6}>
-							<StatsCard
-								bigIcon={<i className="pe-7s-hammer text-warning" />}
-								statsText="Current Stage"
-								statsValue={user ? user.stage : "Loading..."}
-								// statsIcon={<i className="fa fa-info" />}
-								// statsIconText="Your Current Stage"
-							/>
-						</Col>
-						<Col lg={3} sm={6}>
-							<StatsCard
-								bigIcon={<i className="pe-7s-server text-success" />}
-								statsText="Total Stages"
-								statsValue="10"
-								// statsIcon={<i className="fa fa-info" />}
-								// statsIconText="Total Stages in the Programme"
-							/>
-						</Col>
-						<Col lg={3} sm={6}>
-							<StatsCard
-								bigIcon={<i className="pe-7s-graph1 text-danger" />}
-								statsText="Your Tracks"
-								statsValue={user ? user.tracks.length : "Loading..."}
-								// statsIcon={<i className="fa fa-info" />}
-								// statsIconText="Number of Tracks You Belong To"
-							/>
-						</Col>
-						<Col lg={3} sm={6}>
-							<StatsCard
-								bigIcon={<i className="pe-7s-user text-info" />}
-								statsText="Status"
-								statsValue={user ? (user.active ? "Active" : "Inactive") : "Loading..."}
-								// statsIcon={<i className="fa fa-info"
-								// statsIconText="Your Current Status in the Internship"
-							/>
-						</Col>
-					</Row>
-					<Row>
-						<Col md={6}>
-							<Card
-								title="Latest Tasks"
-								category="Here, you see the 5 latest tasks"
-								stats="Updated 3 minutes ago"
-								statsIcon="fa fa-history"
-								content={
-									<div className="table-full-width">
-										<table className="table">
-											<Tasks name="Task" data={this.props.latestTasks} />
-										</table>
-									</div>
-								}
-							/>
-						</Col>
-						<Col md={6}>
-							<Card
-								title="Latest Posts"
-								category="Here, you see the 5 latest posts"
-								stats="Updated 3 minutes ago"
-								statsIcon="fa fa-history"
-								content={
-									<div className="table-full-width">
-										<table className="table">
-											<Posts name="Post" data={this.props.latestPosts} />
-										</table>
-									</div>
-								}
-							/>
-						</Col>
-					</Row>
-				</Grid>
-			</div>
-		);
+		const { posts, loading } = this.props;
+		const edit = <Tooltip id="edit_tooltip">View Post</Tooltip>;
+		if (loading || posts.length < 1) {
+			return (
+				<div>
+					<Helmet>
+						<title>HNG Board | Posts</title>
+					</Helmet>
+					<Loader />
+				</div>
+			);
+		} else {
+			return (
+				<div className="content mx-auto">
+					<Grid fluid className="min-h-screen mx-auto">
+						<Row className="flex justify-center">
+							<Col md={10} xs={10} className="mx-auto posts">
+								<Card
+									title="Latest Posts"
+									category="Here, you see the 5 latest posts"
+									stats={null}
+									statsIcon={null}
+									removeViewMore
+									content={
+										<div className="table-full-width">
+											<table className="table">
+												<tbody>
+													{posts &&
+														posts.map((post) => (
+															<tr key={post.id}>
+																<td>
+																	<p className="text-bold leading-tight tracking-tight">
+																		<strong>{post.post_title}</strong>
+																	</p>
+																	{/* <p className="body text-gray-700" ><small dangerouslySetInnerHTML={{__html: post.post_body.slice(0, 250).trimEnd().replace(/\n|<strong>|<\/strong>|<br\/>|\/\n/g, "") + "....."}}/></p> */}
+																	<small className="text-gray-700 leading-tight">
+																		Posted: {moment(post.created_at).format("DD/MM/YYYY hh:mm A")}{" "}
+																		by {post.user.firstname} {post.user.lastname}
+																	</small>
+																	<p className="text-sm mt-5">
+																		<small className="badge badge-success d-block text-sm">
+																			{post.category.title}
+																		</small>
+																	</p>
+																</td>
+																<td className="td-actions text-right">
+																	<OverlayTrigger placement="top" overlay={edit}>
+																		<Button
+																			bsStyle="info"
+																			simple
+																			type="button"
+																			bsSize="s"
+																			onClick={() => this.viewPost(post.id)}
+																		>
+																			<i className="fa fa-eye"></i>
+																		</Button>
+																	</OverlayTrigger>
+																</td>
+															</tr>
+														))}
+												</tbody>
+											</table>
+										</div>
+									}
+								/>
+							</Col>
+						</Row>
+					</Grid>
+				</div>
+			);
+		}
 	}
 }
 
 const mapState = (state) => {
 	return {
-		user: state.auth.user,
-		latestPosts: state.post.posts,
-		latestTasks: state.user.tasks,
+		loading: state.post.loading,
+		posts: state.post.allPosts,
 	};
 };
 export default connect(mapState)(Dashboard);

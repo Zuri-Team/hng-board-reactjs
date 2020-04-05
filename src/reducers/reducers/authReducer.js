@@ -42,13 +42,13 @@ export default (state = initialState, action) => {
 				type: !state.type, // this is a hack to have the alert show just once per action
 			};
 		case LOG_IN_SUCCESS:
-			sessionStorage["token"] = payload.token;
-			sessionStorage["isUserLogged"] = true;
-			sessionStorage["user_payload"] = JSON.stringify(payload.user);
+			localStorage["token"] = payload.token;
+			localStorage["isUserLogged"] = true;
+			localStorage["user_payload"] = JSON.stringify(payload.user);
 			if (payload.user.role != "intern") {
-				sessionStorage["admin"] = true;
+				localStorage["admin"] = true;
 			} else {
-				sessionStorage["user"] = true;
+				localStorage["user"] = true;
 			}
 			return {
 				...state,
@@ -57,7 +57,7 @@ export default (state = initialState, action) => {
 				errorMessage: null,
 			};
 		case LOG_OUT:
-			sessionStorage.clear();
+			localStorage.clear();
 			return {
 				...state,
 				loading: false,
