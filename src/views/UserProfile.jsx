@@ -10,7 +10,11 @@ import Button from "components/CustomButton/CustomButton.jsx";
 // import avatar from "assets/img/faces/face-3.jpg";
 import { Helmet } from "react-helmet";
 import Loader from "../components/Loader/Loader";
-import { fetchProfileAction, fetchUserTracksAction } from "../reducers/actions/profileActions";
+import {
+	fetchProfileAction,
+	fetchUserTracksAction,
+	editProfileAction,
+} from "../reducers/actions/profileActions";
 import { fetchSlackProfileAction } from "../reducers/actions/slackProfileActions";
 
 const UserProfile = (props) => {
@@ -21,6 +25,7 @@ const UserProfile = (props) => {
 		slackProfile,
 		userTracks,
 		fetchUserTracksAction,
+		editProfileAction,
 	} = props;
 	useEffect(() => {
 		fetchProfileAction();
@@ -50,6 +55,15 @@ const UserProfile = (props) => {
 	const handleEditClick = () => {
 		setSubmitState({ editMode: !submitState.editMode });
 		setDisableFields(!disableFields);
+	};
+
+	// change the below later. it's just dummy data now
+	const handleUpdateProfile = () => {
+		editProfileAction(user);
+	};
+
+	const handleChange = (e) => {
+		setUser({ [e.target.name]: e.target.value });
 	};
 
 	if (!userProfile && !slackProfile && !userTracks) {
@@ -98,6 +112,8 @@ const UserProfile = (props) => {
 														placeholder: "Username",
 														defaultValue: username ? username : "",
 														disabled: disableFields,
+														name: "username",
+														onChange: handleChange,
 													},
 													{
 														label: "Email address",
@@ -106,6 +122,8 @@ const UserProfile = (props) => {
 														placeholder: "Email",
 														defaultValue: email ? email : "",
 														disabled: disableFields,
+														name: "email",
+														onChange: handleChange,
 													},
 												]}
 											/>
@@ -119,6 +137,8 @@ const UserProfile = (props) => {
 														placeholder: "First name",
 														defaultValue: firstname ? firstname : "",
 														disabled: disableFields,
+														name: "firstname",
+														onChange: handleChange,
 													},
 													{
 														label: "Last name",
@@ -127,6 +147,8 @@ const UserProfile = (props) => {
 														placeholder: "Last name",
 														defaultValue: lastname ? lastname : "",
 														disabled: disableFields,
+														name: "lastname",
+														onChange: handleChange,
 													},
 												]}
 											/>
@@ -140,6 +162,8 @@ const UserProfile = (props) => {
 														placeholder: "Location",
 														defaultValue: location ? location : "",
 														disabled: disableFields,
+														name: "location",
+														onChange: handleChange,
 													},
 												]}
 											/>
@@ -180,6 +204,8 @@ const UserProfile = (props) => {
 															placeholder="Edit your bio here"
 															defaultValue={bio ? bio : ""}
 															disabled={disableFields}
+															name="username"
+															onChange={handleChange}
 														/>
 													</FormGroup>
 												</Col>
@@ -189,6 +215,7 @@ const UserProfile = (props) => {
 												bsStyle="info"
 												pullLeft
 												fill
+												onClick={handleUpdateProfile}
 											>
 												Update profile
 											</Button>
@@ -259,7 +286,7 @@ const UserProfile = (props) => {
 									// }
 									profileButton={
 										<div>
-											<Button bsStyle="info" center fill type="submit">
+											<Button bsStyle="info" center fill type="button">
 												Change Avatar
 											</Button>
 										</div>
@@ -292,6 +319,7 @@ const mapDispatchToProps = {
 	fetchProfileAction,
 	fetchSlackProfileAction,
 	fetchUserTracksAction,
+	editProfileAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
