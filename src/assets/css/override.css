@@ -11,5 +11,32 @@
 	border: none;
 }
 .badge.tasks {
-	background-color: #FF9500;
+	background-color: #ff9500;
+}
+
+.col-sm-10 {
+	float: left;
+}
+
+@media (max-width: 1080px) {
+	.col-sm-10 {
+		margin: 0 auto !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.col-sm-12 {
+		float: none;
+	}
+}
+
+@media (max-width: 768px) {
+	.col-md-8 {
+		float: left;
+	}
+}
+@media (max-width: 768px) {
+	.col-md-4.submit {
+		float: left;
+	}
 }

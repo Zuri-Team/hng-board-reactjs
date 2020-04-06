@@ -83,7 +83,7 @@ class User extends Component {
 				return routes[i].name;
 			}
 		}
-		return "Brand";
+		return "";
 	};
 
 	componentDidMount() {

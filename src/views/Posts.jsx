@@ -40,7 +40,7 @@ class Posts extends Component {
 				<div className="content mx-auto">
 					<Grid fluid className="min-h-screen mx-auto">
 						<Row className="flex justify-center">
-							<Col md={10} xs={10} className="mx-auto posts">
+							<Col md={10} sm={12} className="mx-auto posts">
 								<Card
 									title="Posts"
 									// category="Here, you see the 5 latest posts"

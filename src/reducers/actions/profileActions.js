@@ -63,7 +63,7 @@ export const editProfileAction = (user) => async (dispatch) => {
 		dispatch({
 			type: EDIT_PROFILE_SUCCESS,
 			payload: feedback,
-		})
+		});
 	} catch (err) {
 		console.log(err);
 	}

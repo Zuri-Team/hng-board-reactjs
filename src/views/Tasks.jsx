@@ -15,7 +15,7 @@ class Tasks extends Component {
 	render() {
 		const { tasks, loading } = this.props;
 		const edit = <Tooltip id="edit_tooltip">View Task</Tooltip>;
-		if (loading || tasks.length < 1) {
+		if (loading || (tasks && tasks.length < 1)) {
 			return (
 				<div>
 					<Helmet>
@@ -29,7 +29,7 @@ class Tasks extends Component {
 				<div className="content mx-auto">
 					<Grid fluid className="min-h-screen mx-auto">
 						<Row className="flex justify-center">
-							<Col md={10} xs={10} className="mx-auto posts">
+							<Col md={10} sm={12} className="mx-auto posts">
 								<Card
 									title="Tasks"
 									stats={null}

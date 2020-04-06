@@ -1,39 +1,181 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Card } from "components/Card/Card.jsx";
-import { Grid, Row, Col, Button } from "react-bootstrap";
+import { Grid, Row, Col, Button, FormGroup, ControlLabel, FormControl } from "react-bootstrap";
+import { FormInputs } from "components/FormInputs/FormInputs.jsx";
+import NotificationSystem from "react-notification-system";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import moment from "moment";
+import { style } from "variables/Variables.jsx";
 import Loader from "components/Loader/Loader";
 import "assets/css/override.css";
+import {
+	fetchProbationAction,
+	fetchGradeAction,
+	submitTaskAction,
+	setSubmitLoadingToNull,
+	setErrorToFalse,
+} from "reducers/actions/userActions";
 
-const Post = (props) => {
-	const [task, setTask] = useState(null);
+const Task = (props) => {
+	const [task, setTask] = useState({});
 
-	const { loading } = props;
+	const btn = useRef();
+	const notification = useRef();
+
+	const [form, setForm] = useState({
+		user_id: JSON.parse(localStorage["user_payload"]).id,
+		submission_link: "",
+		comment: "",
+		task_id: props.match.params.id,
+		is_submitted: 1,
+	});
+
+	const {
+		loading,
+		onProbation,
+		fetchProbationAction,
+		probator,
+		deadline,
+		fetchGradeAction,
+		isSubmitted,
+		grade,
+		type,
+		isTaskPage,
+		error,
+		errorMessage,
+		submitTaskAction,
+		submitLoading,
+		setSubmitLoadingToNull,
+		setErrorToFalse,
+	} = props;
+	useEffect(() => {
+		if (submitLoading) {
+			btn.current.textContent = "Loading...";
+			btn.current.style.opacity = "0.5";
+			btn.current.style.pointerEvents = "none";
+			btn.current.style.boxShadow = "none";
+		} else {
+			if (submitLoading === false && isSubmitted === false) {
+				addNotification(undefined, "Task Successfully Submitted", undefined);
+				btn.current.textContent = "Submit";
+				btn.current.style.opacity = "unset";
+				btn.current.style.pointerEvents = "unset";
+				btn.current.style.boxShadow = "unset";
+				setSubmitLoadingToNull();
+				setTimeout(() => fetchProbationAction(JSON.parse(localStorage["user_payload"]).id), 2000);
+				setTimeout(
+					() =>
+						fetchGradeAction(props.match.params.id, JSON.parse(localStorage["user_payload"]).id),
+					3000,
+				);
+			}
+		}
+	}, [submitLoading, type]);
+
+	const addNotification = (level = "success", message, className = "pe-7s-check") => {
+		notification.current.addNotification({
+			title: <span data-notify="icon" className={className} />,
+			message: <div>{message}</div>,
+			level: level,
+			position: "tr",
+		});
+	};
+
+	useEffect(() => {
+		if (error && isTaskPage) {
+			addNotification("error", "Ugh 😔, somethig went wrong, Please try again", "pe-7s-info");
+			btn.current.textContent = "Submit";
+			btn.current.style.opacity = "unset";
+			btn.current.style.pointerEvents = "unset";
+			btn.current.style.boxShadow = "unset";
+			setErrorToFalse();
+		}
+	}, [type]);
+
+	const handleChange = (e) => {
+		console.log(e.target.value);
+		setForm({ ...form, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const { submission_link, comment } = form;
+		if (submission_link == "" && comment == "") {
+			addNotification("error", "Please include a link and leave a comment 🙂", "pe-7s-info");
+			return;
+		}
+		if (submission_link == "") {
+			addNotification("error", "Please include a link 🙂", "pe-7s-info");
+			return;
+		}
+		if (comment == "") {
+			addNotification("error", "We want to read your comment 🙂", "pe-7s-info");
+			return;
+		}
+		if (
+			!submission_link.match(
+				new RegExp(
+					/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
+				),
+			)
+		) {
+			addNotification("error", "Please include a valid URL 🙂", "pe-7s-info");
+			return;
+		}
+		if (!submission_link.startsWith("https://")) {
+			addNotification(
+				"error",
+				"Your submission link needs to start with https:// 🙂",
+				"pe-7s-info",
+			);
+			return;
+		}
+		submitTaskAction(form);
+	};
+
+	useEffect(() => {
+		setTimeout(
+			() => fetchGradeAction(props.match.params.id, JSON.parse(localStorage["user_payload"]).id),
+			1000,
+		);
+		fetchProbationAction(JSON.parse(localStorage["user_payload"]).id);
+	}, []);
+
 	useEffect(() => {
 		// loading from the redux cache
-		if (props.tasks.length > 0) {
+		if (props.tasks && props.tasks.length > 0) {
 			const cachedTask = props.tasks.filter((task) => task.id == props.match.params.id)[0];
 			setTask({ ...task, ...cachedTask });
 		}
 	}, [props.tasks]);
 
-	if (loading || task === null) {
+	if (
+		loading ||
+		onProbation === undefined ||
+		probator === null ||
+		deadline === null ||
+		isSubmitted === null ||
+		grade === undefined
+	) {
 		return (
 			<div>
 				<Helmet>
-					<title>HNG Board | Posts</title>
+					<title>HNG Board | Task</title>
 				</Helmet>
 				<Loader />
 			</div>
 		);
 	} else {
 		return (
-			<div className="content mx-auto">
-				<Grid fluid className="min-h-screen mx-auto">
-					<Row className="flex justify-center">
-						<Col md={10} xs={10} className="mx-auto posts">
+			<div className="content">
+				<Helmet>
+					<title>HNG Board | Posts</title>
+				</Helmet>
+				<NotificationSystem ref={notification} style={style} />
+				<Grid fluid className="min-h-screen">
+					<Row className="mx-auto">
+						<Col sm={10} md={8} className="posts justify-center mx-auto">
 							<Card
 								title={task.title}
 								stats={null}
@@ -70,7 +212,7 @@ const Post = (props) => {
 															Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}
 														</small>
 														<p className="text-sm mt-5">
-															<small className="badge badge-success d-block text-sm">
+															<small className="badge badge-success tasks d-block text-sm">
 																{task.track_name}
 															</small>
 														</p>
@@ -79,6 +221,89 @@ const Post = (props) => {
 											</tbody>
 										</table>
 									</div>
+								}
+							/>
+						</Col>
+						<Col sm={10} md={4} className="posts submit mx-auto">
+							<Card
+								removeViewMore
+								category=""
+								stats={
+									onProbation
+										? `You were placed on probation by ${probator.firstname} ${probator.lastname} and you are expected to find your way out before ${deadline} ⛔`
+										: new Date(task.deadline).getTime() < new Date().getTime()
+										? "Deadline elapsed. Submissions are no longer accepted 🚫"
+										: null
+								}
+								title={
+									grade !== null
+										? `Hurray 🎉🙌. Your grade is ready and you scored ${grade}.`
+										: isSubmitted
+										? "Sweet 😋 ! submission received. Check back shortly for your grade !"
+										: "Task Submission"
+								}
+								bigTitle
+								content={
+									<form onSubmit={handleSubmit}>
+										<FormInputs
+											ncols={["col-md-12"]}
+											properties={[
+												{
+													label: "Link",
+													type: "text",
+													bsClass: "form-control",
+													placeholder: "Submit a link to your task",
+													defaultValue: "",
+													disabled:
+														onProbation ||
+														new Date(task.deadline).getTime() < new Date().getTime() ||
+														isSubmitted,
+													name: "submission_link",
+													onChange: handleChange,
+												},
+											]}
+										/>
+										<Row>
+											<Col md={12}>
+												<FormGroup controlId="formControlsTextarea">
+													<ControlLabel>Comment</ControlLabel>
+													<FormControl
+														rows="5"
+														componentClass="textarea"
+														bsClass="form-control"
+														placeholder="Please leave a comment"
+														defaultValue=""
+														disabled={
+															onProbation ||
+															new Date(task.deadline).getTime() < new Date().getTime() ||
+															isSubmitted
+														}
+														name="comment"
+														onChange={handleChange}
+													/>
+												</FormGroup>
+											</Col>
+										</Row>
+										<p className="text-bold leading-tight flex justify-end tracking-tight">
+											<button
+												className="bg-blue-500 hover:bg-blue-700 w-40 text-white block font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+												type="submit"
+												ref={btn}
+												style={{
+													backgroundColor: "#5bc0de",
+													color: "#FFF",
+												}}
+												disabled={
+													onProbation ||
+													new Date(task.deadline).getTime() < new Date().getTime() ||
+													isSubmitted
+												}
+											>
+												Submit
+											</button>
+										</p>
+										<div className="clearfix" />
+									</form>
 								}
 							/>
 						</Col>
@@ -93,6 +318,22 @@ const mapStateToProps = (state) => ({
 	post: state.post.post,
 	loading: state.user.isLoading,
 	tasks: state.user.allTasks,
+	onProbation: state.user.probationStatus,
+	probator: state.user.probator,
+	deadline: state.user.deadline,
+	isSubmitted: state.user.isSubmitted,
+	grade: state.user.grade,
+	type: state.user.type,
+	error: state.user.error,
+	isTaskPage: state.user.isTaskPage,
+	errorMessage: state.user.errorMessage,
+	submitLoading: state.user.submitLoading,
 });
 
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, {
+	fetchProbationAction,
+	fetchGradeAction,
+	submitTaskAction,
+	setSubmitLoadingToNull,
+	setErrorToFalse,
+})(Task);
