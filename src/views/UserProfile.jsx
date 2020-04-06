@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Row, Col, FormGroup, ControlLabel, FormControl } from "react-bootstrap";
 import { connect } from "react-redux";
 
@@ -7,18 +7,66 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
-import avatar from "assets/img/faces/face-3.jpg";
+// import avatar from "assets/img/faces/face-3.jpg";
 import { Helmet } from "react-helmet";
 import Loader from "../components/Loader/Loader";
-import { fetchProfileAction } from "../reducers/actions/profileActions";
+import {
+	fetchProfileAction,
+	fetchUserTracksAction,
+	editProfileAction,
+} from "../reducers/actions/profileActions";
+import { fetchSlackProfileAction } from "../reducers/actions/slackProfileActions";
 
 const UserProfile = (props) => {
-	const { fetchProfileAction, userProfile } = props;
+	const {
+		fetchProfileAction,
+		fetchSlackProfileAction,
+		userProfile,
+		slackProfile,
+		userTracks,
+		fetchUserTracksAction,
+		editProfileAction,
+	} = props;
 	useEffect(() => {
 		fetchProfileAction();
+		fetchSlackProfileAction();
+		fetchUserTracksAction();
 	}, []);
 
-	if (!userProfile) {
+	const [submitState, setSubmitState] = useState({
+		editMode: false,
+	});
+
+	const [user, setUser] = useState({
+		username: "",
+		lastname: "",
+		email: "",
+		firstname: "",
+		location: "",
+	});
+
+	const [disableFields, setDisableFields] = useState(true);
+
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
+	// 	alert("works");
+	// };
+
+	const handleEditClick = () => {
+		setSubmitState({ editMode: !submitState.editMode });
+		setDisableFields(!disableFields);
+	};
+
+	// change the below later. it's just dummy data now
+	const handleUpdateProfile = () => {
+		editProfileAction(user);
+	};
+
+	const handleChange = (e) => {
+		setUser({ [e.target.name]: e.target.value });
+	};
+
+	if (!userProfile && !slackProfile && !userTracks) {
 		return (
 			<div>
 				<Helmet>
@@ -28,9 +76,18 @@ const UserProfile = (props) => {
 			</div>
 		);
 	} else {
-		if (userProfile.status && userProfile.code === 200) {
-			// console.log(userProfile);
+		if (userProfile.status && userProfile.code === 200 && slackProfile && userTracks) {
+			console.log(userTracks);
 			const mainProfileInfo = userProfile.data[0];
+			const {
+				username,
+				email,
+				firstname,
+				lastname,
+				location,
+				profile: { bio, profile_img },
+			} = mainProfileInfo;
+			const mainSlackInfo = slackProfile.SlackUser.user.profile;
 			return (
 				<div className="content">
 					<Helmet>
@@ -41,33 +98,32 @@ const UserProfile = (props) => {
 							<Col md={8}>
 								<Card
 									removeViewMore
-									title="Edit Profile"
+									title="Your Profile"
+									bigTitle
 									content={
 										<form>
 											<FormInputs
-												ncols={["col-md-5", "col-md-3", "col-md-4"]}
+												ncols={["col-md-6", "col-md-6"]}
 												properties={[
-													{
-														label: "Company (disabled)",
-														type: "text",
-														bsClass: "form-control",
-														placeholder: "Company",
-														defaultValue: "Creative Code Inc.",
-														disabled: true,
-													},
 													{
 														label: "Username",
 														type: "text",
 														bsClass: "form-control",
 														placeholder: "Username",
-														defaultValue: `${mainProfileInfo.username}`,
+														defaultValue: username ? username : "",
+														disabled: disableFields,
+														name: "username",
+														onChange: handleChange,
 													},
 													{
 														label: "Email address",
 														type: "email",
 														bsClass: "form-control",
 														placeholder: "Email",
-														defaultValue: `${mainProfileInfo.email}`,
+														defaultValue: email ? email : "",
+														disabled: disableFields,
+														name: "email",
+														onChange: handleChange,
 													},
 												]}
 											/>
@@ -79,14 +135,20 @@ const UserProfile = (props) => {
 														type: "text",
 														bsClass: "form-control",
 														placeholder: "First name",
-														defaultValue: `${mainProfileInfo.firstname}`,
+														defaultValue: firstname ? firstname : "",
+														disabled: disableFields,
+														name: "firstname",
+														onChange: handleChange,
 													},
 													{
 														label: "Last name",
 														type: "text",
 														bsClass: "form-control",
 														placeholder: "Last name",
-														defaultValue: `${mainProfileInfo.lastname}`,
+														defaultValue: lastname ? lastname : "",
+														disabled: disableFields,
+														name: "lastname",
+														onChange: handleChange,
 													},
 												]}
 											/>
@@ -98,7 +160,10 @@ const UserProfile = (props) => {
 														type: "text",
 														bsClass: "form-control",
 														placeholder: "Location",
-														defaultValue: `${mainProfileInfo.location}`,
+														defaultValue: location ? location : "",
+														disabled: disableFields,
+														name: "location",
+														onChange: handleChange,
 													},
 												]}
 											/>
@@ -137,25 +202,65 @@ const UserProfile = (props) => {
 															componentClass="textarea"
 															bsClass="form-control"
 															placeholder="Edit your bio here"
-															defaultValue={`${mainProfileInfo.profile.bio}`}
+															defaultValue={bio ? bio : ""}
+															disabled={disableFields}
+															name="username"
+															onChange={handleChange}
 														/>
 													</FormGroup>
 												</Col>
 											</Row>
-											<Button bsStyle="info" pullRight fill type="submit">
-												Update Profile
+											<Button
+												style={{ display: submitState.editMode ? "inline" : "none" }}
+												bsStyle="info"
+												pullLeft
+												fill
+												onClick={handleUpdateProfile}
+											>
+												Update profile
+											</Button>
+											<Button bsStyle="info" pullRight fill onClick={handleEditClick}>
+												{submitState.editMode ? "Cancel" : "Edit profile"}
 											</Button>
 											<div className="clearfix" />
 										</form>
+									}
+								/>
+
+								<Card
+									removeViewMore
+									title="Your Tracks"
+									bigTitle
+									content={
+										<div className="table-full-width">
+											<table className="table">
+												<tbody>
+													{userTracks.data.tracks.map((track, id) => {
+														return (
+															<tr key={id}>
+																<td>
+																	<p className="text-bold leading-tight tracking-tight">
+																		<strong>{track.track_name}</strong>
+																	</p>
+																	<small className="text-gray-700 leading-tight">
+																		{track.track_description}
+																	</small>
+																</td>
+															</tr>
+														);
+													})}
+												</tbody>
+											</table>
+										</div>
 									}
 								/>
 							</Col>
 							<Col md={4}>
 								<UserCard
 									bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-									avatar={avatar}
-									name={`${mainProfileInfo.firstname} ${mainProfileInfo.lastname}`}
-									userName={mainProfileInfo.username}
+									avatar={profile_img ? profile_img : mainSlackInfo.image_original}
+									name={firstname ? `${mainProfileInfo.firstname} ${mainProfileInfo.lastname}` : ""}
+									userName={username}
 									description={
 										<span>
 											{/* "Lamborghini Mercy
@@ -166,16 +271,23 @@ const UserProfile = (props) => {
 											{mainProfileInfo.profile.bio}
 										</span>
 									}
-									socials={
+									// socials={
+									// 	<div>
+									// 		<Button simple>
+									// 			<i className="fa fa-facebook-square" />
+									// 		</Button>
+									// 		<Button simple>
+									// 			<i className="fa fa-twitter" />
+									// 		</Button>
+									// 		<Button simple>
+									// 			<i className="fa fa-google-plus-square" />
+									// 		</Button>
+									// 	</div>
+									// }
+									profileButton={
 										<div>
-											<Button simple>
-												<i className="fa fa-facebook-square" />
-											</Button>
-											<Button simple>
-												<i className="fa fa-twitter" />
-											</Button>
-											<Button simple>
-												<i className="fa fa-google-plus-square" />
+											<Button bsStyle="info" center fill type="button">
+												Change Avatar
 											</Button>
 										</div>
 									}
@@ -199,10 +311,15 @@ const UserProfile = (props) => {
 
 const mapStateToProps = (state) => ({
 	userProfile: state.userProfile.profile,
+	slackProfile: state.slackProfile.profile,
+	userTracks: state.userProfile.tracks,
 });
 
 const mapDispatchToProps = {
 	fetchProfileAction,
+	fetchSlackProfileAction,
+	fetchUserTracksAction,
+	editProfileAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
