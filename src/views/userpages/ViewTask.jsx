@@ -179,7 +179,7 @@ const Task = (props) => {
 				<NotificationSystem ref={notification} style={style} />
 				<Grid fluid className="min-h-screen">
 					<Row className="mx-auto">
-						<Col md={4} xs={12} className="posts submit mx-auto">
+						<Col md={4} className="posts submit mx-auto">
 							<Card
 								removeViewMore
 								category=""
@@ -262,14 +262,14 @@ const Task = (props) => {
 								}
 							/>
 						</Col>
-						<Col md={8} xs={12} className="posts justify-center mx-auto">
+						<Col md={8}>
 							<Card
 								title={task.title}
 								stats={null}
 								statsIcon={null}
 								removeViewMore
 								content={
-									<div className="table-full-width">
+									<div className="">
 										<table className="table">
 											<tbody>
 												<tr key={task.id}>
