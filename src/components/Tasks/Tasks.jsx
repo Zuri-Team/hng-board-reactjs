@@ -16,7 +16,7 @@ export class Tasks extends Component {
 			<tbody>
 				{data &&
 					data.map((datum) => (
-						<tr key={datum.id}>
+						<tr key={datum.id} onClick={() => this.viewTask(datum.id)}>
 							<td>
 								<p className="text-bold leading-tight tracking-tight">
 									<strong>{datum.title}</strong>

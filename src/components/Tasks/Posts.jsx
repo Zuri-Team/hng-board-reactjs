@@ -14,7 +14,7 @@ export class Posts extends Component {
 			<tbody>
 				{data &&
 					data.map((datum) => (
-						<tr key={datum.id}>
+						<tr key={datum.id} onClick={() => this.viewPost(datum.id)}>
 							<td>
 								<p className="text-bold leading-tight tracking-tight">
 									<strong>{datum.post_title}</strong>
