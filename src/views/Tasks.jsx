@@ -60,7 +60,10 @@ class Tasks extends Component {
 																				{task.track_name}
 																			</small>{" "}
 																			{new Date(task.deadline).getTime() < new Date().getTime() && (
-																				<small className="badge badge-success d-block ml-3 tasks text-sm" style={{backgroundColor: "palevioletred"}}>
+																				<small
+																					className="badge badge-success d-block ml-3 tasks text-sm"
+																					style={{ backgroundColor: "palevioletred" }}
+																				>
 																					closed
 																				</small>
 																			)}
