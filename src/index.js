@@ -14,7 +14,8 @@ import "./assets/css/pe-icon-7-stroke.css";
 import setToken from "./axios/setToken";
 import axios from "./axios/axios";
 
-import AdminLayout from "layouts/Admin.jsx";
+// import AdminLayout from "layouts/Admin.jsx";
+import NotFound from "./views/NotFound";
 import UserLayout from "layouts/User.jsx";
 import Login from "./views/Login";
 import Register from "./views/Register";
@@ -35,7 +36,7 @@ ReactDOM.render(
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/request_reset" component={RequestPasswordReset} />
 				<Route exact path="/register" component={Register} />
-				<ProtectedAdminRoute path="/admin" component={AdminLayout} />
+				<ProtectedAdminRoute path="/admin" component={NotFound} />
 				<ProtectedUserRoute path="/user" component={UserLayout} />
 				<Redirect strict from="/" to="/admin/dashboard" />
 				<Route
