@@ -125,19 +125,6 @@ const UserProfile = (props) => {
 										{mainProfileInfo.profile.bio}
 									</span>
 								}
-								// socials={
-								// 	<div>
-								// 		<Button simple>
-								// 			<i className="fa fa-facebook-square" />
-								// 		</Button>
-								// 		<Button simple>
-								// 			<i className="fa fa-twitter" />
-								// 		</Button>
-								// 		<Button simple>
-								// 			<i className="fa fa-google-plus-square" />
-								// 		</Button>
-								// 	</div>
-								// }
 								profileButton={
 									<div>
 										<Button bsStyle="info" center fill type="button">

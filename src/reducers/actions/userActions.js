@@ -103,6 +103,7 @@ export const fetchGradeAction = (task_id, user_id) => async (dispatch) => {
 	try {
 		const response = await axios.get(`/user/${user_id}/task/${task_id}`);
 		dispatch(fetchGradeSuccess(response.data.data));
+		console.log(response);
 	} catch (err) {
 		console.log(err);
 	}

@@ -25,6 +25,8 @@ const initialState = {
 	message: null,
 	isTaskPage: false,
 	submitLoading: null,
+	submission_link: null,
+	comment: null,
 };
 
 export default (state = initialState, action) => {
@@ -66,6 +68,8 @@ export default (state = initialState, action) => {
 				grade: payload.length > 0 && payload[0].is_graded ? payload[0].grade_score : null,
 				isSubmitted: payload.length > 0,
 				isLoading: false,
+				submission_link: payload.length > 0 ? payload[0].submission_link : null,
+				comment: payload.length > 0 ? payload[0].comment : null,
 			};
 		case SUBMIT_TASK_LOADING:
 			return {

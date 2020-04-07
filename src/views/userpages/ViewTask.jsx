@@ -43,11 +43,12 @@ const Task = (props) => {
 		type,
 		isTaskPage,
 		error,
-		errorMessage,
 		submitTaskAction,
 		submitLoading,
 		setSubmitLoadingToNull,
 		setErrorToFalse,
+		link,
+		comment,
 	} = props;
 	useEffect(() => {
 		if (submitLoading) {
@@ -261,6 +262,32 @@ const Task = (props) => {
 									</form>
 								}
 							/>
+							{link && (
+								<Card
+									removeViewMore
+									category=""
+									stats={
+										<div className="container col-md-12">
+											<div className="row">
+												<div className="form-group">
+													<p>
+														Your comment: <small>{comment}</small>
+													</p>
+												</div>
+											</div>
+										</div>
+									}
+									title="Your submission"
+									bigTitle
+									content={
+										<div className="form-group">
+											<p>
+												Your link: <a href={link}>{link}</a>
+											</p>
+										</div>
+									}
+								/>
+							)}
 						</Col>
 						<Col md={8}>
 							<Card
@@ -332,6 +359,8 @@ const mapStateToProps = (state) => ({
 	isTaskPage: state.user.isTaskPage,
 	errorMessage: state.user.errorMessage,
 	submitLoading: state.user.submitLoading,
+	link: state.user.submission_link,
+	comment: state.user.comment,
 });
 
 export default connect(mapStateToProps, {
