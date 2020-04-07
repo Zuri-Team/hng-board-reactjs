@@ -23,7 +23,15 @@ export class Tasks extends Component {
 								</p>
 								<small className="text-gray-700 leading-tight">
 									Deadline: {moment(datum.deadline).format("DD/MM/YYYY hh:mm A")}
-								</small>
+								</small>{" "}
+								{new Date(datum.deadline).getTime() < new Date().getTime() && (
+									<small
+										className="badge badge-success d-block ml-3 tasks text-sm"
+										style={{ backgroundColor: "palevioletred" }}
+									>
+										closed
+									</small>
+								)}
 								<p className="text-sm mt-5">
 									<small className="badge badge-success tasks d-block text-sm">
 										{datum.track_name}

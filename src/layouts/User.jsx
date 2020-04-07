@@ -118,7 +118,7 @@ class User extends Component {
 			title: <span data-notify="icon" className="pe-7s-like2" />,
 			message: (
 				<div>
-					Always good to have you here, <b>{user.firstname}</b>
+					Always good to have you here, <b>{user.firstname}</b>. Please endeavour to wash your hands regulary and stay safe 😊
 				</div>
 			),
 			level: level,
