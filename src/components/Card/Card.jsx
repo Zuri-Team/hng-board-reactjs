@@ -29,12 +29,22 @@ export class Card extends Component {
 					<div className="footer flex justify-between ">
 						{/* {this.props.legend}
 						{this.props.stats != null ? <hr /> : ""} */}
-						<div className="stats  flex ml-0 justify-start">
+						<div
+							className="stats  flex ml-0"
+							style={{
+								justifyContent: this.props.removeViewMore ? "" : "start",
+								fontWeight: this.props.removeViewMore ? "bold" : "",
+								color: this.props.removeViewMore ? "red" : "",
+							}}
+						>
 							<i className={this.props.statsIcon} /> {this.props.stats}
 						</div>
 						<Link
 							to={this.props.route}
 							className="flex justify-end leading-tight text-end w-40 mr-0"
+							style={{
+								display: this.props.removeViewMore ? "none" : "",
+							}}
 						>
 							{this.props.removeViewMore ? null : "view more.."}
 						</Link>

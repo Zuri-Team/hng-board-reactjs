@@ -7,7 +7,7 @@ import Loader from "../components/Loader/Loader";
 import moment from "moment";
 import { Helmet } from "react-helmet";
 
-class Dashboard extends Component {
+class Posts extends Component {
 	createLegend(json) {
 		var legend = [];
 		for (var i = 0; i < json["names"].length; i++) {
@@ -40,10 +40,10 @@ class Dashboard extends Component {
 				<div className="content mx-auto">
 					<Grid fluid className="min-h-screen mx-auto">
 						<Row className="flex justify-center">
-							<Col md={10} xs={10} className="mx-auto posts">
+							<Col md={10} sm={12} className="mx-auto posts">
 								<Card
-									title="Latest Posts"
-									category="Here, you see the 5 latest posts"
+									title="Posts"
+									// category="Here, you see the 5 latest posts"
 									stats={null}
 									statsIcon={null}
 									removeViewMore
@@ -104,4 +104,4 @@ const mapState = (state) => {
 		posts: state.post.allPosts,
 	};
 };
-export default connect(mapState)(Dashboard);
+export default connect(mapState)(Posts);

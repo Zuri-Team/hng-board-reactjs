@@ -37,13 +37,13 @@ class Sidebar extends Component {
 					<div className="sidebar-background" style={sidebarBackground} />
 				) : null}
 				<div className="logo">
-					<a href="#sidebar" className="simple-text logo-mini">
+					{/* <a href="#sidebar" className="simple-text logo-mini">
 						<div className="logo-img">
 							<img src={logo} alt="logo_image" />
 						</div>
-					</a>
+					</a> */}
 					<a href="#sidebar" className="simple-text logo-normal">
-						{this.props.fullname}
+						Hello, {this.props.fullname} 😎
 					</a>
 				</div>
 				<div className="sidebar-wrapper">

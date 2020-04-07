@@ -76,8 +76,13 @@ const UserProfile = (props) => {
 			</div>
 		);
 	} else {
-		if (userProfile.status && userProfile.code === 200 && slackProfile && userTracks) {
-			console.log(userTracks);
+		if (
+			userProfile &&
+			userProfile.status &&
+			userProfile.code === 200 &&
+			slackProfile &&
+			userTracks
+		) {
 			const mainProfileInfo = userProfile.data[0];
 			const {
 				username,

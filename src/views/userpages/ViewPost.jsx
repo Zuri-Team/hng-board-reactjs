@@ -1,18 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "components/Card/Card.jsx";
 import { Grid, Row, Col, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import moment from "moment";
 import Loader from "components/Loader/Loader";
-import { fetchPostAction } from "reducers/actions/postsActions";
 import "assets/css/override.css";
 
 const Post = (props) => {
-	const { post, fetchPostAction, loading } = props;
+	const [post, setPost] = useState(null);
+	const { loading } = props;
 	useEffect(() => {
-		fetchPostAction(props.match.params.id);
-	}, []);
+		// loading from the redux cache
+		if (props.posts.length > 0) {
+			const cachedPost = props.posts.filter((post) => post.id == props.match.params.id)[0];
+			setPost({ ...post, ...cachedPost });
+		}
+	}, [props.posts]);
 
 	if (loading || post === null) {
 		return (
@@ -57,11 +61,7 @@ const Post = (props) => {
 														<p className="body text-gray-700">
 															<small
 																dangerouslySetInnerHTML={{
-																	__html:
-																		post.post_body.replace(
-																			/\n|<strong>|<\/strong>|<br\/>|\/\n/g,
-																			"",
-																		) + ".....",
+																	__html: post.post_body,
 																}}
 															/>
 														</p>
@@ -91,11 +91,8 @@ const Post = (props) => {
 
 const mapStateToProps = (state) => ({
 	post: state.post.post,
+	posts: state.post.allPosts,
 	loading: state.post.loading,
 });
 
-const mapDispatchToProps = {
-	fetchPostAction,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps)(Post);
