@@ -8,10 +8,12 @@ import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import "../assets/css/spinner.css";
+import "../assets/css/FilePicker.css";
+import axios from "axios/axios";
 
 // import avatar from "assets/img/faces/face-3.jpg";
 import { Helmet } from "react-helmet";
-import Loader from "../components/Loader/Loader";
+
 import {
 	fetchProfileAction,
 	fetchUserTracksAction,
@@ -41,6 +43,11 @@ const UserProfile = (props) => {
 		editMode: false,
 	});
 
+	const [upload, setUpload] = useState({
+		uploadMode: false,
+		loading: false,
+	});
+
 	const [user, setUser] = useState({
 		username: "",
 		lastname: "",
@@ -54,10 +61,58 @@ const UserProfile = (props) => {
 
 	const [disableFields, setDisableFields] = useState(true);
 
+	const addNotification = (level = "success", message, className = "pe-7s-check") => {
+		notification.current.addNotification({
+			title: <span data-notify="icon" className={className} />,
+			message: <div>{message}</div>,
+			level: level,
+			position: "tr",
+		});
+	};
 	// const handleSubmit = (e) => {
 	// 	e.preventDefault();
 	// 	alert("works");
 	// };
+	const onChange = async (e) => {
+		let user = JSON.parse(localStorage["user_payload"]);
+		const file = e.target.files[0];
+		setUpload({ loading: true });
+		if (file.size > 500000) {
+			addNotification(
+				"error",
+				"Image too large, please choose an image of size less than 150kb",
+				"pe-7s-info",
+			);
+			return;
+		}
+		const types = ["image/png", "image/jpeg", "image/gif"];
+
+		if (types.every((type) => file.type !== type)) {
+			addNotification("error", `'${file.type}' is not a supported format`, "pe-7s-info");
+			return;
+		}
+
+		const formData = new FormData();
+		formData.append("profile_img", file);
+		const response = await axios.post(`/profile/${user.id}/upload`, formData);
+		if (response.data.code === 200) {
+			setUpload({ loading: false });
+			addNotification(undefined, `Avatar changed successfully`, undefined);
+			setTimeout(() => {
+				fetchProfileAction();
+				fetchSlackProfileAction();
+			}, 2000);
+		} else {
+			setUpload({ loading: false });
+			addNotification("error", `Something went wrong, please review and retry`, "pe-7s-info");
+		}
+	};
+
+	const handleUpdateMode = () => {
+		setUpload({ uploadMode: !upload.uploadMode });
+	};
+
+	useEffect(() => {}, []);
 
 	const handleEditClick = () => {
 		setSubmitState({ editMode: !submitState.editMode });
@@ -127,12 +182,52 @@ const UserProfile = (props) => {
 								}
 								profileButton={
 									<div>
-										<Button bsStyle="info" center fill type="button">
-											Change Avatar
-										</Button>
+										{!upload.uploadMode && (
+											<Button bsStyle="info" center fill type="button" onClick={handleUpdateMode}>
+												Change Avatar
+											</Button>
+										)}
 									</div>
 								}
 							/>
+							{upload.uploadMode && !upload.loading && (
+								<div className={"card"}>
+									<div className={"header text-center"}>
+										<h3 className="title" style={{ textAlign: "center" }}>
+											Upload your picture
+										</h3>
+									</div>
+									<hr />
+									<div
+										className="content mx-auto pb-3 flex justify-center"
+										style={{ position: "relative" }}
+									>
+										<label for="file-upload" class="custom-file-upload">
+											<i class="fa fa-cloud-upload"></i> Click to Change Your Avatar
+										</label>
+										<input id="file-upload" type="file" onChange={onChange} />
+									</div>
+									<div>
+										<div className="flex my-3 justify-center">
+											{!upload.loading ? (
+												<Button bsStyle="info" center fill type="button" onClick={handleUpdateMode}>
+													Cancel
+												</Button>
+											) : (
+												<div
+													class="loader mx-auto mt-64 w-50 h-screen d-block text-center"
+													id="loader-2"
+												>
+													<span></span>
+													<span></span>
+													<span></span>
+												</div>
+											)}
+										</div>
+									</div>
+									<hr />
+								</div>
+							)}
 						</Col>
 						<Col md={8}>
 							<Card

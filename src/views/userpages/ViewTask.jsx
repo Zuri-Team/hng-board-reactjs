@@ -295,6 +295,7 @@ const Task = (props) => {
 								stats={null}
 								statsIcon={null}
 								removeViewMore
+								ctTableResponsive
 								content={
 									<div className="">
 										<table className="table">
