@@ -6,6 +6,10 @@
 		float: none !important;
 	}
 }
+.col-xs-12 {
+	padding-left: unset;
+	padding-right: unset;
+}
 
 .btn-info {
 	border: none;
@@ -35,8 +39,4 @@
 		float: left;
 	}
 }
-@media (max-width: 768px) {
-	.col-md-4.submit {
-		float: left;
-	}
-}
+

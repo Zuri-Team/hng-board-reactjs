@@ -163,7 +163,11 @@ const Task = (props) => {
 				<Helmet>
 					<title>HNG Board | Task</title>
 				</Helmet>
-				<Loader />
+				<div class="loader mx-auto mt-64 w-50 h-screen d-block text-center" id="loader-2">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
 			</div>
 		);
 	} else {
@@ -175,56 +179,7 @@ const Task = (props) => {
 				<NotificationSystem ref={notification} style={style} />
 				<Grid fluid className="min-h-screen">
 					<Row className="mx-auto">
-						<Col sm={10} md={8} className="posts justify-center mx-auto">
-							<Card
-								title={task.title}
-								stats={null}
-								statsIcon={null}
-								removeViewMore
-								content={
-									<div className="table-full-width">
-										<table className="table">
-											<tbody>
-												<tr key={task.id}>
-													<td>
-														<p className="text-bold leading-tight flex justify-end tracking-tight">
-															<Button
-																style={{
-																	backgroundColor: "#5bc0de",
-																	color: "#FFF",
-																	border: "none",
-																	outline: "none",
-																	display: "block",
-																}}
-																onClick={() => props.history.goBack()}
-															>
-																Go back
-															</Button>
-														</p>
-														<p className="body text-gray-700">
-															<small
-																dangerouslySetInnerHTML={{
-																	__html: task.body,
-																}}
-															/>
-														</p>
-														<small className="text-gray-700 leading-tight">
-															Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}
-														</small>
-														<p className="text-sm mt-5">
-															<small className="badge badge-success tasks d-block text-sm">
-																{task.track_name}
-															</small>
-														</p>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								}
-							/>
-						</Col>
-						<Col sm={10} md={4} className="posts submit mx-auto">
+						<Col md={4} xs={12} className="posts submit mx-auto">
 							<Card
 								removeViewMore
 								category=""
@@ -304,6 +259,55 @@ const Task = (props) => {
 										</p>
 										<div className="clearfix" />
 									</form>
+								}
+							/>
+						</Col>
+						<Col md={8} xs={12} className="posts justify-center mx-auto">
+							<Card
+								title={task.title}
+								stats={null}
+								statsIcon={null}
+								removeViewMore
+								content={
+									<div className="table-full-width">
+										<table className="table">
+											<tbody>
+												<tr key={task.id}>
+													<td>
+														<p className="text-bold leading-tight flex justify-end tracking-tight">
+															<Button
+																style={{
+																	backgroundColor: "#5bc0de",
+																	color: "#FFF",
+																	border: "none",
+																	outline: "none",
+																	display: "block",
+																}}
+																onClick={() => props.history.goBack()}
+															>
+																Go back
+															</Button>
+														</p>
+														<p className="body text-gray-700">
+															<small
+																dangerouslySetInnerHTML={{
+																	__html: task.body,
+																}}
+															/>
+														</p>
+														<small className="text-gray-700 leading-tight">
+															Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}
+														</small>
+														<p className="text-sm mt-5">
+															<small className="badge badge-success tasks d-block text-sm">
+																{task.track_name}
+															</small>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								}
 							/>
 						</Col>

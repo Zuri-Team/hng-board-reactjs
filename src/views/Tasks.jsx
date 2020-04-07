@@ -15,13 +15,17 @@ class Tasks extends Component {
 	render() {
 		const { tasks, loading } = this.props;
 		const edit = <Tooltip id="edit_tooltip">View Task</Tooltip>;
-		if (loading || (tasks && tasks.length < 1)) {
+		if (tasks.length < 1) {
 			return (
 				<div>
 					<Helmet>
 						<title>HNG Board | Tasks</title>
 					</Helmet>
-					<Loader />
+					<div class="loader mx-auto mt-64 w-50 h-screen d-block text-center" id="loader-2">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
 				</div>
 			);
 		} else {

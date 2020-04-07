@@ -24,7 +24,11 @@ const Post = (props) => {
 				<Helmet>
 					<title>HNG Board | Posts</title>
 				</Helmet>
-				<Loader />
+				<div class="loader mx-auto mt-64 w-50 h-screen d-block text-center" id="loader-2">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
 			</div>
 		);
 	} else {
@@ -32,7 +36,7 @@ const Post = (props) => {
 			<div className="content mx-auto">
 				<Grid fluid className="min-h-screen mx-auto">
 					<Row className="flex justify-center">
-						<Col md={10} xs={10} className="mx-auto posts">
+						<Col md={10} xs={12} className="mx-auto posts">
 							<Card
 								title={post.post_title}
 								stats={null}

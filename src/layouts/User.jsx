@@ -88,9 +88,9 @@ class User extends Component {
 
 	componentDidMount() {
 		let user = JSON.parse(localStorage["user_payload"]);
-		this.props.getUserAction(user.id);
 		this.props.fetchTasksAction();
-		this.props.fetchPostsAction();
+		setTimeout(() => this.props.fetchPostsAction(), 1000);
+		this.props.getUserAction(user.id);
 		if (this.props.location.pathname === "/user") {
 			this.props.history.push("/user/dashboard");
 		}
