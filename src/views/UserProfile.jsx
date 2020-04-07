@@ -80,7 +80,7 @@ const UserProfile = (props) => {
 		if (file.size > 500000) {
 			addNotification(
 				"error",
-				"Image too large, please choose an image of size less than 150kb",
+				"Image too large, please choose an image of size less than 500kb",
 				"pe-7s-info",
 			);
 			return;
