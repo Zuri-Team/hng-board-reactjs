@@ -122,7 +122,6 @@ export const regInAction = (payload) => async (dispatch) => {
 		await axios.post("/register", payload);
 		dispatch(regSuccess());
 	} catch (err) {
-		console.log(err.response);
 		if (err.response && err.response.status == 401) {
 			dispatch(regFail("This email has already been taken"));
 		} else {
@@ -153,7 +152,6 @@ export const getUserAction = (id) => async (dispatch) => {
 	try {
 		const response = await axios.get(`/user-profile/${id}`);
 		const profile = await axios.get(`/profile/${id}`);
-		console.log(profile);
 		dispatch(getUser(response.data.data));
 	} catch (err) {
 		console.log(err);
