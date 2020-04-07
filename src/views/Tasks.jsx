@@ -42,7 +42,7 @@ class Tasks extends Component {
 													{tasks &&
 														tasks.map((task) => (
 															<>
-																<tr key={task.id}>
+																<tr key={task.id} onClick={() => this.viewTask(task.id)}>
 																	<td>
 																		<p className="text-bold leading-tight tracking-tight">
 																			<strong>{task.title}</strong>

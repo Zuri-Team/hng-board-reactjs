@@ -53,7 +53,7 @@ class Posts extends Component {
 												<tbody>
 													{posts &&
 														posts.map((post) => (
-															<tr key={post.id}>
+															<tr key={post.id} onClick={() => this.viewPost(post.id)}>
 																<td>
 																	<p className="text-bold leading-tight tracking-tight">
 																		<strong>{post.post_title}</strong>
