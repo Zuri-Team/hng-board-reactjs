@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Grid, Row, Col, FormGroup, ControlLabel, FormControl } from "react-bootstrap";
 import { connect } from "react-redux";
-
+import NotificationSystem from "react-notification-system";
+import { style } from "variables/Variables.jsx";
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
@@ -33,6 +34,8 @@ const UserProfile = (props) => {
 		fetchUserTracksAction();
 	}, []);
 
+	const notification = useRef();
+
 	const [submitState, setSubmitState] = useState({
 		editMode: false,
 	});
@@ -43,7 +46,10 @@ const UserProfile = (props) => {
 		email: "",
 		firstname: "",
 		location: "",
+		bio: "",
 	});
+
+	const [image, setImage] = useState([]);
 
 	const [disableFields, setDisableFields] = useState(true);
 
@@ -60,6 +66,10 @@ const UserProfile = (props) => {
 	// change the below later. it's just dummy data now
 	const handleUpdateProfile = () => {
 		editProfileAction(user);
+		fetchProfileAction();
+		fetchSlackProfileAction();
+		setSubmitState({ editMode: !submitState.editMode });
+		setDisableFields(!disableFields);
 	};
 
 	const handleChange = (e) => {
@@ -95,6 +105,7 @@ const UserProfile = (props) => {
 			const mainSlackInfo = slackProfile.SlackUser.user.profile;
 			return (
 				<div className="content">
+					<NotificationSystem ref={notification} style={style} />
 					<Helmet>
 						<title>HNG Board | Profile</title>
 					</Helmet>
@@ -209,7 +220,7 @@ const UserProfile = (props) => {
 															placeholder="Edit your bio here"
 															defaultValue={bio ? bio : ""}
 															disabled={disableFields}
-															name="username"
+															name="bio"
 															onChange={handleChange}
 														/>
 													</FormGroup>

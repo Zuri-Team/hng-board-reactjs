@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import "./styles/tailwind.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -30,7 +30,7 @@ axios.defaults.headers.common["Content-Type"] = "application/json";
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
+		<HashRouter>
 			<Switch>
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/request_reset" component={RequestPasswordReset} />
@@ -44,7 +44,7 @@ ReactDOM.render(
 					)}
 				/>
 			</Switch>
-		</BrowserRouter>
+		</HashRouter>
 	</Provider>,
 	document.getElementById("root"),
 );

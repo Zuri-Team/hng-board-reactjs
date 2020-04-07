@@ -152,6 +152,8 @@ export const logOut = () => (dispatch) => {
 export const getUserAction = (id) => async (dispatch) => {
 	try {
 		const response = await axios.get(`/user-profile/${id}`);
+		const profile = await axios.get(`/profile/${id}`);
+		console.log(profile);
 		dispatch(getUser(response.data.data));
 	} catch (err) {
 		console.log(err);
