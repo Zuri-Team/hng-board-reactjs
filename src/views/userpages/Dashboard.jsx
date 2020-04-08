@@ -7,8 +7,8 @@ import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
 import { Posts } from "components/Tasks/Posts.jsx";
 import { Helmet } from "react-helmet";
-import "../assets/css/spinner.css";
-import Loader from "../components/Loader/Loader";
+import "assets/css/spinner.css";
+import Loader from "components/Loader/Loader";
 
 class Dashboard extends Component {
 	render() {

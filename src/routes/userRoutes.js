@@ -1,7 +1,7 @@
-import Dashboard from "views/Dashboard.jsx";
+import Dashboard from "views/userpages/Dashboard.jsx";
 import UserProfile from "views/UserProfile.jsx";
-import Tasks from "views/Tasks.jsx";
-import Posts from "views/Posts.jsx";
+import Tasks from "views/userpages/Tasks.jsx";
+import Posts from "views/userpages/Posts.jsx";
 
 const dashboardRoutes = [
 	{

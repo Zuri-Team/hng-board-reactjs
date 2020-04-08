@@ -3,7 +3,7 @@ import { Grid, Row, Col, Button, Tooltip, OverlayTrigger } from "react-bootstrap
 import { connect } from "react-redux";
 import { Card } from "components/Card/Card.jsx";
 import "assets/css/override.css";
-import Loader from "../components/Loader/Loader";
+import Loader from "components/Loader/Loader";
 import moment from "moment";
 import { Helmet } from "react-helmet";
 

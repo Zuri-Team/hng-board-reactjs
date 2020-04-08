@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
-import { Tasks } from "components/Tasks/Tasks.jsx";
+// import { Tasks } from "components/Tasks/Tasks.jsx";
 import {
 	dataPie,
 	legendPie,
@@ -143,9 +143,7 @@ class AdminDashboard extends Component {
 								statsIcon="fa fa-history"
 								content={
 									<div className="table-full-width">
-										<table className="table">
-											<Tasks />
-										</table>
+										<table className="table">{/* <Tasks /> */}</table>
 									</div>
 								}
 							/>

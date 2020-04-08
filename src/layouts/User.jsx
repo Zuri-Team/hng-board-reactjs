@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import NotificationSystem from "react-notification-system";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
@@ -167,6 +167,20 @@ class User extends Component {
 						{this.getRoutes(routes)}
 						<ProtectedUserRoute exact path="/user/post/:id" component={Post} />
 						<ProtectedUserRoute exact path="/user/task/:id" component={Task} />
+						<Route
+							render={() => (
+								<div>
+									<h4 className="text-center min-h-full my-64 p-20">
+										Hey{" "}
+										<strong>
+											{user.firstname} {user.lastname}
+										</strong>
+										, this page does not exist and I know this must be sad, please click on
+							{" "}<strong>DASHBOARD</strong>{" "}on the side bar to go back . See ya 😎
+									</h4>
+								</div>
+							)}
+						/>
 					</Switch>
 					<Footer />
 				</div>

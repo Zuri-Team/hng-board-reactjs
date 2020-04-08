@@ -7,8 +7,8 @@ import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
-import "../assets/css/spinner.css";
-import "../assets/css/FilePicker.css";
+import "assets/css/spinner.css";
+import "assets/css/FilePicker.css";
 import axios from "axios/axios";
 
 // import avatar from "assets/img/faces/face-3.jpg";
