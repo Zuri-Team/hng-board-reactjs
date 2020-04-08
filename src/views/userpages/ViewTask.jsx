@@ -27,7 +27,7 @@ const Task = (props) => {
 		user_id: JSON.parse(localStorage["user_payload"]).id,
 		submission_link: "",
 		comment: "",
-		task_id: props.match.params.id,
+		task_id: Number(props.match.params.id),
 		is_submitted: 1,
 	});
 

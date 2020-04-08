@@ -62,8 +62,16 @@ export const editProfileAction = (user) => async (dispatch) => {
 	});
 	try {
 		const userId = JSON.parse(localStorage["user_payload"]).id;
-		const response = await axios.post(`/profile/${userId}/edit`, user);
-		const feedback = response.data;
+		const a = await fetch(`https://api.start.ng/api/profile/${userId}/edit`, {
+			method: "POST",
+			headers: {
+				Authorization: "Bearer " + localStorage["token"],
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(user),
+		});
+		const response = await a.json();
+		const feedback = response;
 		dispatch({
 			type: EDIT_PROFILE_SUCCESS,
 			payload: feedback,

@@ -9,9 +9,6 @@ import { UserCard } from "components/UserCard/UserCard.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 import "assets/css/spinner.css";
 import "assets/css/FilePicker.css";
-import axios from "axios/axios";
-
-// import avatar from "assets/img/faces/face-3.jpg";
 import { Helmet } from "react-helmet";
 
 import {
@@ -57,8 +54,6 @@ const UserProfile = (props) => {
 		bio: "",
 	});
 
-	const [image, setImage] = useState([]);
-
 	const [disableFields, setDisableFields] = useState(true);
 
 	const addNotification = (level = "success", message, className = "pe-7s-check") => {
@@ -94,8 +89,16 @@ const UserProfile = (props) => {
 
 		const formData = new FormData();
 		formData.append("profile_img", file);
-		const response = await axios.post(`/profile/${user.id}/upload`, formData);
-		if (response.data.code === 200) {
+		const a = await fetch(`https://api.start.ng/api/profile/${user.id}/upload`, {
+			method: "POST",
+			headers: {
+				Authorization: "Bearer " + localStorage["token"],
+				Accept: "application/json",
+			},
+			body: formData,
+		});
+		const response = await a.json();
+		if (response.code === 200) {
 			setUpload({ loading: false });
 			addNotification(undefined, `Avatar changed successfully`, undefined);
 			setTimeout(() => {
@@ -121,7 +124,21 @@ const UserProfile = (props) => {
 
 	// change the below later. it's just dummy data now
 	const handleUpdateProfile = () => {
-		editProfileAction(user);
+		let { username, email, firstname, lastname, location, bio } = user;
+		username = username || userProfile.data[0].username;
+		email = email || userProfile.data[0].email;
+		firstname = firstname || userProfile.data[0].firstname;
+		lastname = lastname || userProfile.data[0].lastname;
+		location = location || userProfile.data[0].location;
+		bio = bio || userProfile.data[0].profile.bio;
+		editProfileAction({
+			username,
+			email,
+			lastname,
+			firstname,
+			location,
+			bio,
+		});
 		fetchProfileAction();
 		fetchSlackProfileAction();
 		setSubmitState({ editMode: !submitState.editMode });
@@ -129,9 +146,8 @@ const UserProfile = (props) => {
 	};
 
 	const handleChange = (e) => {
-		setUser({ [e.target.name]: e.target.value });
+		setUser({ ...user, [e.target.name]: e.target.value });
 	};
-
 	if (userProfile === null || slackProfile === null || userTracks === null) {
 		return (
 			<div>

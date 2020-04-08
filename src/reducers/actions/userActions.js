@@ -71,7 +71,6 @@ export const submitTaskFail = () => {
 export const fetchTasksAction = () => async (dispatch) => {
 	dispatch(fetchTasksLoading());
 	try {
-		// const [tasks, tracks] = await Promise.all([axios.get("/user/task"), axios.get("track/all")]);
 		const [a, b] = await Promise.all([
 			fetch("https://api.start.ng/api/user/task", {
 				headers: {
@@ -135,7 +134,16 @@ export const fetchGradeAction = (task_id, user_id) => async (dispatch) => {
 export const submitTaskAction = (data) => async (dispatch) => {
 	dispatch(submitTaskLoading());
 	try {
-		const response = await axios.post("/submit", data);
+		const a = await fetch(`https://api.start.ng/api/submit`, {
+			method: "POST",
+			headers: {
+				Authorization: "Bearer " + localStorage["token"],
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		});
+		const response = await a.json();
+		console.log(response);
 		dispatch(submitTaskSuccess());
 	} catch (err) {
 		dispatch(submitTaskFail());
