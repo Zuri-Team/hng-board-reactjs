@@ -36,7 +36,7 @@ ReactDOM.render(
 			<Switch>
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/request_reset" component={RequestPasswordReset} />
-				<Route exact path="/reset_password/:token" component={ResetPassword} />
+				<Route exact path="/reset_password" component={ResetPassword} />
 				<Route exact path="/register" component={Register} />
 				<ProtectedAdminRoute path="/admin" component={NotFound} />
 				<ProtectedUserRoute path="/user" component={UserLayout} />

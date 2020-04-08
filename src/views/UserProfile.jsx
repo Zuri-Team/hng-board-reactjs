@@ -164,7 +164,7 @@ const UserProfile = (props) => {
 				</Helmet>
 				<Grid fluid>
 					<Row>
-						<Col md={4}>
+						<Col md={4} xs={12}>
 							<UserCard
 								bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
 								avatar={profile_img ? profile_img : mainSlackInfo.image_original}
@@ -229,7 +229,7 @@ const UserProfile = (props) => {
 								</div>
 							)}
 						</Col>
-						<Col md={8}>
+						<Col md={8} xs={12}>
 							<Card
 								removeViewMore
 								title="Your Profile"
@@ -395,12 +395,6 @@ const UserProfile = (props) => {
 		);
 	}
 };
-// class UserProfile extends Component {
-// 	render() {
-// 		const { profile }.props;
-
-// 	}
-// }
 
 const mapStateToProps = (state) => ({
 	userProfile: state.userProfile.profile,

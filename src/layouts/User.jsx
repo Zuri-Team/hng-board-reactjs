@@ -175,8 +175,8 @@ class User extends Component {
 										<strong>
 											{user.firstname} {user.lastname}
 										</strong>
-										, this page does not exist and I know this must be sad, please click on
-							{" "}<strong>DASHBOARD</strong>{" "}on the side bar to go back . See ya 😎
+										, this page does not exist and I know this must be sad, please click on{" "}
+										<strong>DASHBOARD</strong> on the side bar to go back . See ya 😎
 									</h4>
 								</div>
 							)}

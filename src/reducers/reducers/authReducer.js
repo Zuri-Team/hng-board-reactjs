@@ -10,6 +10,9 @@ import {
 	REQUEST_RESET_LOADING,
 	REQUEST_RESET_SUCCESS,
 	REQUEST_RESET_FAIL,
+	RESET_LOADING,
+	RESET_SUCCESS,
+	RESET_FAIL,
 	GET_USER_PROFILE,
 } from "../types/authTypes";
 const initialState = {
@@ -21,6 +24,7 @@ const initialState = {
 	type: false,
 	registered: false,
 	isRequestPage: false,
+	isResetPage: false,
 	tracks: [],
 };
 
@@ -37,6 +41,7 @@ export default (state = initialState, action) => {
 				...state,
 				loading: false,
 				isRequestPage: false,
+				isResetPage: false,
 				error: true,
 				errorMessage: payload,
 				type: !state.type, // this is a hack to have the alert show just once per action
@@ -113,6 +118,31 @@ export default (state = initialState, action) => {
 				error: true,
 				message: null,
 				isRequestPage: true,
+				errorMessage: payload,
+				type: !state.type,
+			};
+		case RESET_LOADING:
+			return {
+				...state,
+				loading: true,
+			};
+		case RESET_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				error: false,
+				errorMessage: null,
+				message: payload,
+				isResetPage: true,
+				type: !state.type,
+			};
+		case RESET_FAIL:
+			return {
+				...state,
+				loading: false,
+				error: true,
+				message: null,
+				isResetPage: true,
 				errorMessage: payload,
 				type: !state.type,
 			};

@@ -1,28 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { requestAction } from "reducers/actions/authActions";
+import { resetAction } from "reducers/actions/authActions";
 import NotificationSystem from "react-notification-system";
 import { style } from "variables/Variables.jsx";
 import { Helmet } from "react-helmet";
 
-const RequestPasswordReset = (props) => {
+const ResetPassword = (props) => {
 	const [user, setUser] = useState({
+		token: props.history.location.search.split("=")[1],
+		password: "",
+		confirm_password: "",
 		email: "",
 	});
 
 	const btn = useRef();
 	const notification = useRef();
 
-	const {
-		isLoading,
-		requestAction,
-		error,
-		errorMessage,
-		successMessage,
-		type,
-		isRequestPage,
-	} = props;
+	const { isLoading, resetAction, error, errorMessage, successMessage, type, isResetPage } = props;
 
 	useEffect(() => {
 		if (isLoading) {
@@ -31,7 +26,7 @@ const RequestPasswordReset = (props) => {
 			btn.current.style.pointerEvents = "none";
 			btn.current.style.boxShadow = "none";
 		} else {
-			btn.current.textContent = "Reset Password";
+			btn.current.textContent = "Change Password";
 			btn.current.style.opacity = "unset";
 			btn.current.style.pointerEvents = "unset";
 			btn.current.style.boxShadow = "unset";
@@ -56,7 +51,7 @@ const RequestPasswordReset = (props) => {
 	}
 
 	useEffect(() => {
-		if (error && isRequestPage) {
+		if (error && isResetPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
 	}, [type, errorMessage, error]);
@@ -64,7 +59,8 @@ const RequestPasswordReset = (props) => {
 	useEffect(() => {
 		if (successMessage) {
 			addNotification(undefined, successMessage, undefined);
-			setUser({ ...user, email: "" });
+			setUser({ ...user, email: "", password: "", confirm_password: "", token: "" });
+			setTimeout(() => props.history.push("/login"), 2000);
 		}
 	}, [type, successMessage]);
 
@@ -75,9 +71,9 @@ const RequestPasswordReset = (props) => {
 
 	const handleReset = (e) => {
 		e.preventDefault();
-		const { email } = user;
-		if (email == "") {
-			addNotification("error", "The email field is required", "pe-7s-info");
+		const { email, password, confirm_password } = user;
+		if (password !== confirm_password) {
+			addNotification("error", "Passwords do not match", "pe-7s-info");
 			return;
 		}
 		if (!(email.match(/([@])/) && email.match(/([.])/))) {
@@ -88,7 +84,7 @@ const RequestPasswordReset = (props) => {
 			);
 			return;
 		}
-		requestAction(user);
+		resetAction(user);
 	};
 
 	return (
@@ -115,6 +111,32 @@ const RequestPasswordReset = (props) => {
 							onChange={onChange}
 						/>
 					</div>
+					<div className="px-4 pb-4">
+						<label htmlFor="password" className="text-sm block font-bold  pb-2">
+							NEW PASSWORD
+						</label>
+						<input
+							type="password"
+							name="password"
+							id="password"
+							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300 "
+							placeholder="*******"
+							onChange={onChange}
+						/>
+					</div>
+					<div className="px-4 pb-4">
+						<label htmlFor="confirm_password" className="text-sm block font-bold  pb-2">
+							CONFIRM PASSWORD
+						</label>
+						<input
+							type="password"
+							name="confirm_password"
+							id="confirm_password"
+							className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300 "
+							placeholder="********"
+							onChange={onChange}
+						/>
+					</div>
 					<div className="my-3">
 						<button
 							className="bg-blue-500 hover:bg-blue-700 w-auto text-white block mx-auto font-bold-600 py-2 px-4 mt-10 rounded focus:outline-none focus:shadow-outline"
@@ -122,7 +144,7 @@ const RequestPasswordReset = (props) => {
 							ref={btn}
 							disabled={isLoading}
 						>
-							Reset Password
+							Change Password
 						</button>
 						<small className="flex mx-auto text-end w-auto tracking-tight justify-center leading-tight text-md mt-5">
 							<Link to="/login" className="ml-2 flex cursor-pointer justify-end">
@@ -143,8 +165,8 @@ const mapState = (state) => {
 		errorMessage: state.auth.errorMessage,
 		type: state.auth.type,
 		successMessage: state.auth.message,
-		isRequestPage: state.auth.isRequestPage,
+		isResetPage: state.auth.isResetPage,
 	};
 };
 
-export default connect(mapState, { requestAction })(RequestPasswordReset);
+export default connect(mapState, { resetAction })(ResetPassword);

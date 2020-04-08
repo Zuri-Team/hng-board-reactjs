@@ -11,6 +11,9 @@ import {
 	REQUEST_RESET_SUCCESS,
 	REQUEST_RESET_FAIL,
 	GET_USER_PROFILE,
+	RESET_SUCCESS,
+	RESET_LOADING,
+	RESET_FAIL,
 } from "../types/authTypes";
 import axios from "axios/axios";
 
@@ -39,17 +42,16 @@ export const log_Out = (payload) => {
 		type: LOG_OUT,
 	};
 };
-
-export const regLoading = () => {
-	return {
-		type: SET_REG_LOADING,
-	};
-};
-
 export const getTrack = (payload) => {
 	return {
 		type: GET_TRACKS,
 		payload,
+	};
+};
+
+export const regLoading = () => {
+	return {
+		type: SET_REG_LOADING,
 	};
 };
 
@@ -89,6 +91,26 @@ export const requestFail = (payload) => {
 export const getUser = (payload) => {
 	return {
 		type: GET_USER_PROFILE,
+		payload,
+	};
+};
+
+export const resetLoading = () => {
+	return {
+		type: RESET_LOADING,
+	};
+};
+
+export const resetSuccess = (payload) => {
+	return {
+		type: RESET_SUCCESS,
+		payload,
+	};
+};
+
+export const resetFail = (payload) => {
+	return {
+		type: RESET_FAIL,
 		payload,
 	};
 };
@@ -155,5 +177,23 @@ export const getUserAction = (id) => async (dispatch) => {
 		dispatch(getUser(response.data.data));
 	} catch (err) {
 		console.log(err);
+	}
+};
+
+export const resetAction = (payload) => async (dispatch) => {
+	dispatch(resetLoading());
+	try {
+		const response = await axios.post("/password/reset", payload);
+		dispatch(resetSuccess(response && response.data.data));
+	} catch (e) {
+		if (e.response && e.response.status === 404) {
+			dispatch(
+				resetFail(
+					"Please initiate a password reset again, you can go to the login page to do this.",
+				),
+			);
+		} else {
+			dispatch(resetFail("Something went wrong, please try again"));
+		}
 	}
 };

@@ -35,6 +35,6 @@ export const fetchSlackProfileAction = () => async (dispatch, getState) => {
 		const payload = response.data;
 		dispatch(fetchSlackProfileSuccess(payload));
 	} catch (err) {
-		console.log(err.response);
+		console.log(err);
 	}
 };
