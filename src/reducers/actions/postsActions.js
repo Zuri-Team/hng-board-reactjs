@@ -17,8 +17,14 @@ export const fetchPostsSuccess = (payload) => {
 export const fetchPostsAction = () => async (dispatch) => {
 	dispatch(fetchPostsLoading());
 	try {
-		const response = await axios.get("/posts");
-		dispatch(fetchPostsSuccess(response.data.data.data));
+		const a = await fetch("https://api.start.ng/api/posts", {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage["token"],
+			},
+		});
+		const response = await a.json();
+		dispatch(fetchPostsSuccess(response.data.data));
 	} catch (err) {
 		console.log(err);
 	}

@@ -172,9 +172,13 @@ export const logOut = () => (dispatch) => {
 
 export const getUserAction = (id) => async (dispatch) => {
 	try {
-		const response = await axios.get(`/user-profile/${id}`);
-		const profile = await axios.get(`/profile/${id}`);
-		dispatch(getUser(response.data.data));
+		const profile = await fetch(`https://api.start.ng/api/user-profile/${id}`, {
+			headers: {
+				Authorization: "Bearer " + localStorage["token"],
+			},
+		});
+		const response = await profile.json();
+		dispatch(getUser(response.data));
 	} catch (err) {
 		console.log(err);
 	}

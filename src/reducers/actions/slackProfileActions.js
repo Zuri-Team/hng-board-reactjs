@@ -1,7 +1,6 @@
 import {
 	FETCH_SLACK_PROFILE_LOADING,
 	FETCH_SLACK_PROFILE_SUCCESS,
-	FETCH_SLACK_PROFILE_ERROR,
 } from "../types/slackProfileTypes";
 import axios from "axios/axios";
 
@@ -18,14 +17,7 @@ export const fetchSlackProfileSuccess = (payload) => {
 	};
 };
 
-// export const fetchSlackProfileError = () => {
-// 	return {
-// 		type: FETCH_SLACK_PROFILE_ERROR,
-// 	};
-// };
-// const fromRedux = store.getState().userProfile.profile.data[0];
-
-export const fetchSlackProfileAction = () => async (dispatch, getState) => {
+export const fetchSlackProfileAction = () => async (dispatch) => {
 	dispatch(fetchSlackProfileLoading());
 	try {
 		const slack_id = JSON.parse(localStorage["user_payload"]).slack_id;

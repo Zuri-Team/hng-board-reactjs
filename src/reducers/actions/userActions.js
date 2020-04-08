@@ -71,10 +71,24 @@ export const submitTaskFail = () => {
 export const fetchTasksAction = () => async (dispatch) => {
 	dispatch(fetchTasksLoading());
 	try {
-		const [tasks, tracks] = await Promise.all([axios.get("/user/task"), axios.get("track/all")]);
+		// const [tasks, tracks] = await Promise.all([axios.get("/user/task"), axios.get("track/all")]);
+		const [a, b] = await Promise.all([
+			fetch("https://api.start.ng/api/user/task", {
+				headers: {
+					Authorization: "Bearer " + localStorage["token"],
+				},
+			}),
+			fetch("https://api.start.ng/api/track/all", {
+				headers: {
+					Authorization: "Bearer " + localStorage["token"],
+				},
+			}),
+		]);
 
-		const taskResponse = tasks.data.data.flat();
-		const trackResponse = tracks.data.data.data;
+		const tasks = await a.json();
+		const tracks = await b.json();
+		const taskResponse = tasks.data.flat();
+		const trackResponse = tracks.data.data;
 		for (let i = 0; i < taskResponse.length; i++) {
 			for (let j = 0; j < trackResponse.length; j++) {
 				if (taskResponse[i].track_id == trackResponse[j].id) {
@@ -91,8 +105,13 @@ export const fetchTasksAction = () => async (dispatch) => {
 export const fetchProbationAction = (id) => async (dispatch) => {
 	dispatch(fetchProbationLoading());
 	try {
-		const response = await axios.get(`/probation/status/${id}`);
-		dispatch(fetchProbationSuccess(response.data.data));
+		const a = await fetch(`https://api.start.ng/api/probation/status/${id}`, {
+			headers: {
+				Authorization: "Bearer " + localStorage["token"],
+			},
+		});
+		const response = await a.json();
+		dispatch(fetchProbationSuccess(response.data));
 	} catch (err) {
 		console.log(err);
 	}
@@ -101,8 +120,13 @@ export const fetchProbationAction = (id) => async (dispatch) => {
 export const fetchGradeAction = (task_id, user_id) => async (dispatch) => {
 	dispatch(fetchGradeLoading());
 	try {
-		const response = await axios.get(`/user/${user_id}/task/${task_id}`);
-		dispatch(fetchGradeSuccess(response.data.data));
+		const a = await fetch(`https://api.start.ng/api/user/${user_id}/task/${task_id}`, {
+			headers: {
+				Authorization: "Bearer " + localStorage["token"],
+			},
+		});
+		const response = await a.json();
+		dispatch(fetchGradeSuccess(response.data));
 	} catch (err) {
 		console.log(err);
 	}

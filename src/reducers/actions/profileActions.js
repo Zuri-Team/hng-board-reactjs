@@ -41,8 +41,12 @@ export const fetchUserTracksAction = () => async (dispatch) => {
 	});
 	try {
 		const userId = JSON.parse(localStorage["user_payload"]).id;
-		const response = await axios.get(`/user-profile/${userId}`);
-		const tracks = response.data;
+		const profile = await fetch(`https://api.start.ng/api/user-profile/${userId}`, {
+			headers: {
+				Authorization: "Bearer " + localStorage["token"],
+			},
+		});
+		const tracks = await profile.json();
 		dispatch({
 			type: FETCH_USER_TRACKS_SUCCESS,
 			payload: tracks,
