@@ -148,7 +148,7 @@ const UserProfile = (props) => {
 	const handleChange = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value });
 	};
-	if (userProfile === null || slackProfile === null || userTracks === null) {
+	if (userProfile === null || userTracks === null) {
 		return (
 			<div>
 				<Helmet>
@@ -171,7 +171,11 @@ const UserProfile = (props) => {
 			location,
 			profile: { bio, profile_img },
 		} = mainProfileInfo;
-		const mainSlackInfo = slackProfile.SlackUser.user.profile;
+		const mainSlackInfo =
+			slackProfile &&
+			slackProfile.SlackUser &&
+			slackProfile.SlackUser.user &&
+			slackProfile.SlackUser.user.profile;
 		return (
 			<div className="content">
 				<NotificationSystem ref={notification} style={style} />
@@ -183,7 +187,7 @@ const UserProfile = (props) => {
 						<Col md={4} xs={12}>
 							<UserCard
 								bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-								avatar={profile_img ? profile_img : mainSlackInfo.image_original}
+								avatar={profile_img ? profile_img : mainSlackInfo && mainSlackInfo.image_original}
 								name={firstname ? `${mainProfileInfo.firstname} ${mainProfileInfo.lastname}` : ""}
 								userName={username}
 								description={
