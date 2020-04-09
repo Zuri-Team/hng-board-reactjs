@@ -31,6 +31,9 @@ class Tasks extends Component {
 		} else {
 			return (
 				<div className="content mx-auto">
+					<Helmet>
+						<title>HNG Board | Tasks</title>
+					</Helmet>
 					<Grid fluid className="min-h-screen mx-auto">
 						<Row className="flex justify-center">
 							<Col md={10} sm={12} className="mx-auto posts">
