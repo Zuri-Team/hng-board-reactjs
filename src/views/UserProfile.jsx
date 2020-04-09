@@ -21,7 +21,7 @@ import { fetchSlackProfileAction } from "../reducers/actions/slackProfileActions
 const UserProfile = (props) => {
 	const {
 		fetchProfileAction,
-		fetchSlackProfileAction,
+		// fetchSlackProfileAction,
 		userProfile,
 		slackProfile,
 		userTracks,
@@ -30,7 +30,7 @@ const UserProfile = (props) => {
 	} = props;
 	useEffect(() => {
 		fetchProfileAction();
-		fetchSlackProfileAction();
+		// fetchSlackProfileAction();
 		fetchUserTracksAction();
 	}, []);
 
@@ -103,7 +103,7 @@ const UserProfile = (props) => {
 			addNotification(undefined, `Avatar changed successfully`, undefined);
 			setTimeout(() => {
 				fetchProfileAction();
-				fetchSlackProfileAction();
+				// fetchSlackProfileAction();
 			}, 2000);
 		} else {
 			setUpload({ loading: false });
@@ -140,7 +140,7 @@ const UserProfile = (props) => {
 			bio,
 		});
 		fetchProfileAction();
-		fetchSlackProfileAction();
+		// fetchSlackProfileAction();
 		setSubmitState({ editMode: !submitState.editMode });
 		setDisableFields(!disableFields);
 	};
@@ -424,7 +424,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
 	fetchProfileAction,
-	fetchSlackProfileAction,
+	// fetchSlackProfileAction,
 	fetchUserTracksAction,
 	editProfileAction,
 };
