@@ -44,7 +44,7 @@ const Post = (props) => {
 								removeViewMore
 								content={
 									<div className="table-full-width">
-										<table className="table">
+										<table className="table break-words">
 											<tbody>
 												<tr key={post.id}>
 													<td>

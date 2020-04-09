@@ -8,17 +8,6 @@ import moment from "moment";
 import { Helmet } from "react-helmet";
 
 class Posts extends Component {
-	createLegend(json) {
-		var legend = [];
-		for (var i = 0; i < json["names"].length; i++) {
-			var type = "fa fa-circle text-" + json["types"][i];
-			legend.push(<i className={type} key={i} />);
-			legend.push(" ");
-			legend.push(json["names"][i]);
-		}
-		return legend;
-	}
-
 	viewPost = (id) => {
 		this.props.history.push(`/user/post/${id}`);
 	};
@@ -56,7 +45,7 @@ class Posts extends Component {
 									removeViewMore
 									content={
 										<div className="table-full-width">
-											<table className="table">
+											<table className="table break-words">
 												<tbody>
 													{posts &&
 														posts.map((post) => (

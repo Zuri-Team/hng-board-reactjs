@@ -7,8 +7,14 @@
 	}
 }
 .col-xs-12 {
-	padding-left: unset;
-	padding-right: unset;
+	word-wrap: break-word;
+}
+.table {
+	word-break: break-word;
+}
+
+.col-sm-12 {
+	word-wrap: break-word;
 }
 
 .btn-info {
@@ -39,4 +45,3 @@
 		float: left;
 	}
 }
-

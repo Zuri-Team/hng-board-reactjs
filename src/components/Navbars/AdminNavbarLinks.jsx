@@ -27,10 +27,10 @@ class AdminNavbarLinks extends Component {
 		return (
 			<div>
 				<Nav>
-					<NavItem eventKey={1} href="#sidebar">
-						{/* <i className="fa fa-dashboard" /> */}
-						<p className="hidden-lg hidden-md">Dashboard</p>
-					</NavItem>
+					{/* <i className="fa fa-dashboard" /> */}
+					{/* <NavItem eventKey={1} href="#sidebar">
+						<p className="hidden-lg hidden-md">Home</p>
+					</NavItem> */}
 					{/**/}
 					{/* <NavItem eventKey={3} href="#">
 						<i className="fa fa-search" />
