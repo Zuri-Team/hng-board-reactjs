@@ -26,6 +26,7 @@ class Sidebar extends Component {
 		const sidebarBackground = {
 			backgroundImage: "url(" + this.props.image + ")",
 		};
+		const gender = JSON.parse(localStorage["user_payload"]).gender;
 		return (
 			<div
 				id="sidebar"
@@ -43,7 +44,8 @@ class Sidebar extends Component {
 						</div>
 					</a> */}
 					<a href="#sidebar" className="simple-text logo-normal">
-						Hello, {this.props.fullname} 😎
+						Hello, {this.props.fullname}{" "}
+						{gender == "male" ? "👨‍💻" : gender == "female" ? "👩‍💻" : "💻"}
 					</a>
 				</div>
 				<div className="sidebar-wrapper">
