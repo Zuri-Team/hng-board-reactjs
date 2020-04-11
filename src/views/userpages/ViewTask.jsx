@@ -333,7 +333,7 @@ const Task = (props) => {
 																}}
 															/>
 														</p>
-														<small className="text-gray-700 leading-tight">
+														<small className="text-gray-700">
 															Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}
 														</small>
 														<p className="text-sm mt-5">

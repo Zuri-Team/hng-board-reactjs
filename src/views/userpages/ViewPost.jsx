@@ -69,7 +69,7 @@ const Post = (props) => {
 																}}
 															/>
 														</p>
-														<small className="text-gray-700 leading-tight">
+														<small className="text-gray-700">
 															Posted: {moment(post.created_at).format("DD/MM/YYYY hh:mm A")} by{" "}
 															{post.user.firstname} {post.user.lastname}
 														</small>
