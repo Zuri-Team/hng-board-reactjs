@@ -35,6 +35,20 @@ const Post = (props) => {
 		return (
 			<div className="content mx-auto">
 				<Grid fluid className="min-h-screen mx-auto">
+					<p className="text-bold leading-tight flex justify-end tracking-tight">
+						<Button
+							style={{
+								backgroundColor: "#5bc0de",
+								color: "#FFF",
+								border: "none",
+								outline: "none",
+								display: "block",
+							}}
+							onClick={() => props.history.goBack()}
+						>
+							Go back
+						</Button>
+					</p>
 					<Row className="flex justify-center">
 						<Col md={10} xs={12} className="mx-auto posts">
 							<Card
@@ -48,20 +62,6 @@ const Post = (props) => {
 											<tbody>
 												<tr key={post.id}>
 													<td>
-														<p className="text-bold leading-tight flex justify-end tracking-tight">
-															<Button
-																style={{
-																	backgroundColor: "#5bc0de",
-																	color: "#FFF",
-																	border: "none",
-																	outline: "none",
-																	display: "block",
-																}}
-																onClick={() => props.history.goBack()}
-															>
-																Go back
-															</Button>
-														</p>
 														<p className="body text-gray-700">
 															<small
 																dangerouslySetInnerHTML={{

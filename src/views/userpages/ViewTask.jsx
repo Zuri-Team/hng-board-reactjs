@@ -179,6 +179,20 @@ const Task = (props) => {
 				</Helmet>
 				<NotificationSystem ref={notification} style={style} />
 				<Grid fluid className="min-h-screen">
+					<p className="text-bold leading-tight flex justify-end tracking-tight">
+						<Button
+							style={{
+								backgroundColor: "#5bc0de",
+								color: "#FFF",
+								border: "none",
+								outline: "none",
+								display: "block",
+							}}
+							onClick={() => props.history.goBack()}
+						>
+							Go back
+						</Button>
+					</p>
 					<Row className="mx-auto">
 						<Col md={4} xs={12} className="posts submit mx-auto">
 							<Card
@@ -312,20 +326,6 @@ const Task = (props) => {
 											<tbody>
 												<tr key={task.id}>
 													<td>
-														<p className="text-bold leading-tight flex justify-end tracking-tight">
-															<Button
-																style={{
-																	backgroundColor: "#5bc0de",
-																	color: "#FFF",
-																	border: "none",
-																	outline: "none",
-																	display: "block",
-																}}
-																onClick={() => props.history.goBack()}
-															>
-																Go back
-															</Button>
-														</p>
 														<p className="body text-gray-700">
 															<small
 																dangerouslySetInnerHTML={{
