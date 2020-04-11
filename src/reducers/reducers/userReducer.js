@@ -26,6 +26,7 @@ const initialState = {
 	isTaskPage: false,
 	submitLoading: null,
 	submission_link: null,
+	submitted_at: null,
 	comment: null,
 };
 
@@ -69,6 +70,7 @@ export default (state = initialState, action) => {
 				isSubmitted: payload.length > 0,
 				isLoading: false,
 				submission_link: payload.length > 0 ? payload[0].submission_link : null,
+				submitted_at: payload.length > 0 ? payload[0].created_at : null,
 				comment: payload.length > 0 ? payload[0].comment : null,
 			};
 		case SUBMIT_TASK_LOADING:

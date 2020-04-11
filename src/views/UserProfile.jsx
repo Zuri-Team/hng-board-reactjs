@@ -10,6 +10,7 @@ import Button from "components/CustomButton/CustomButton.jsx";
 import "assets/css/spinner.css";
 import "assets/css/FilePicker.css";
 import { Helmet } from "react-helmet";
+import image from "assets/img/sidebar-1.jpg";
 
 import {
 	fetchProfileAction,
@@ -186,7 +187,7 @@ const UserProfile = (props) => {
 					<Row>
 						<Col md={4} xs={12}>
 							<UserCard
-								bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+								bgImage={image}
 								avatar={profile_img ? profile_img : mainSlackInfo && mainSlackInfo.image_original}
 								name={firstname ? `${mainProfileInfo.firstname} ${mainProfileInfo.lastname}` : ""}
 								userName={username}

@@ -49,6 +49,7 @@ const Task = (props) => {
 		setErrorToFalse,
 		link,
 		comment,
+		submitted_at,
 	} = props;
 	useEffect(() => {
 		if (submitLoading) {
@@ -85,7 +86,7 @@ const Task = (props) => {
 
 	useEffect(() => {
 		if (error && isTaskPage) {
-			addNotification("error", "Ugh 😔, somethig went wrong, Please try again", "pe-7s-info");
+			addNotification("error", "Ugh 😔, something went wrong, Please try again", "pe-7s-info");
 			btn.current.textContent = "Submit";
 			btn.current.style.opacity = "unset";
 			btn.current.style.pointerEvents = "unset";
@@ -279,11 +280,21 @@ const Task = (props) => {
 									title="Your submission"
 									bigTitle
 									content={
-										<div className="form-group">
-											<p>
-												Your link: <a href={link}>{link}</a>
-											</p>
-										</div>
+										<>
+											<div className="form-group">
+												<small>
+													Your link:{" "}
+													<a href={link} target="_blank" rel="noopener noreferrer">
+														{link}
+													</a>
+												</small>
+											</div>
+											<div className="form-group">
+												<small>
+													Submission Time: <small>{submitted_at}</small>
+												</small>
+											</div>
+										</>
 									}
 								/>
 							)}
@@ -361,6 +372,7 @@ const mapStateToProps = (state) => ({
 	submitLoading: state.user.submitLoading,
 	link: state.user.submission_link,
 	comment: state.user.comment,
+	submitted_at: state.user.submitted_at,
 });
 
 export default connect(mapStateToProps, {

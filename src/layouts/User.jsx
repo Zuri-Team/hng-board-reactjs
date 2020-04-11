@@ -17,7 +17,7 @@ import { style } from "variables/Variables.jsx";
 
 import routes from "routes/userRoutes.js";
 
-import image from "assets/img/sidebar-3.jpg";
+import image from "assets/img/sidebar-7.jpg";
 
 class User extends Component {
 	constructor(props) {
@@ -153,7 +153,7 @@ class User extends Component {
 				<Sidebar
 					{...this.props}
 					routes={routes}
-					// image={this.state.image}
+					image={this.state.image}
 					fullname={fullname}
 					color={this.state.color}
 					hasImage={this.state.hasImage}

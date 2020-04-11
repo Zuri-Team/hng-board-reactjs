@@ -75,7 +75,13 @@ class Dashboard extends Component {
 									<Card
 										title="Latest Tasks"
 										category="Here, you see the 5 latest tasks"
-										stats={`Your latest task expires ${
+										stats={`Your latest task ${
+											new Date(
+												this.props.latestTasks[0] && this.props.latestTasks[0].deadline,
+											).getTime() > new Date().getTime
+												? "expires"
+												: "expired"
+										} ${
 											this.props.latestTasks[0]
 												? moment(this.props.latestTasks[0].deadline).fromNow()
 												: "..."
