@@ -25,11 +25,8 @@ export const fetchProfileAction = () => async (dispatch) => {
 	try {
 		const userId = JSON.parse(localStorage["user_payload"]).id;
 		const response = await axios.get(`/profile/${userId}`);
-		const tasks = response.data;
-		// const tracksPromise = tasks.map(async task => await axios.get(`/track/${task.track_id}`));
-		// const tracks = await Promise.all(tracksPromise);
-		// tracks.map((track, i) => tasks[i]["track_name"] = track.data.data.track_name);
-		dispatch(fetchProfileSuccess(tasks));
+		const profile = response.data;
+		dispatch(fetchProfileSuccess(profile));
 	} catch (err) {
 		console.log(err);
 	}
