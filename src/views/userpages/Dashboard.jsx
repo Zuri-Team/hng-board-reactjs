@@ -8,7 +8,6 @@ import { Tasks } from "components/Tasks/Tasks.jsx";
 import { Posts } from "components/Tasks/Posts.jsx";
 import { Helmet } from "react-helmet";
 import "assets/css/spinner.css";
-import Loader from "components/Loader/Loader";
 
 class Dashboard extends Component {
 	render() {
@@ -50,8 +49,9 @@ class Dashboard extends Component {
 						<Col lg={3} sm={6}>
 							<StatsCard
 								bigIcon={<i className="pe-7s-user text-info" />}
-								statsText="Status"
-								statsValue={user ? (user.active ? "Active" : "Inactive") : "Loading..."}
+								statsText="Your Courses"
+								statsValue={user ? user.courses.length : "Loading..."}
+								// statsValue={user ? (user.active ? "Active" : "Inactive") : "Loading..."}
 								// statsIcon={<i className="fa fa-info"
 								// statsIconText="Your Current Status in the Internship"
 							/>
@@ -67,7 +67,7 @@ class Dashboard extends Component {
 										this.props.latestTasks && this.props.latestTasks.length > 0
 											? new Date(
 													this.props.latestTasks[0] && this.props.latestTasks[0].deadline,
-											  ).getTime() > new Date().getTime
+											  ).getTime() > new Date().getTime()
 												? "expires"
 												: "expired"
 											: ""

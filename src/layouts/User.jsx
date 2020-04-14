@@ -147,6 +147,7 @@ class User extends Component {
 	render() {
 		let user = JSON.parse(localStorage["user_payload"]);
 		const fullname = user.firstname + " " + user.lastname;
+		const id = user.id;
 		return localStorage.getItem("user") == "true" ? (
 			<div className="wrapper">
 				<NotificationSystem ref="notificationSystem" style={style} />
@@ -154,6 +155,7 @@ class User extends Component {
 					{...this.props}
 					routes={routes}
 					image={this.state.image}
+					id={id}
 					fullname={fullname}
 					color={this.state.color}
 					hasImage={this.state.hasImage}

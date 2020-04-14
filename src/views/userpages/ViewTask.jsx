@@ -337,9 +337,20 @@ const Task = (props) => {
 															Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}
 														</small>
 														<p className="text-sm mt-5">
-															<small className="badge badge-success tasks d-block text-sm">
+															<small className="badge badge-success d-block courses text-sm">
+																{task.course && task.course.name}
+															</small>{" "}
+															<small className="badge badge-success ml-3 d-block tasks text-sm">
 																{task.track_name}
-															</small>
+															</small>{" "}
+															{new Date(task.deadline).getTime() < new Date().getTime() && (
+																<small
+																	className="badge badge-success d-block ml-3 tasks text-sm"
+																	style={{ backgroundColor: "palevioletred" }}
+																>
+																	closed
+																</small>
+															)}
 														</p>
 													</td>
 												</tr>

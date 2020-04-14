@@ -24,6 +24,10 @@
 	background-color: #ff9500;
 }
 
+.badge.courses {
+	background-color: #1dc7ea;
+}
+
 .col-sm-10 {
 	float: left;
 }

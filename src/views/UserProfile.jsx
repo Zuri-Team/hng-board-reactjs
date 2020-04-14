@@ -322,32 +322,6 @@ const UserProfile = (props) => {
 												},
 											]}
 										/>
-										{/* <FormInputs
-												ncols={["col-md-4", "col-md-4", "col-md-4"]}
-												properties={[
-													{
-														label: "City",
-														type: "text",
-														bsClass: "form-control",
-														placeholder: "City",
-														defaultValue: "Mike",
-													},
-													{
-														label: "Country",
-														type: "text",
-														bsClass: "form-control",
-														placeholder: "Country",
-														defaultValue: "Andrew",
-													},
-													{
-														label: "Postal Code",
-														type: "number",
-														bsClass: "form-control",
-														placeholder: "ZIP Code",
-													},
-												]}
-											/> */}
-
 										<Row>
 											<Col md={12}>
 												<FormGroup controlId="formControlsTextarea">
@@ -381,7 +355,8 @@ const UserProfile = (props) => {
 									</form>
 								}
 							/>
-
+						</Col>
+						<Col md={6} xs={12}>
 							<Card
 								removeViewMore
 								title="Your Tracks"
@@ -399,6 +374,35 @@ const UserProfile = (props) => {
 																</p>
 																<small className="text-gray-700 leading-tight">
 																	{track.track_description}
+																</small>
+															</td>
+														</tr>
+													);
+												})}
+											</tbody>
+										</table>
+									</div>
+								}
+							/>
+						</Col>
+						<Col md={6} xs={12}>
+							<Card
+								removeViewMore
+								title="Your Courses"
+								bigTitle
+								content={
+									<div className="table-full-width">
+										<table className="table">
+											<tbody>
+												{userTracks.data.courses.map((course, id) => {
+													return (
+														<tr key={id}>
+															<td>
+																<p className="text-bold leading-tight tracking-tight">
+																	<strong>{course.name}</strong>
+																</p>
+																<small className="text-gray-700 leading-tight">
+																	{course.description}
 																</small>
 															</td>
 														</tr>

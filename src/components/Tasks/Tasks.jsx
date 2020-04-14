@@ -25,7 +25,10 @@ export class Tasks extends Component {
 									Deadline: {moment(datum.deadline).format("DD/MM/YYYY hh:mm A")}
 								</small>
 								<p className="text-sm mt-5">
-									<small className="badge badge-success tasks d-block text-sm">
+									<small className="badge badge-success d-block courses text-sm">
+										{datum.course.name}
+									</small>{" "}
+									<small className="badge badge-success tasks ml-3 d-block text-sm">
 										{datum.track_name}
 									</small>{" "}
 									{new Date(datum.deadline).getTime() < new Date().getTime() && (
