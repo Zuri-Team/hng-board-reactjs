@@ -11,8 +11,8 @@ import {
 } from "../types/userTypes";
 
 const initialState = {
-	tasks: [],
-	allTasks: [],
+	tasks: null,
+	allTasks: null,
 	isLoading: false,
 	task: null,
 	probationStatus: null,
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				tasks: payload.slice(0, 5),
-				allTasks: [...state.tasks, ...payload],
+				allTasks: payload,
 				isLoading: false,
 			};
 		case FETCH_PROBATION_LOADING:

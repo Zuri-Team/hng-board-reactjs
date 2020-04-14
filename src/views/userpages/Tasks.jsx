@@ -15,7 +15,7 @@ class Tasks extends Component {
 	render() {
 		const { tasks, loading } = this.props;
 		const edit = <Tooltip id="edit_tooltip">View Task</Tooltip>;
-		if (tasks.length < 1) {
+		if (!tasks) {
 			return (
 				<div>
 					<Helmet>
@@ -46,7 +46,11 @@ class Tasks extends Component {
 										<div className="table-full-width">
 											<table className="table">
 												<tbody>
-													{tasks &&
+													{tasks.length < 1 ? (
+														<p className="mx-auto mt-10 w-50 d-block text-center">
+															You have no tasks yet
+														</p>
+													) : (
 														tasks.map((task) => (
 															<>
 																<tr key={task.id} onClick={() => this.viewTask(task.id)}>
@@ -88,7 +92,8 @@ class Tasks extends Component {
 																	</td>
 																</tr>
 															</>
-														))}
+														))
+													)}
 												</tbody>
 											</table>
 										</div>

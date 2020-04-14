@@ -76,20 +76,24 @@ class Dashboard extends Component {
 										title="Latest Tasks"
 										category="Here, you see the 5 latest tasks"
 										stats={`Your latest task ${
-											new Date(
-												this.props.latestTasks[0] && this.props.latestTasks[0].deadline,
-											).getTime() > new Date().getTime
-												? "expires"
-												: "expired"
+											this.props.latestTasks && this.props.latestTasks.length > 0
+												? new Date(
+														this.props.latestTasks[0] && this.props.latestTasks[0].deadline,
+												  ).getTime() > new Date().getTime
+													? "expires"
+													: "expired"
+												: ""
 										} ${
-											this.props.latestTasks[0]
-												? moment(this.props.latestTasks[0].deadline).fromNow()
-												: "..."
+											this.props.latestTasks && this.props.latestTasks.length > 0
+												? this.props.latestTasks[0]
+													? moment(this.props.latestTasks[0].deadline).fromNow()
+													: "..."
+												: ""
 										}`}
 										statsIcon="fa fa-clock-o"
 										route="/user/tasks"
 										content={
-											latestTasks.length > 1 ? (
+											latestTasks && latestTasks.length > 0 ? (
 												<div className="table-full-width">
 													<table className="table">
 														<Tasks
@@ -99,12 +103,16 @@ class Dashboard extends Component {
 														/>
 													</table>
 												</div>
-											) : (
+											) : !latestTasks ? (
 												<div class="loader mx-auto w-50 d-block text-center" id="loader-2">
 													<span></span>
 													<span></span>
 													<span></span>
 												</div>
+											) : (
+												<p className="mx-auto mt-10 w-50 d-block text-center">
+													You have no tasks yet
+												</p>
 											)
 										}
 									/>

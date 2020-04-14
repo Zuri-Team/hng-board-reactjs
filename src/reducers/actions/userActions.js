@@ -83,7 +83,6 @@ export const fetchTasksAction = () => async (dispatch) => {
 				},
 			}),
 		]);
-
 		const tasks = await a.json();
 		const tracks = await b.json();
 		const taskResponse = tasks.data.flat();
