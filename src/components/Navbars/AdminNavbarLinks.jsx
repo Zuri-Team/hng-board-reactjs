@@ -16,6 +16,18 @@ class AdminNavbarLinks extends Component {
 
 	render() {
 		const { user } = this.props;
+		// const id =
+		// 	user && (+user.id < 10
+		// 		? "0000" + user.id
+		// 		: +user.id < 100
+		// 		? "000" + user.id
+		// 		: +user.id < 1000
+		// 		? "00" + user.id
+		// 		: +user.id >= 1000
+		// 		? "0" + user.id
+		// 		: user.id); // I did this and then discovered the below.
+
+		const id = user && String(user.id).padStart(5, 0);
 		const notification = (
 			<div>
 				<i className="fa fa-globe" />
@@ -46,7 +58,7 @@ class AdminNavbarLinks extends Component {
 						<MenuItem eventKey={2.5}>Another notifications</MenuItem>
 					</NavDropdown> */}
 					<NavItem eventKey={2} href="#">
-						INTERNSHIP ID: {user ? "SNG-" + user.id : "Loading..."}
+						INTERNSHIP ID: {user ? "SNG-" + id : "Loading..."}
 					</NavItem>
 					<NavItem eventKey={1} href="#">
 						{user ? user.email : "Loading..."}
