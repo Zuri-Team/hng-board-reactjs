@@ -38,7 +38,7 @@ class Header extends Component {
 						<Navbar.Toggle onClick={this.mobileSidebarToggle} />
 					</Navbar.Header>
 					<Navbar.Collapse>
-						<AdminNavbarLinks />
+						<AdminNavbarLinks showModal={this.props.showModal} />
 					</Navbar.Collapse>
 				</Navbar>
 			</>

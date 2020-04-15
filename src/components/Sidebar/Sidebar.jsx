@@ -71,7 +71,7 @@ class Sidebar extends Component {
 								);
 							return null;
 						})}
-						{this.state.width <= 991 ? <AdminNavbarLinks /> : null}
+						{this.state.width <= 991 ? <AdminNavbarLinks showModal={this.props.showModal} /> : null}
 					</ul>
 				</div>
 			</div>

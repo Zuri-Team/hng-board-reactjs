@@ -12,6 +12,8 @@ import { fetchTasksAction } from "reducers/actions/userActions";
 import { fetchPostsAction } from "reducers/actions/postsActions";
 import Post from "views/userpages/ViewPost";
 import Task from "views/userpages/ViewTask";
+import Modal from "components/Modal/Modal";
+import "assets/css/override.css";
 
 import { style } from "variables/Variables.jsx";
 
@@ -27,9 +29,88 @@ class User extends Component {
 			image: image,
 			color: "black",
 			hasImage: true,
+			course: "",
+			courses: null,
+			action: "",
+			reason: "",
 			fixedClasses: "dropdown show-dropdown open",
+			showModal: false,
 		};
 	}
+
+	fetchCourses = async () => {
+		try {
+			const response = await fetch(`https://api.start.ng/api/course/all`, {
+				headers: {
+					Authorization: `Bearer ${localStorage["token"]}`,
+				},
+			});
+			const data = await response.json();
+
+			if (data.code === 200) {
+				this.setState({ courses: data["data"] });
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	addNotification = (level = "success", message, className = "pe-7s-check") => {
+		this.state._notificationSystem.addNotification({
+			title: <span data-notify="icon" className={className} />,
+			message: <div>{message}</div>,
+			level: level,
+			position: "tr",
+		});
+	};
+
+	handleSubmit = async () => {
+		const { action, reason, course, courses } = this.state;
+		const user = JSON.parse(localStorage["user_payload"]);
+		const user_id = user && user.id;
+
+		if (!reason || !action || !course) {
+			this.addNotification("error", "All fields are required", "pe-7s-info");
+			return;
+		}
+		const course_id = this.state.courses.filter((a) => a.name == course)[0].id;
+
+		try {
+			const response = await fetch(`https://api.start.ng/api/course-requests/send-request`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage["token"]}`,
+				},
+				body: JSON.stringify({
+					course_id,
+					user_id,
+					action,
+					reason,
+				}),
+			});
+			const { code, message } = await response.json();
+			if (code == 200) {
+				this.addNotification(undefined, message, undefined);
+				this.setState({
+					reason: "",
+					course: "",
+					action: "",
+					showModal: false,
+				});
+			} else {
+				this.addNotification("error", message, "pe-7s-info");
+			}
+		} catch (err) {
+			this.addNotification("error", "Something went wrong, please try again", "pe-7s-info");
+		}
+	};
+
+	onChange = (e) => {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
+	};
+
 	handleNotificationClick = (position) => {
 		var color = Math.floor(Math.random() * 4 + 1);
 		var level;
@@ -88,6 +169,7 @@ class User extends Component {
 
 	componentDidMount() {
 		let user = JSON.parse(localStorage["user_payload"]);
+		this.fetchCourses();
 		this.props.fetchTasksAction();
 		setTimeout(() => this.props.fetchPostsAction(), 1000);
 		this.props.getUserAction(user.id);
@@ -157,11 +239,13 @@ class User extends Component {
 					fullname={fullname}
 					color={this.state.color}
 					hasImage={this.state.hasImage}
+					showModal={() => this.setState({ showModal: true })}
 				/>
 				<div id="main-panel" className="main-panel" ref="mainPanel">
 					<AdminNavbar
 						{...this.props}
 						brandText={this.getBrandText(this.props.location.pathname)}
+						showModal={() => this.setState({ showModal: true })}
 					/>
 					<Switch>
 						{this.getRoutes(routes)}
@@ -184,6 +268,73 @@ class User extends Component {
 					</Switch>
 					<Footer />
 				</div>
+				<Modal
+					show={this.state.showModal}
+					onHide={() => this.setState({ showModal: false })}
+					heading="Make a Course Change Request"
+					submit={this.handleSubmit}
+					content={
+						<div>
+							<p className="mb-1 text-md">Action</p>
+							<hr />
+							<div className="flex justify-start">
+								<label className="contain">
+									Add
+									<input type="radio" name="action" value="add" onChange={this.onChange} />
+									<span className="checkmark"></span>
+								</label>
+
+								<label className="contain ml-3">
+									Remove
+									<input type="radio" name="action" value="remove" onChange={this.onChange} />
+									<span className="checkmark"></span>
+								</label>
+							</div>
+							<hr />
+							<div className="flex flex-wrap mx-3 mb-10">
+								<div className="w-full px-3">
+									<label
+										className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+										htmlFor="grid-track"
+									>
+										Track
+									</label>
+									<select
+										className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-track"
+										name="course"
+										value={this.state.course}
+										onChange={this.onChange}
+									>
+										<option value="">Please select a course</option>
+										{this.state.courses &&
+											this.state.courses.map((course) => (
+												<option key={course.id}>{course.name}</option>
+											))}
+									</select>
+								</div>
+							</div>
+							<div className="flex flex-wrap mx-3 mb-10">
+								<div className="w-full px-3">
+									<label
+										className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+										htmlFor="grid-email"
+									>
+										Reason
+									</label>
+									<textarea
+										className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										id="grid-reason"
+										rows="10"
+										name="reason"
+										onChange={this.onChange}
+										placeholder="Please specify a valid reason"
+									/>
+								</div>
+							</div>
+						</div>
+					}
+				/>
 			</div>
 		) : (
 			this.props.history.goBack()
