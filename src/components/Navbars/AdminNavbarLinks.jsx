@@ -64,12 +64,12 @@ class AdminNavbarLinks extends Component {
 						{user ? user.email : "Loading..."}
 					</NavItem>
 					{/* <NavDropdown eventKey={2} title="Actions" id="basic-nav-dropdown-right"> */}
-						{/* <MenuItem eventKey={2.1}>Change Track</MenuItem> */}
-						{/* <MenuItem onClick={() => this.props.showModal()} eventKey={2.2}>
+					{/* <MenuItem eventKey={2.1}>Change Track</MenuItem> */}
+					{/* <MenuItem onClick={() => this.props.showModal()} eventKey={2.2}>
 							Change Course
 						</MenuItem> */}
-						{/* <MenuItem eventKey={2.3}>Make Submission</MenuItem> */}
-						{/* <MenuItem divider />
+					{/* <MenuItem eventKey={2.3}>Make Submission</MenuItem> */}
+					{/* <MenuItem divider />
 						<MenuItem onClick={this.viewProfile} eventKey={2.5}>
 							View Profile
 						</MenuItem>
