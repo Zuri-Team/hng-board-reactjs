@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
 				probationStatus: payload.status,
 				probator: payload.probator,
 				deadline: payload.exit_on,
-				isLoading: false,
+				// isLoading: false,
 			};
 		case FETCH_GRADE_LOADING:
 			return {
