@@ -157,8 +157,7 @@ const Task = (props) => {
 		probator === null ||
 		deadline === null ||
 		isSubmitted === null ||
-		grade === undefined ||
-		(onProbation && probator == undefined)
+		grade === undefined
 	) {
 		return (
 			<div>
