@@ -27,7 +27,6 @@ export const fetchPostsAction = () => async (dispatch) => {
 		const a = await axios.get("/posts");
 
 		const response = a.data;
-		console.log(a.data);
 		dispatch(fetchPostsSuccess(response.data.data));
 	} catch (err) {
 		console.log(err);

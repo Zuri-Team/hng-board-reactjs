@@ -157,7 +157,8 @@ const Task = (props) => {
 		probator === null ||
 		deadline === null ||
 		isSubmitted === null ||
-		grade === undefined
+		grade === undefined ||
+		(onProbation && probator == undefined)
 	) {
 		return (
 			<div>
@@ -200,7 +201,9 @@ const Task = (props) => {
 								category=""
 								stats={
 									onProbation
-										? `You were placed on probation by ${probator && probator.firstname} ${probator && probator.lastname} and you are expected to find your way out before ${deadline && deadline} ⛔`
+										? `You were placed on probation by ${probator && probator.firstname} ${
+												probator && probator.lastname
+										  } and you are expected to find your way out before ${deadline && deadline} ⛔`
 										: new Date(task.deadline).getTime() < new Date().getTime()
 										? "Deadline elapsed. Submissions are no longer accepted 🚫"
 										: null

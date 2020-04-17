@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				probationStatus: payload.status,
-				grade: payload.probator,
+				probator: payload.probator,
 				deadline: payload.exit_on,
 				isLoading: false,
 			};
