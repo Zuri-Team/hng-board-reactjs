@@ -16,6 +16,7 @@ import {
 	RESET_FAIL,
 } from "../types/authTypes";
 import axios from "axios/axios";
+import setToken from "axios/setToken";
 
 export const logInLoading = () => {
 	return {
@@ -119,6 +120,7 @@ export const logInAction = (payload) => async (dispatch) => {
 	dispatch(logInLoading());
 	try {
 		const response = await axios.post("/login", payload);
+		setToken(response.data.token);
 		dispatch(logInSuccess(response.data));
 	} catch (err) {
 		if (err.response && err.response.status == 401) {

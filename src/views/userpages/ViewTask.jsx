@@ -200,7 +200,7 @@ const Task = (props) => {
 								category=""
 								stats={
 									onProbation
-										? `You were placed on probation by ${probator.firstname} ${probator.lastname} and you are expected to find your way out before ${deadline} ⛔`
+										? `You were placed on probation by ${probator && probator.firstname} ${probator && probator.lastname} and you are expected to find your way out before ${deadline && deadline} ⛔`
 										: new Date(task.deadline).getTime() < new Date().getTime()
 										? "Deadline elapsed. Submissions are no longer accepted 🚫"
 										: null

@@ -17,13 +17,17 @@ export const fetchPostsSuccess = (payload) => {
 export const fetchPostsAction = () => async (dispatch) => {
 	dispatch(fetchPostsLoading());
 	try {
-		const a = await fetch("https://api.start.ng/api/posts", {
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + localStorage["token"],
-			},
-		});
-		const response = await a.json();
+		// const a = await fetch("https://api.start.ng/api/posts", {
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 		Authorization: "Bearer " + localStorage["token"],
+		// 	},
+		// });
+		// const response = await a.json();
+		const a = await axios.get("/posts");
+
+		const response = a.data;
+		console.log(a.data);
 		dispatch(fetchPostsSuccess(response.data.data));
 	} catch (err) {
 		console.log(err);
