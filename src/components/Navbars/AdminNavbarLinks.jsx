@@ -63,17 +63,17 @@ class AdminNavbarLinks extends Component {
 					<NavItem eventKey={1} href="#">
 						{user ? user.email : "Loading..."}
 					</NavItem>
-					{/* <NavDropdown eventKey={2} title="Actions" id="basic-nav-dropdown-right"> */}
-					{/* <MenuItem eventKey={2.1}>Change Track</MenuItem> */}
-					{/* <MenuItem onClick={() => this.props.showModal()} eventKey={2.2}>
+					<NavDropdown eventKey={2} title="Actions" id="basic-nav-dropdown-right">
+						{/* <MenuItem eventKey={2.1}>Change Track</MenuItem> */}
+						<MenuItem onClick={() => this.props.showModal()} eventKey={2.2}>
 							Change Course
-						</MenuItem> */}
-					{/* <MenuItem eventKey={2.3}>Make Submission</MenuItem> */}
-					{/* <MenuItem divider />
+						</MenuItem>
+						{/* <MenuItem eventKey={2.3}>Make Submission</MenuItem> */}
+						<MenuItem divider />
 						<MenuItem onClick={this.viewProfile} eventKey={2.5}>
 							View Profile
 						</MenuItem>
-					</NavDropdown> */}
+					</NavDropdown>
 					<Button
 						style={{
 							backgroundColor: "#5bc0de",

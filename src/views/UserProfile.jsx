@@ -73,10 +73,10 @@ const UserProfile = (props) => {
 		let user = JSON.parse(localStorage["user_payload"]);
 		const file = e.target.files[0];
 		setUpload({ loading: true });
-		if (file.size > 500000) {
+		if (file.size > 1000000) {
 			addNotification(
 				"error",
-				"Image too large, please choose an image of size less than 500kb",
+				"Image too large, please choose an image of size less than 1 MB",
 				"pe-7s-info",
 			);
 			return;
