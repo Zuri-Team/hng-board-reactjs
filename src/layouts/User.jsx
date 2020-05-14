@@ -8,7 +8,7 @@ import Sidebar from "components/Sidebar/Sidebar";
 import ProtectedUserRoute from "components/ProtectedRoute/ProtectedUserRoute";
 import { connect } from "react-redux";
 import { getUserAction } from "reducers/actions/authActions";
-import { fetchTasksAction } from "reducers/actions/userActions";
+import { fetchTasksAction, fetchScoreAction } from "reducers/actions/userActions";
 import { fetchPostsAction } from "reducers/actions/postsActions";
 import Post from "views/userpages/ViewPost";
 import Task from "views/userpages/ViewTask";
@@ -171,6 +171,7 @@ class User extends Component {
 		let user = JSON.parse(localStorage["user_payload"]);
 		this.fetchCourses();
 		this.props.fetchTasksAction();
+		this.props.fetchScoreAction();
 		setTimeout(() => this.props.fetchPostsAction(), 1000);
 		this.props.getUserAction(user.id);
 		if (this.props.location.pathname === "/user") {
@@ -342,4 +343,9 @@ class User extends Component {
 	}
 }
 
-export default connect(null, { getUserAction, fetchPostsAction, fetchTasksAction })(User);
+export default connect(null, {
+	getUserAction,
+	fetchPostsAction,
+	fetchTasksAction,
+	fetchScoreAction,
+})(User);
