@@ -38,7 +38,7 @@ export const fetchUserTracksAction = () => async (dispatch) => {
 	});
 	try {
 		const userId = JSON.parse(localStorage["user_payload"]).id;
-		const profile = await fetch(`https://api.start.ng/api/user-profile/${userId}`, {
+		const profile = await fetch(`http://test.hng.tech/api/user-profile/${userId}`, {
 			headers: {
 				Authorization: "Bearer " + localStorage["token"],
 			},
@@ -59,7 +59,7 @@ export const editProfileAction = (user) => async (dispatch) => {
 	});
 	try {
 		const userId = JSON.parse(localStorage["user_payload"]).id;
-		const a = await fetch(`https://api.start.ng/api/profile/${userId}/edit`, {
+		const a = await fetch(`http://test.hng.tech/api/profile/${userId}/edit`, {
 			method: "POST",
 			headers: {
 				Authorization: "Bearer " + localStorage["token"],

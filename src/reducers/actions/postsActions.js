@@ -17,7 +17,7 @@ export const fetchPostsSuccess = (payload) => {
 export const fetchPostsAction = () => async (dispatch) => {
 	dispatch(fetchPostsLoading());
 	try {
-		// const a = await fetch("https://api.start.ng/api/posts", {
+		// const a = await fetch("http://test.hng.tech/api/posts", {
 		// 	headers: {
 		// 		"Content-Type": "application/json",
 		// 		Authorization: "Bearer " + localStorage["token"],

@@ -174,7 +174,7 @@ export const logOut = () => (dispatch) => {
 
 export const getUserAction = (id) => async (dispatch) => {
 	try {
-		const profile = await fetch(`https://api.start.ng/api/user-profile/${id}`, {
+		const profile = await fetch(`http://test.hng.tech/api/user-profile/${id}`, {
 			headers: {
 				Authorization: "Bearer " + localStorage["token"],
 			},

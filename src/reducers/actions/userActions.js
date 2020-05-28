@@ -82,12 +82,12 @@ export const fetchTasksAction = () => async (dispatch) => {
 	dispatch(fetchTasksLoading());
 	try {
 		const [a, b] = await Promise.all([
-			fetch("https://api.start.ng/api/user/task", {
+			fetch("http://test.hng.tech/api/user/task", {
 				headers: {
 					Authorization: "Bearer " + localStorage["token"],
 				},
 			}),
-			fetch("https://api.start.ng/api/track/all", {
+			fetch("http://test.hng.tech/api/track/all", {
 				headers: {
 					Authorization: "Bearer " + localStorage["token"],
 				},
@@ -113,7 +113,7 @@ export const fetchTasksAction = () => async (dispatch) => {
 export const fetchProbationAction = (id) => async (dispatch) => {
 	dispatch(fetchProbationLoading());
 	try {
-		const a = await fetch(`https://api.start.ng/api/probation/status/${id}`, {
+		const a = await fetch(`http://test.hng.tech/api/probation/status/${id}`, {
 			headers: {
 				Authorization: "Bearer " + localStorage["token"],
 			},
@@ -128,7 +128,7 @@ export const fetchProbationAction = (id) => async (dispatch) => {
 export const fetchGradeAction = (task_id, user_id) => async (dispatch) => {
 	dispatch(fetchGradeLoading());
 	try {
-		const a = await fetch(`https://api.start.ng/api/user/${user_id}/task/${task_id}`, {
+		const a = await fetch(`http://test.hng.tech/api/user/${user_id}/task/${task_id}`, {
 			headers: {
 				Authorization: "Bearer " + localStorage["token"],
 			},
@@ -143,7 +143,7 @@ export const fetchGradeAction = (task_id, user_id) => async (dispatch) => {
 export const submitTaskAction = (data) => async (dispatch) => {
 	dispatch(submitTaskLoading());
 	try {
-		const a = await fetch(`https://api.start.ng/api/submit`, {
+		const a = await fetch(`http://test.hng.tech/api/submit`, {
 			method: "POST",
 			headers: {
 				Authorization: "Bearer " + localStorage["token"],
