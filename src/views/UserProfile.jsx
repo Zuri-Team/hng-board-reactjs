@@ -90,7 +90,7 @@ const UserProfile = (props) => {
 
 		const formData = new FormData();
 		formData.append("profile_img", file);
-		const a = await fetch(`http://test.hng.tech/api/profile/${user.id}/upload`, {
+		const a = await fetch(`https://test.hng.tech/api/profile/${user.id}/upload`, {
 			method: "POST",
 			headers: {
 				Authorization: "Bearer " + localStorage["token"],

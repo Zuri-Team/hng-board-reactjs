@@ -58,7 +58,7 @@ class AdminNavbarLinks extends Component {
 						<MenuItem eventKey={2.5}>Another notifications</MenuItem>
 					</NavDropdown> */}
 					<NavItem eventKey={2} href="#">
-						INTERNSHIP ID: {user ? "SNG-" + id : "Loading..."}
+						INTERNSHIP ID: {user ? "HNG-" + id : "Loading..."}
 					</NavItem>
 					<NavItem eventKey={1} href="#">
 						{user ? user.email : "Loading..."}

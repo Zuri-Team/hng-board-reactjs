@@ -15,7 +15,16 @@ const Login = (props) => {
 	const btn = useRef();
 	const notification = useRef();
 
-	const { isLoading, logInAction, error, errorMessage, type, isRequestPage, isResetPage } = props;
+	const {
+		isLoading,
+		logInAction,
+		error,
+		errorMessage,
+		type,
+		isRequestPage,
+		isResetPage,
+		isRegisterPage,
+	} = props;
 
 	useEffect(() => {
 		if (isLoading) {
@@ -49,7 +58,7 @@ const Login = (props) => {
 	}
 
 	useEffect(() => {
-		if (error && !isRequestPage && !isResetPage) {
+		if (error && !isRequestPage && !isResetPage && !isRegisterPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
 	}, [type]);
@@ -157,6 +166,7 @@ const mapState = (state) => {
 		errorMessage: state.auth.errorMessage,
 		isRequestPage: state.auth.isRequestPage,
 		isResetPage: state.auth.isResetPage,
+		isRegisterPage: state.auth.isRegisterPage,
 		type: state.auth.type,
 	};
 };

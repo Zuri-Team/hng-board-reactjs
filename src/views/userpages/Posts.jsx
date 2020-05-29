@@ -15,7 +15,7 @@ class Posts extends Component {
 	render() {
 		const { posts, loading } = this.props;
 		const edit = <Tooltip id="edit_tooltip">View Post</Tooltip>;
-		if (posts.length < 1) {
+		if (!posts) {
 			return (
 				<div>
 					<Helmet>
@@ -47,39 +47,47 @@ class Posts extends Component {
 										<div className="table-full-width">
 											<table className="table break-words">
 												<tbody>
-													{posts &&
+													{posts.length < 1 ? (
+														<p className="mx-auto mt-10 w-50 d-block text-center">
+															There are no posts yet
+														</p>
+													) : (
+														posts &&
 														posts.map((post) => (
-															<tr key={post.id} onClick={() => this.viewPost(post.id)}>
-																<td>
-																	<p className="text-bold leading-tight tracking-tight">
-																		<strong>{post.post_title}</strong>
-																	</p>
-																	{/* <p className="body text-gray-700" ><small dangerouslySetInnerHTML={{__html: post.post_body.slice(0, 250).trimEnd().replace(/\n|<strong>|<\/strong>|<br\/>|\/\n/g, "") + "....."}}/></p> */}
-																	<small className="text-gray-700 leading-tight">
-																		Posted: {moment(post.created_at).format("DD/MM/YYYY hh:mm A")}{" "}
-																		by {post.user.firstname} {post.user.lastname}
-																	</small>
-																	<p className="text-sm mt-5">
-																		<small className="badge badge-success d-block text-sm">
-																			{post.category.title}
+															<>
+																<tr key={post.id} onClick={() => this.viewPost(post.id)}>
+																	<td>
+																		<p className="text-bold leading-tight tracking-tight">
+																			<strong>{post.post_title}</strong>
+																		</p>
+																		{/* <p className="body text-gray-700" ><small dangerouslySetInnerHTML={{__html: post.post_body.slice(0, 250).trimEnd().replace(/\n|<strong>|<\/strong>|<br\/>|\/\n/g, "") + "....."}}/></p> */}
+																		<small className="text-gray-700 leading-tight">
+																			Posted: {moment(post.created_at).format("DD/MM/YYYY hh:mm A")}{" "}
+																			by {post.user.firstname} {post.user.lastname}
 																		</small>
-																	</p>
-																</td>
-																<td className="td-actions text-right">
-																	<OverlayTrigger placement="top" overlay={edit}>
-																		<Button
-																			bsStyle="info"
-																			simple
-																			type="button"
-																			bsSize="s"
-																			onClick={() => this.viewPost(post.id)}
-																		>
-																			<i className="fa fa-eye"></i>
-																		</Button>
-																	</OverlayTrigger>
-																</td>
-															</tr>
-														))}
+																		<p className="text-sm mt-5">
+																			<small className="badge badge-success d-block text-sm">
+																				{post.category.title}
+																			</small>
+																		</p>
+																	</td>
+																	<td className="td-actions text-right">
+																		<OverlayTrigger placement="top" overlay={edit}>
+																			<Button
+																				bsStyle="info"
+																				simple
+																				type="button"
+																				bsSize="s"
+																				onClick={() => this.viewPost(post.id)}
+																			>
+																				<i className="fa fa-eye"></i>
+																			</Button>
+																		</OverlayTrigger>
+																	</td>
+																</tr>
+															</>
+														))
+													)}
 												</tbody>
 											</table>
 										</div>

@@ -128,12 +128,16 @@ class Dashboard extends Component {
 												/>
 											</table>
 										</div>
-									) : (
+									) : !latestPosts ? (
 										<div class="loader mx-auto w-50 d-block text-center" id="loader-2">
 											<span></span>
 											<span></span>
 											<span></span>
 										</div>
+									) : (
+										<p className="mx-auto mt-10 w-50 d-block text-center">
+											There are no posts yet.
+										</p>
 									)
 								}
 							/>

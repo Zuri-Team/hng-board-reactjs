@@ -25,6 +25,7 @@ const initialState = {
 	registered: false,
 	isRequestPage: false,
 	isResetPage: false,
+	isRegisterPage: false,
 	tracks: [],
 };
 
@@ -42,6 +43,7 @@ export default (state = initialState, action) => {
 				loading: false,
 				isRequestPage: false,
 				isResetPage: false,
+				isRegisterPage: false,
 				error: true,
 				errorMessage: payload,
 				type: !state.type, // this is a hack to have the alert show just once per action
@@ -60,6 +62,7 @@ export default (state = initialState, action) => {
 				loading: false,
 				error: false,
 				errorMessage: null,
+				isRegisterPage: false,
 			};
 		case LOG_OUT:
 			localStorage.clear();
@@ -69,6 +72,7 @@ export default (state = initialState, action) => {
 				user: null,
 				error: false,
 				errorMessage: null,
+				isRegisterPage: false,
 			};
 		case GET_TRACKS:
 			return {
@@ -86,6 +90,7 @@ export default (state = initialState, action) => {
 				error: false,
 				loading: false,
 				registered: true,
+				isRegisterPage: false,
 			};
 		case REG_FAIL:
 			return {
@@ -94,6 +99,7 @@ export default (state = initialState, action) => {
 				error: true,
 				loading: false,
 				errorMessage: payload,
+				isRegisterPage: true,
 				type: !state.type, // this is a hack to have the alert show just once per action
 			};
 		case REQUEST_RESET_LOADING:
@@ -107,6 +113,7 @@ export default (state = initialState, action) => {
 				loading: false,
 				error: false,
 				errorMessage: null,
+				isRegisterPage: false,
 				message: payload,
 				isRequestPage: true,
 				type: !state.type,
@@ -118,6 +125,7 @@ export default (state = initialState, action) => {
 				error: true,
 				message: null,
 				isRequestPage: true,
+				isRegisterPage: false,
 				errorMessage: payload,
 				type: !state.type,
 			};
@@ -134,6 +142,7 @@ export default (state = initialState, action) => {
 				errorMessage: null,
 				message: payload,
 				isResetPage: true,
+				isRegisterPage: false,
 				type: !state.type,
 			};
 		case RESET_FAIL:
@@ -143,6 +152,7 @@ export default (state = initialState, action) => {
 				error: true,
 				message: null,
 				isResetPage: true,
+				isRegisterPage: false,
 				errorMessage: payload,
 				type: !state.type,
 			};

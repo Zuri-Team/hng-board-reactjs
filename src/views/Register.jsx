@@ -27,6 +27,7 @@ const Register = (props) => {
 		error,
 		errorMessage,
 		isRegistered,
+		isRegisterPage,
 		type,
 	} = props;
 
@@ -61,9 +62,10 @@ const Register = (props) => {
 				gender: "",
 				location: "",
 			});
-			props.history.push("/login");
+			addNotification(undefined, "Registration successful, redirecting to login...", undefined);
+			setTimeout(() => props.history.push("/login"), 2000);
 		}
-	}, [isRegistered, props.history]);
+	}, [isRegistered]);
 
 	const addNotification = (level = "success", message, className = "pe-7s-check") => {
 		notification.current.addNotification({
@@ -75,16 +77,16 @@ const Register = (props) => {
 	};
 
 	useEffect(() => {
-		if (error) {
+		if (error && isRegisterPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
 	}, [type, error, errorMessage]);
 
 	useEffect(() => {
-		if (tracks.length !== 5) {
+		if (tracks.length === 0) {
 			getTrackAction();
 		}
-	}, []);
+	}, [tracks]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -353,6 +355,7 @@ const mapState = (state) => {
 		errorMessage: state.auth.errorMessage,
 		type: state.auth.type,
 		isRegistred: state.auth.registered,
+		isRegisterPage: state.auth.isRegisterPage,
 	};
 };
 

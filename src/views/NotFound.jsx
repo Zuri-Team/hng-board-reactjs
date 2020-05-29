@@ -20,7 +20,7 @@ function NotFound() {
 						onClick={redirect}
 						style={{ textDecoration: "underline", color: "blue", cursor: "pointer" }}
 					>
-						https://admin.start.ng
+						http://manager.hng.tech
 					</p>
 				</strong>{" "}
 				to log in. See ya 😎

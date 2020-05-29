@@ -40,7 +40,7 @@ class User extends Component {
 
 	fetchCourses = async () => {
 		try {
-			const response = await fetch(`http://test.hng.tech/api/course/all`, {
+			const response = await fetch(`https://test.hng.tech/api/course/all`, {
 				headers: {
 					Authorization: `Bearer ${localStorage["token"]}`,
 				},
@@ -76,7 +76,7 @@ class User extends Component {
 		const course_id = this.state.courses.filter((a) => a.name == course)[0].id;
 
 		try {
-			const response = await fetch(`http://test.hng.tech/api/course-requests/send-request`, {
+			const response = await fetch(`https://test.hng.tech/api/course-requests/send-request`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
