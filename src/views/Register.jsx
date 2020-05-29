@@ -354,7 +354,7 @@ const mapState = (state) => {
 		error: state.auth.error,
 		errorMessage: state.auth.errorMessage,
 		type: state.auth.type,
-		isRegistred: state.auth.registered,
+		isRegistered: state.auth.registered,
 		isRegisterPage: state.auth.isRegisterPage,
 	};
 };
