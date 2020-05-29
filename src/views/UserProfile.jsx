@@ -331,7 +331,7 @@ const UserProfile = (props) => {
 														componentClass="textarea"
 														bsClass="form-control"
 														placeholder="Edit your bio here"
-														defaultValue={bio ? bio : ""}
+														defaultValue={!bio === `Welcome to Start.Ng.` ? bio : ""}
 														disabled={disableFields}
 														name="bio"
 														onChange={handleChange}
