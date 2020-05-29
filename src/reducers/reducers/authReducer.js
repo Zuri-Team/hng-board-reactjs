@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
 			localStorage["token"] = payload.token;
 			localStorage["isUserLogged"] = true;
 			localStorage["user_payload"] = JSON.stringify(payload.user);
-			if (payload.user.role != "intern") {
+			if (payload.user.role !== "intern") {
 				localStorage["admin"] = true;
 			} else {
 				localStorage["user"] = true;

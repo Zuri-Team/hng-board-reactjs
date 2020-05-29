@@ -65,7 +65,7 @@ const Register = (props) => {
 			addNotification(undefined, "Registration successful, redirecting to login...", undefined);
 			setTimeout(() => props.history.push("/login"), 2000);
 		}
-	}, [isRegistered]);
+	}, [isRegistered, props.history, form]);
 
 	const addNotification = (level = "success", message, className = "pe-7s-check") => {
 		notification.current.addNotification({
@@ -80,13 +80,13 @@ const Register = (props) => {
 		if (error && isRegisterPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
-	}, [type, error, errorMessage]);
+	}, [type, error, errorMessage, isRegisterPage]);
 
 	useEffect(() => {
 		if (tracks.length === 0) {
 			getTrackAction();
 		}
-	}, [tracks]);
+	}, [tracks, getTrackAction]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -110,7 +110,7 @@ const Register = (props) => {
 				track &&
 				location &&
 				password &&
-				confirm_password) == ""
+				confirm_password) === ""
 		) {
 			addNotification("error", "All fields are required", "pe-7s-info");
 			return;

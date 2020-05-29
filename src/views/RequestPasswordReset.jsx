@@ -59,14 +59,14 @@ const RequestPasswordReset = (props) => {
 		if (error && isRequestPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
-	}, [type, errorMessage, error]);
+	}, [type, errorMessage, error, isRequestPage]);
 
 	useEffect(() => {
 		if (successMessage) {
 			addNotification(undefined, successMessage, undefined);
 			setUser({ ...user, email: "" });
 		}
-	}, [type, successMessage]);
+	}, [type, successMessage, user]);
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
@@ -76,7 +76,7 @@ const RequestPasswordReset = (props) => {
 	const handleReset = (e) => {
 		e.preventDefault();
 		const { email } = user;
-		if (email == "") {
+		if (email === "") {
 			addNotification("error", "The email field is required", "pe-7s-info");
 			return;
 		}

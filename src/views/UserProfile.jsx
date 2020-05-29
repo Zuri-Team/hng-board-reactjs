@@ -17,7 +17,7 @@ import {
 	fetchUserTracksAction,
 	editProfileAction,
 } from "../reducers/actions/profileActions";
-import { fetchSlackProfileAction } from "../reducers/actions/slackProfileActions";
+// import { fetchSlackProfileAction } from "../reducers/actions/slackProfileActions";
 
 const UserProfile = (props) => {
 	const {
@@ -33,7 +33,7 @@ const UserProfile = (props) => {
 		fetchProfileAction();
 		// fetchSlackProfileAction();
 		fetchUserTracksAction();
-	}, []);
+	}, [fetchProfileAction, fetchUserTracksAction]);
 
 	const notification = useRef();
 
@@ -198,7 +198,7 @@ const UserProfile = (props) => {
 											Your chick she so thirsty
 											<br />
 											I'm in that two seat Lambo" */}
-										{mainProfileInfo.profile.bio}
+										{mainProfileInfo.role.toUpperCase()}
 									</span>
 								}
 								profileButton={

@@ -23,7 +23,7 @@ class Footer extends Component {
 						</ul>
 					</nav> */}
 					<p className="copyright text-center">
-						&copy; {new Date().getFullYear()} | <a href="#">HNG Board</a>
+						&copy; {new Date().getFullYear()} | <span>HNG Board</span>
 					</p>
 				</Grid>
 			</footer>

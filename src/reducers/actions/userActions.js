@@ -99,7 +99,7 @@ export const fetchTasksAction = () => async (dispatch) => {
 		const trackResponse = tracks.data.data;
 		for (let i = 0; i < taskResponse.length; i++) {
 			for (let j = 0; j < trackResponse.length; j++) {
-				if (taskResponse[i].track_id == trackResponse[j].id) {
+				if (taskResponse[i].track_id === trackResponse[j].id) {
 					taskResponse[i]["track_name"] = trackResponse[j].track_name;
 				}
 			}

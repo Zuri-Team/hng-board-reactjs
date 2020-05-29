@@ -61,7 +61,7 @@ const Login = (props) => {
 		if (error && !isRequestPage && !isResetPage && !isRegisterPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
-	}, [type]);
+	}, [type, error, errorMessage, isRequestPage, isResetPage, isRegisterPage]);
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
@@ -71,15 +71,15 @@ const Login = (props) => {
 	const handleLogin = (e) => {
 		e.preventDefault();
 		const { email, password } = user;
-		if (email == "" && password == "") {
+		if (email === "" && password === "") {
 			addNotification("error", "You need to provide a password and email to proceed", "pe-7s-info");
 			return;
 		}
-		if (email == "") {
+		if (email === "") {
 			addNotification("error", "The email field is required", "pe-7s-info");
 			return;
 		}
-		if (password == "") {
+		if (password === "") {
 			addNotification("error", "The password field is required", "pe-7s-info");
 			return;
 		}
