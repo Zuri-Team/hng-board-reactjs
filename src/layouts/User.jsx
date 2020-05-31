@@ -202,7 +202,7 @@ class User extends Component {
 			message: (
 				<div>
 					Welcome to HNG board, <strong>{user.firstname}</strong>. For any questions, please contact
-					@kingabesh or @judejay on slack 😊
+					the following mentors: @kingabesh or @judejay on the slack workspace 😊
 				</div>
 			),
 			level: level,
