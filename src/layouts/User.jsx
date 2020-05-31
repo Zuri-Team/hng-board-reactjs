@@ -201,8 +201,8 @@ class User extends Component {
 			title: <span data-notify="icon" className="pe-7s-like2" />,
 			message: (
 				<div>
-					Keep on doing your tasks, <strong>{user.firstname}</strong>. Progress is incremental and
-					you own yours. Always glad to have you here. Stay safe as always 😊
+					Welcome to HNG board, <strong>{user.firstname}</strong>. For any questions, please contact
+					@kingabesh or @judejay on slack 😊
 				</div>
 			),
 			level: level,
