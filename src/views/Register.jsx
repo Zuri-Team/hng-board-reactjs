@@ -223,7 +223,11 @@ const Register = (props) => {
 							>
 								<option value="">Please select a track...</option>
 								{tracks &&
-									tracks.map((track) => <option key={track.id}>{track.track_name}</option>)}
+									tracks.map((track) => (
+										<option value={track.id} key={track.id}>
+											{track.track_name}
+										</option>
+									))}
 							</select>
 						</div>
 					</div>
