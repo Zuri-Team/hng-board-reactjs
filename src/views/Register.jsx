@@ -128,8 +128,7 @@ const Register = (props) => {
 				return;
 			}
 		}
-		// regInAction(form);
-		addNotification(undefined, "Registration halted. Please check back in 30 minutes", undefined);
+		regInAction(form);
 	};
 
 	const onChange = (e) => {
