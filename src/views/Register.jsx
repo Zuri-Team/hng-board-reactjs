@@ -128,7 +128,8 @@ const Register = (props) => {
 				return;
 			}
 		}
-		regInAction(form);
+		// regInAction(form);
+		addNotification(undefined, "Registration successful, redirecting to login...", undefined);
 	};
 
 	const onChange = (e) => {
