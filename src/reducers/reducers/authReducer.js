@@ -91,6 +91,7 @@ export default (state = initialState, action) => {
 				loading: false,
 				registered: true,
 				isRegisterPage: false,
+				type: !state.type,
 			};
 		case REG_FAIL:
 			return {

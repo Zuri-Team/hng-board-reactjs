@@ -65,7 +65,7 @@ const Register = (props) => {
 			addNotification(undefined, "Registration successful, redirecting to login...", undefined);
 			setTimeout(() => props.history.push("/login"), 2000);
 		}
-	}, [isRegistered]);
+	}, [type]);
 
 	const addNotification = (level = "success", message, className = "pe-7s-check") => {
 		notification.current.addNotification({
