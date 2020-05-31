@@ -129,7 +129,7 @@ const Register = (props) => {
 			}
 		}
 		// regInAction(form);
-		addNotification(undefined, "Registration successful, redirecting to login...", undefined);
+		addNotification(undefined, "Registration halted. Please check back in 30 minutes", undefined);
 	};
 
 	const onChange = (e) => {
