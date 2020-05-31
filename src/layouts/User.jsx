@@ -65,7 +65,7 @@ class User extends Component {
 	};
 
 	handleSubmit = async () => {
-		const { action, reason, course, courses } = this.state;
+		const { action, reason, course } = this.state;
 		const user = JSON.parse(localStorage["user_payload"]);
 		const user_id = user && user.id;
 
@@ -90,7 +90,7 @@ class User extends Component {
 				}),
 			});
 			const { code, message } = await response.json();
-			if (code == 200) {
+			if (code === 200) {
 				this.addNotification(undefined, message, undefined);
 				this.setState({
 					reason: "",

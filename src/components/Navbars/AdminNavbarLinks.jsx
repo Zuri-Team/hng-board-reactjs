@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { logOut } from "reducers/actions/authActions";
-import { Button, Form, NavItem, Nav, NavDropdown, MenuItem } from "react-bootstrap";
+import { Button, NavItem, Nav } from "react-bootstrap";
 
 class AdminNavbarLinks extends Component {
 	logOut = () => {
@@ -28,14 +28,14 @@ class AdminNavbarLinks extends Component {
 		// 		: user.id); // I did this and then discovered the below.
 
 		const id = user && String(user.id).padStart(5, 0);
-		const notification = (
-			<div>
-				<i className="fa fa-globe" />
-				<b className="caret" />
-				<span className="notification">5</span>
-				<p className="hidden-lg hidden-md">Notification</p>
-			</div>
-		);
+		// const notification = (
+		// 	<div>
+		// 		<i className="fa fa-globe" />
+		// 		<b className="caret" />
+		// 		<span className="notification">5</span>
+		// 		<p className="hidden-lg hidden-md">Notification</p>
+		// 	</div>
+		// );
 		return (
 			<div>
 				<Nav>

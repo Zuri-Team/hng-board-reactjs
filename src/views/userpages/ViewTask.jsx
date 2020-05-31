@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import moment from "moment";
 import { style } from "variables/Variables.jsx";
-import Loader from "components/Loader/Loader";
+// import Loader from "components/Loader/Loader";
 import "assets/css/override.css";
 import {
 	fetchProbationAction,

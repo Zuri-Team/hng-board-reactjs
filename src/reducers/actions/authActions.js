@@ -123,7 +123,7 @@ export const logInAction = (payload) => async (dispatch) => {
 		setToken(response.data.token);
 		dispatch(logInSuccess(response.data));
 	} catch (err) {
-		if (err.response && err.response.status == 401) {
+		if (err.response && err.response.status === 401) {
 			dispatch(logInFail("Invalid Credentials, Please review and retry"));
 		} else {
 			dispatch(logInFail("Something went wrong, please try again"));
@@ -146,7 +146,7 @@ export const regInAction = (payload) => async (dispatch) => {
 		await axios.post("/register", payload);
 		dispatch(regSuccess());
 	} catch (err) {
-		if (err.response && err.response.status == 401) {
+		if (err.response && err.response.status === 401) {
 			dispatch(regFail("This email has already been taken"));
 		} else {
 			dispatch(regFail(err.response && err.response.data && err.response.data.message));

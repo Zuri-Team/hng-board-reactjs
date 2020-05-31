@@ -1,6 +1,6 @@
 # HNG Board
 
-about here ....
+about here ......
 
 ----
 

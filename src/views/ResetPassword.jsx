@@ -54,7 +54,7 @@ const ResetPassword = (props) => {
 		if (error && isResetPage) {
 			addNotification("error", errorMessage, "pe-7s-info");
 		}
-	}, [type, errorMessage, error]);
+	}, [type, errorMessage, error, isResetPage]);
 
 	useEffect(() => {
 		if (successMessage) {
@@ -62,7 +62,7 @@ const ResetPassword = (props) => {
 			setUser({ ...user, email: "", password: "", confirm_password: "", token: "" });
 			setTimeout(() => props.history.push("/login"), 2000);
 		}
-	}, [type, successMessage]);
+	}, [type, successMessage, props.history, user]);
 
 	const onChange = (e) => {
 		const { name, value } = e.target;
