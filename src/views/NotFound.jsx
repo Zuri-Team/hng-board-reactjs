@@ -3,7 +3,7 @@ import React from "react";
 function NotFound() {
 	const redirect = () => {
 		localStorage.clear();
-		window.location.href = "https://admin.start.ng";
+		window.location.href = "https://manager.hng.tech";
 	};
 	let user = JSON.parse(localStorage["user_payload"]);
 	return (
