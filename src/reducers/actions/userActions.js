@@ -69,13 +69,13 @@ export const submitTaskFail = () => {
 };
 
 export const fetchScoreAction = () => async (dispatch) => {
-	//try {
-		//const response = await axios.get("/user-profile/total_score");
-		//console.log(response.data);
-		//console.log("hi");
-	//} catch (err) {
-		//console.log(err);
-	//}
+	try {
+		const response = await axios.get("/user-profile/total_score");
+		console.log(response.data);
+		console.log("hi");
+	} catch (err) {
+		console.log(err);
+	}
 };
 
 export const fetchTasksAction = () => async (dispatch) => {
