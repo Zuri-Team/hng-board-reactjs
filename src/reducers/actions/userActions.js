@@ -154,6 +154,8 @@ export const submitTaskAction = (data) => async (dispatch) => {
 		const response = await a.json();
 		if (response.code === 200) {
 			dispatch(submitTaskSuccess());
+		} else {
+			dispatch(submitTaskFail());
 		}
 	} catch (err) {
 		dispatch(submitTaskFail());

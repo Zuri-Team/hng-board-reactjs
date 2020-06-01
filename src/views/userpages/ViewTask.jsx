@@ -86,7 +86,8 @@ const Task = (props) => {
 
 	useEffect(() => {
 		if (error && isTaskPage) {
-			addNotification("error", "Ugh 😔, something went wrong, Please try again", "pe-7s-info");
+			// addNotification("error", "Ugh 😔, something went wrong, Please try again", "pe-7s-info");
+			addNotification("error", "Ugh 😔, you need to submit the lucid task first.", "pe-7s-info");
 			btn.current.textContent = "Submit";
 			btn.current.style.opacity = "unset";
 			btn.current.style.pointerEvents = "unset";
