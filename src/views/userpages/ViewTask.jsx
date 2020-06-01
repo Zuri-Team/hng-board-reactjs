@@ -150,7 +150,7 @@ const Task = (props) => {
 		// }
 		if (
 			(task_id == 1 && submission_link.startsWith("https://www.lucid.blog")) ||
-			(task_id == 2 && !submission_link.startsWith("https://www.github.com"))
+			(task_id == 2 && submission_link.startsWith("https://www.github.com"))
 		) {
 			submitTaskAction(form);
 			return;
