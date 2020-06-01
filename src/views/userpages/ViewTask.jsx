@@ -115,6 +115,10 @@ const Task = (props) => {
 			addNotification("error", "We want to read your comment 🙂", "pe-7s-info");
 			return;
 		}
+		if (comment.length > 240) {
+			addNotification("error", "Please keep your comment short (Below 200 words) 🙂", "pe-7s-info");
+			return;
+		}
 		// if (
 		// 	!submission_link.match(
 		// 		new RegExp(
