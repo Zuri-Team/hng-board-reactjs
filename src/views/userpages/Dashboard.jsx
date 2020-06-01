@@ -19,7 +19,7 @@ class Dashboard extends Component {
 				</Helmet>
 				<Grid fluid>
 					<Row>
-						<Col lg={3} sm={6}>
+						<Col lg={4} sm={6}>
 							<StatsCard
 								bigIcon={<i className="pe-7s-hammer text-warning" />}
 								statsText="Current Stage"
@@ -28,7 +28,7 @@ class Dashboard extends Component {
 								// statsIconText="Your Current Stage"
 							/>
 						</Col>
-						<Col lg={3} sm={6}>
+						<Col lg={4} sm={6}>
 							<StatsCard
 								bigIcon={<i className="pe-7s-server text-success" />}
 								statsText="Total Stages"
@@ -37,7 +37,7 @@ class Dashboard extends Component {
 								// statsIconText="Total Stages in the Programme"
 							/>
 						</Col>
-						<Col lg={3} sm={6}>
+						<Col lg={4} sm={6}>
 							<StatsCard
 								bigIcon={<i className="pe-7s-graph1 text-danger" />}
 								statsText="Your Tracks"
@@ -46,16 +46,16 @@ class Dashboard extends Component {
 								// statsIconText="Number of Tracks You Belong To"
 							/>
 						</Col>
-						<Col lg={3} sm={6}>
+						{/* <Col lg={3} sm={6}>
 							<StatsCard
 								bigIcon={<i className="pe-7s-user text-info" />}
 								statsText="Your Courses"
-								statsValue={user ? user.courses.length : "Loading..."}
+								statsValue={user ? user.courses && user.courses.length : "Loading..."}
 								// statsValue={user ? (user.active ? "Active" : "Inactive") : "Loading..."}
 								// statsIcon={<i className="fa fa-info"
 								// statsIconText="Your Current Status in the Internship"
 							/>
-						</Col>
+						</Col> */}
 					</Row>
 					<Row>
 						<Col md={6}>

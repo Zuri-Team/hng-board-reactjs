@@ -169,7 +169,7 @@ class User extends Component {
 
 	componentDidMount() {
 		let user = JSON.parse(localStorage["user_payload"]);
-		this.fetchCourses();
+		// this.fetchCourses();
 		this.props.fetchTasksAction();
 		this.props.fetchScoreAction();
 		setTimeout(() => this.props.fetchPostsAction(), 1000);
@@ -269,7 +269,7 @@ class User extends Component {
 					</Switch>
 					<Footer />
 				</div>
-				<Modal
+				{/* <Modal
 					show={this.state.showModal}
 					onHide={() => this.setState({ showModal: false })}
 					heading="Make a Course Change Request"
@@ -335,7 +335,7 @@ class User extends Component {
 							</div>
 						</div>
 					}
-				/>
+				/> */}
 			</div>
 		) : (
 			this.props.history.goBack()

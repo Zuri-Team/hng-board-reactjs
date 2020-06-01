@@ -101,7 +101,7 @@ const Task = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const { submission_link, comment } = form;
+		const { submission_link, comment, task_id } = form;
 		if (submission_link == "" && comment == "") {
 			addNotification("error", "Please include a link and leave a comment 🙂", "pe-7s-info");
 			return;
@@ -124,15 +124,38 @@ const Task = (props) => {
 			addNotification("error", "Please include a valid URL 🙂", "pe-7s-info");
 			return;
 		}
-		if (!submission_link.startsWith("https://")) {
+		if (task_id == 2 && !submission_link.startsWith("https://www.github.com")) {
 			addNotification(
 				"error",
-				"Your submission link needs to start with https:// 🙂",
+				"Please submit a valid github URL as required by the task 🙂",
 				"pe-7s-info",
 			);
 			return;
 		}
-		submitTaskAction(form);
+		if (task_id == 1 && !submission_link.startsWith("https://www.lucid.blog")) {
+			addNotification(
+				"error",
+				"Please submit a valid lucid URL as required by the task 🙂",
+				"pe-7s-info",
+			);
+			return;
+		}
+		// if (!submission_link.startsWith("https://")) {
+		// 	addNotification(
+		// 		"error",
+		// 		"Your submission link needs to start with https:// 🙂",
+		// 		"pe-7s-info",
+		// 	);
+		// 	return;
+		// }
+		if (
+			(task_id == 1 && submission_link.startsWith("https://www.lucid.blog")) ||
+			(task_id == 2 && !submission_link.startsWith("https://www.github.com"))
+		) {
+			submitTaskAction(form);
+			return;
+		}
+		// submitTaskAction(form);
 	};
 
 	useEffect(() => {
@@ -337,9 +360,9 @@ const Task = (props) => {
 															Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}
 														</small>
 														<p className="text-sm mt-5">
-															<small className="badge badge-success d-block courses text-sm">
+															{/* <small className="badge badge-success d-block courses text-sm">
 																{task.course && task.course.name}
-															</small>{" "}
+															</small>{" "} */}
 															<small className="badge badge-success ml-3 d-block tasks text-sm">
 																{task.track_name}
 															</small>{" "}

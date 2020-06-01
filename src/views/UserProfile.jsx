@@ -355,8 +355,6 @@ const UserProfile = (props) => {
 									</form>
 								}
 							/>
-						</Col>
-						<Col md={6} xs={12}>
 							<Card
 								removeViewMore
 								title="Your Tracks"
@@ -385,7 +383,10 @@ const UserProfile = (props) => {
 								}
 							/>
 						</Col>
-						<Col md={6} xs={12}>
+						{/* <Col md={6} xs={12}>
+							
+						</Col> */}
+						{/* <Col md={6} xs={12}>
 							<Card
 								removeViewMore
 								title="Your Courses"
@@ -413,7 +414,7 @@ const UserProfile = (props) => {
 									</div>
 								}
 							/>
-						</Col>
+						</Col> */}
 					</Row>
 				</Grid>
 			</div>

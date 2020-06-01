@@ -63,9 +63,9 @@ class Tasks extends Component {
 																			Deadline: {moment(task.deadline).format("DD/MM/YYYY hh:mm A")}{" "}
 																		</small>
 																		<p className="text-sm mt-5">
-																			<small className="badge badge-success d-block courses text-sm">
+																			{/* <small className="badge badge-success d-block courses text-sm">
 																				{task.course.name}
-																			</small>{" "}
+																			</small>{" "} */}
 																			<small className="badge badge-success ml-3 d-block tasks text-sm">
 																				{task.track_name}
 																			</small>{" "}
