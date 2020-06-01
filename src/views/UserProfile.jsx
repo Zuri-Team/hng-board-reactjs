@@ -193,12 +193,8 @@ const UserProfile = (props) => {
 								userName={username}
 								description={
 									<span>
-										{/* "Lamborghini Mercy
-											<br />
-											Your chick she so thirsty
-											<br />
-											I'm in that two seat Lambo" */}
-										{mainProfileInfo.profile.bio}
+										"You cannot calculate greatness"
+										{/* {mainProfileInfo.profile.bio} */}
 									</span>
 								}
 								profileButton={
@@ -331,7 +327,7 @@ const UserProfile = (props) => {
 														componentClass="textarea"
 														bsClass="form-control"
 														placeholder="Edit your bio here"
-														defaultValue={bio ? bio : ""}
+														defaultValue={!bio ? bio : "Welcome to HNG"}
 														disabled={disableFields}
 														name="bio"
 														onChange={handleChange}
