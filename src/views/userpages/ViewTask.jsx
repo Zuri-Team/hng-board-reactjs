@@ -124,7 +124,15 @@ const Task = (props) => {
 			addNotification("error", "Please include a valid URL 🙂", "pe-7s-info");
 			return;
 		}
-		if (task_id == 2 && !submission_link.startsWith("https://www.github.com")) {
+		if (!submission_link.startsWith("https://")) {
+			addNotification(
+				"error",
+				"Your submission link needs to start with https:// 🙂",
+				"pe-7s-info",
+			);
+			return;
+		}
+		if (task_id == 2 && !submission_link.includes("github.com")) {
 			addNotification(
 				"error",
 				"Please submit a valid github URL as required by the task 🙂",
@@ -132,7 +140,7 @@ const Task = (props) => {
 			);
 			return;
 		}
-		if (task_id == 1 && !submission_link.startsWith("https://www.lucid.blog")) {
+		if (task_id == 1 && !submission_link.includes("lucid.blog")) {
 			addNotification(
 				"error",
 				"Please submit a valid lucid URL as required by the task 🙂",
@@ -140,17 +148,9 @@ const Task = (props) => {
 			);
 			return;
 		}
-		// if (!submission_link.startsWith("https://")) {
-		// 	addNotification(
-		// 		"error",
-		// 		"Your submission link needs to start with https:// 🙂",
-		// 		"pe-7s-info",
-		// 	);
-		// 	return;
-		// }
 		if (
-			(task_id == 1 && submission_link.startsWith("https://www.lucid.blog")) ||
-			(task_id == 2 && submission_link.startsWith("https://www.github.com"))
+			(task_id == 1 && submission_link.includes("lucid.blog")) ||
+			(task_id == 2 && submission_link.includes("github.com"))
 		) {
 			submitTaskAction(form);
 			return;
