@@ -147,7 +147,7 @@ export const regInAction = (payload) => async (dispatch) => {
 		dispatch(regSuccess());
 	} catch (err) {
 		if (err.response && err.response.status === 401) {
-			dispatch(regFail("This email has already been taken"));
+			dispatch(regFail("This email or slack username has already been taken. Please make sure they are both unique"));
 		} else {
 			dispatch(regFail(err.response && err.response.data && err.response.data.message));
 		}
