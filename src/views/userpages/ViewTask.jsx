@@ -114,16 +114,16 @@ const Task = (props) => {
 			addNotification("error", "We want to read your comment 🙂", "pe-7s-info");
 			return;
 		}
-		if (
-			!submission_link.match(
-				new RegExp(
-					/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
-				),
-			)
-		) {
-			addNotification("error", "Please include a valid URL 🙂", "pe-7s-info");
-			return;
-		}
+		// if (
+		// 	!submission_link.match(
+		// 		new RegExp(
+		// 			/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
+		// 		),
+		// 	)
+		// ) {
+		// 	addNotification("error", "Please include a valid URL 🙂", "pe-7s-info");
+		// 	return;
+		// }
 		if (!submission_link.startsWith("https://")) {
 			addNotification(
 				"error",
