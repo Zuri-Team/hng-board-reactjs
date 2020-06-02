@@ -86,8 +86,8 @@ const Task = (props) => {
 
 	useEffect(() => {
 		if (error && isTaskPage) {
-			// addNotification("error", "Ugh 😔, something went wrong, Please try again", "pe-7s-info");
-			addNotification("error", "Ugh 😔, you need to submit the lucid task first.", "pe-7s-info");
+			addNotification("error", "Ugh 😔, something went wrong, Please try again", "pe-7s-info");
+			// addNotification("error", "Ugh 😔, you need to submit the lucid task first.", "pe-7s-info");
 			btn.current.textContent = "Submit";
 			btn.current.style.opacity = "unset";
 			btn.current.style.pointerEvents = "unset";
@@ -149,6 +149,14 @@ const Task = (props) => {
 			addNotification(
 				"error",
 				"Please submit a valid lucid URL as required by the task 🙂",
+				"pe-7s-info",
+			);
+			return;
+		}
+		if (!navigator.onLine) {
+			addNotification(
+				"error",
+				"Oops, please ensure you are connected to the internet 🙂",
 				"pe-7s-info",
 			);
 			return;
