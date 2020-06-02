@@ -161,13 +161,7 @@ const Task = (props) => {
 			);
 			return;
 		}
-		if (
-			(task_id == 1 && submission_link.includes("lucid.blog")) ||
-			(task_id == 2 && submission_link.includes("github.com"))
-		) {
-			submitTaskAction(form);
-			return;
-		}
+		submitTaskAction(form);
 		// submitTaskAction(form);
 	};
 
