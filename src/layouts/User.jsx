@@ -201,8 +201,7 @@ class User extends Component {
 			title: <span data-notify="icon" className="pe-7s-like2" />,
 			message: (
 				<div>
-					Welcome to HNG board, <strong>{user.firstname}</strong>. For any questions, please contact
-					the following mentors: @kingabesh or @judejay on the slack workspace 😊
+					Welcome to HNG board, <strong>{user.firstname}</strong>. !!! 😊
 				</div>
 			),
 			level: level,
