@@ -95,7 +95,8 @@ export const fetchTasksAction = () => async (dispatch) => {
 		]);
 		const tasks = await a.json();
 		const tracks = await b.json();
-		const taskResponse = tasks.data.flat();
+		// const taskResponse = tasks.data.flat();
+		const taskResponse = [].concat.apply([], task.data);
 		const trackResponse = tracks.data.data;
 		for (let i = 0; i < taskResponse.length; i++) {
 			for (let j = 0; j < trackResponse.length; j++) {
