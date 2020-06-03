@@ -271,7 +271,7 @@ const Task = (props) => {
 														rows="5"
 														componentClass="textarea"
 														bsClass="form-control"
-														placeholder="Please leave a comment"
+														placeholder="Please leave a comment (not more than three lines)"
 														defaultValue=""
 														disabled={
 															onProbation ||
