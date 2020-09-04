@@ -7,7 +7,7 @@
     "bootstrap": "^3.4.1",
     "chartist": "0.10.1",
     "moment": "^2.24.0",
-    "node-sass": "4.12.0",
+    "node-sass": "4.13.1",
     "react": "16.8.6",
     "react-bootstrap": "0.32.4",
     "react-chartist": "0.13.3",
